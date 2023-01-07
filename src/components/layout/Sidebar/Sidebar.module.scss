@@ -1,0 +1,76 @@
+// @import url('../../../styles/mixin');
+@mixin customScrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 1.5px;
+    background-color: #c5c5c5;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #eee;
+  }
+}
+
+.sider {
+  [class~="ant-layout-sider-children"] {
+    background-color: rgba(234, 184, 48, .75);
+  }
+
+  .logo_box,
+  [class~="ant-layout-sider-trigger"] {
+    background-color: rgb(234, 184, 48) !important;
+    color: rgba(0, 0, 0, .88);
+  }
+
+  .logo_box {
+    height: 5.4rem;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    box-shadow: 0 .25rem .5rem rgba(0, 0, 0, .2);
+
+    img {
+      // width: 90%;
+      height: 2.665rem;
+      object-fit: contain;
+      transition: height .2s;
+    }
+
+    &.expanded img {
+      height: 3.9rem;
+    }
+  }
+
+  .menu_box {
+    height: calc(100vh - 5.4rem - 4.8rem);
+    overflow-y: auto;
+    @include customScrollbar();
+
+    position: sticky;
+    top: 5.4rem;
+    left: 0;
+    background-color: transparent;
+
+    &[class~="ant-menu"] {
+      border-inline-end: none;
+    }
+
+    li {
+      width: 100%;
+      margin: .4rem 0;
+      border-radius: 0;
+      
+      &[class~="ant-menu-item-selected"] {
+        border-right: 4px solid #063970;
+        background-color: #b4ccd4;
+      }
+
+      &:not([class~="ant-menu-item-selected"]):active {
+        background-color: #b4ccd4 !important;
+      }
+    }
+  }
+}
