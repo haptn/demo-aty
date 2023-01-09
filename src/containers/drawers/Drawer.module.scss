@@ -1,0 +1,10 @@
+.drawer {
+  div[class~="ant-drawer-header"] {
+    padding: 1.1rem 1.6rem;
+    background-color: #063970;
+    
+    div[class~="ant-drawer-title"] {
+      color: #fafafa;
+    }
+  }
+}
