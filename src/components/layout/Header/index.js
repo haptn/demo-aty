@@ -125,7 +125,7 @@ function Header() {   // { title }
             <img src={NewLogoImg} alt='avatar' />
             <span>
               <b>{user?.name}</b>
-              <small>{user?.roleName}</small>
+              <small>{user?.role}</small>
             </span>
           </div>
         </Dropdown>

@@ -16,5 +16,5 @@ export { default as TaxesLayout } from './pages/TaxesLayout'
 
 // Drawers
 export { default as Drawer } from './drawers/Drawer'
-export { default as AccountDetailDrawer } from './drawers/AccountDetail/AccountDetailDrawer'
 export { default as SchoolDetailDrawer } from './drawers/SchoolDetail/SchoolDetailDrawer'
+export { default as AccountDetailDrawer } from './drawers/AccountDetail/AccountDetailDrawer'

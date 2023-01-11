@@ -9,8 +9,8 @@ import {
 } from '@ant-design/icons'
 import { MainLayout, SchoolDetailDrawer, AccountDetailDrawer } from '..'
 import { listAccounts, listSchools } from '../../mock/data'
-import styles from '../../styles/pages/SchoolLayout.module.scss'
 import { filterSchools, schoolStatus, schoolType, staffStatus } from '../../config/constants'
+import styles from '../../styles/pages/SchoolLayout.module.scss'
 
 const { Search } = Input
 
@@ -24,15 +24,15 @@ function SchoolsLayout() {
   const [detailData, setDetailData] = useState(null)
   const [schoolStatuses, setSchoolStatuses] = useState(() => {
     const obj = {}
-    data.forEach(({ key, status }) => { 
-      obj[key] = status 
+    data.forEach(({ key, status }) => {
+      obj[key] = status
     })
     return obj
   })
   const [workingStatuses, setWorkingStatuses] = useState(() => {
     const obj = {}
-    listAccounts.forEach(({ key, status }) => { 
-      obj[key] = status 
+    listAccounts.forEach(({ key, status }) => {
+      obj[key] = status
     })
     return obj
   })
@@ -46,15 +46,15 @@ function SchoolsLayout() {
   const expandableRows = useMemo(() => {
     let clone = [...data]
     clone = _.remove(clone,
-      item => listAccounts.map(({schoolId}) => schoolId).includes(item.key)
+      item => listAccounts.map(({ schoolId }) => schoolId).includes(item.key)
     )
     return clone
   }, [data])
 
   const handleChangeWorkingStatuses = ({ key, status }) => {
     setWorkingStatuses(prevStatus => {
-      const clone = {...prevStatus}
-      clone[key] = status === staffStatus.WORKING 
+      const clone = { ...prevStatus }
+      clone[key] = status === staffStatus.WORKING
         ? staffStatus.QUITTED : staffStatus.WORKING
       return clone
     })
@@ -62,7 +62,7 @@ function SchoolsLayout() {
 
   const handleCloseSchool = key => {
     setSchoolStatuses(prevStatus => {
-      const clone = {...prevStatus}
+      const clone = { ...prevStatus }
       clone[key] = schoolStatus.CLOSED
       return clone
     })
@@ -72,7 +72,7 @@ function SchoolsLayout() {
   const handleSearch = keyword => {
     setData(() => {
       const clone = [...listSchools]
-      return clone?.filter(school => 
+      return clone?.filter(school =>
         school?.name?.toLowerCase()?.includes(keyword?.toLowerCase())
         ||
         school?.address?.toLowerCase()?.includes(keyword?.toLowerCase())
@@ -83,8 +83,6 @@ function SchoolsLayout() {
   const handleFilter = (type = '', value) => {
     setFilters(prev => ({ ...prev, [type]: value }))
 
-    console.log({type, value})
-
     switch (type) {
       case filterSchools.STATUS:
         setData(prevData => {
@@ -94,7 +92,7 @@ function SchoolsLayout() {
           return clone?.filter(({ status }) => status === value)
         })
         break;
-    
+
       case filterSchools.TYPE:
         setData(prevData => {
           console.log('```type: ', prevData);
@@ -108,8 +106,6 @@ function SchoolsLayout() {
       default:
         break;
     }
-
-    
   }
 
   const handleViewSchoolDetail = record => {
@@ -151,7 +147,7 @@ function SchoolsLayout() {
         key: 'role',
         align: 'center',
         render: (_, { role }) => {
-          let color = role === 'Admin trường' ? 'yellow' : 'purple'
+          let color = role === 'Admin trường' ? 'magenta' : 'geekblue'
           return (
             <Tag color={color} key={role}>
               {role}
@@ -217,7 +213,7 @@ function SchoolsLayout() {
           <a onClick={() => handleViewSchoolDetail(record)}>
             <b>{record?.name}</b>
           </a>
-          <br/>
+          <br />
           <span style={{ fontSize: '1.15rem', color: '#333' }}>
             MST: {record?.taxCode}
           </span>
@@ -256,7 +252,7 @@ function SchoolsLayout() {
         let color = status === schoolStatus.WORKING
           ? 'green'
           : status === schoolStatus.CLOSED
-            ? 'volcano' : 'geekblue'
+            ? 'volcano' : 'blue'
 
         return (
           <Tag color={color} key={status}>
@@ -288,7 +284,7 @@ function SchoolsLayout() {
           >
             <Button type="text" danger
               shape='circle'
-              icon={<StopOutlined/>}
+              icon={<StopOutlined />}
               onClick={() => setOpenPopConfirm(record?.key)}
               disabled={schoolStatuses[record?.key] === schoolStatus.CLOSED}
             />
@@ -299,23 +295,27 @@ function SchoolsLayout() {
   ]
 
   return (
-    <MainLayout title="Quản lý Trường & Tài khoản">
+    <MainLayout>  {/* title="Quản lý Trường & Nhân viên" */}
+      <div className='w-100 flex-between'>
+        <h2>Quản lý Trường & Nhân viên</h2>
+
         {/* Buttons */}
-      <Space size='small' className='w-100 flex-row-end'>
-        <Button type="primary" icon={<PlusOutlined/>} size='middle'
-          className='p-btn'
-        >
-          Thêm trường
-        </Button>
-        <Button type="primary" icon={<PlusOutlined/>} size='middle'
-          className='p-btn'
-        >
-          Thêm tài khoản
-        </Button>
-        <Button type="default" icon={<FileExcelOutlined/>} size='middle' className='p-btn'>
-          Xuất file Excel
-        </Button>
-      </Space>
+        <Space size='small'>
+          <Button type="primary" icon={<PlusOutlined />} size='middle'
+            className='p-btn'
+          >
+            Thêm Trường
+          </Button>
+          <Button type="primary" icon={<PlusOutlined />} size='middle'
+            className='p-btn'
+          >
+            Thêm Nhân viên
+          </Button>
+          <Button type="default" icon={<FileExcelOutlined />} size='middle' className='p-btn'>
+            Xuất file Excel
+          </Button>
+        </Space>
+      </div>
 
       <div className='w-100 pt-2 flex-between'>
         {/* Filters */}
@@ -357,7 +357,7 @@ function SchoolsLayout() {
             ]}
           />
         </Space>
-        
+
         {/* Search */}
         <Search allowClear enterButton
           value={searchKeyword}
@@ -383,19 +383,19 @@ function SchoolsLayout() {
                   icon={<DownOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
                 />
               )
-              : expandedKeys.length > 0 ? (
-                <Button type="text"
-                  shape='circle'
-                  onClick={() => setExpandedKeys([])}
-                  icon={<MinusOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
-                />
-              ) : ( // expandedKeys.length <= 0
-                <Button type="text"
-                  shape='circle'
-                  onClick={() => setExpandedKeys([...expandableRows.map(item => item?.key)])}
-                  icon={<RightOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
-                />
-              )
+                : expandedKeys.length > 0 ? (
+                  <Button type="text"
+                    shape='circle'
+                    onClick={() => setExpandedKeys([])}
+                    icon={<MinusOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
+                  />
+                ) : ( // expandedKeys.length <= 0
+                  <Button type="text"
+                    shape='circle'
+                    onClick={() => setExpandedKeys([...expandableRows.map(item => item?.key)])}
+                    icon={<RightOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
+                  />
+                )
             },
             expandedRowKeys: expandedKeys,
             rowExpandable: record => listAccounts.map(item => item?.schoolId).includes(record?.key),
@@ -434,7 +434,7 @@ function SchoolsLayout() {
                 return clone
               })
             },
-          }} 
+          }}
         />
       </div>
 

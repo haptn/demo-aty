@@ -27,7 +27,7 @@ function AppRouter() {
           <Route element={
             <ProtectedRoute 
               redirectPath='/'
-              isAllowed={!!user && user?.role === userRole.ADMIN.value}
+              isAllowed={!!user && user?.role === userRole.ADMIN}
             />
           }>
             <Route path="setting" element={<Setting/>} />

@@ -1,0 +1,30 @@
+.table {
+  div[class~="ant-table"] {
+    overflow-x: auto;
+    box-shadow: 0 .25rem .5rem rgba($color: #000000, $alpha: .2);
+  }
+
+  & [class~="ant-table-thead"] > tr > th {
+    // border-bottom-color: #063970;
+    color: #fafafa;
+    background-color: #063970;
+    background-color: #4f65df;
+    padding: .5rem .8rem !important;
+
+    &[class~="ant-table-row-expand-icon-cell"] > button > span {
+      color: #fff !important;
+    }
+  }
+
+  & [class~="ant-table-expanded-row"] {
+    & [class~="ant-table-thead"] > tr > th {
+      color: unset;
+      background-color: #97a3e6;
+    }
+  }
+
+  & tr[class~="ant-table-expanded-row"] div[class~="ant-table"] {
+    margin: 0 4rem !important;
+    // box-shadow: 0 .25rem .5rem rgba($color: #000000, $alpha: .2);
+  }
+}

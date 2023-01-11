@@ -3,9 +3,9 @@ export const keys = {
 }
 
 export const userRole = {
-  ACCOUNTER: { name: 'Kế toán', value: 1 },
-  SCHOOL_ADMIN: { name: 'Admin trường', value: 2 },
-  ADMIN: { name: 'Admin ATY', value: 3 }
+  ACCOUNTER: 'Kế toán',
+  SCHOOL_ADMIN: 'Admin trường',
+  ADMIN: 'Admin ATY'
 }
 
 export const schoolStatus = {
@@ -30,4 +30,10 @@ export const staffStatus = {
 export const filterSchools = {
   STATUS: 'status',
   TYPE: 'type'
+}
+
+export const filterAccounts = {
+  STATUS: 'status',
+  ROLE: 'role',
+  SCHOOL: 'school'
 }

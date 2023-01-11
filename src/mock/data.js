@@ -15,7 +15,7 @@ import { toCapital } from "../utils/string"
 const menuItems = []
 
 const excludePages = ['/login', '/profile']
-const allRoles = [...Object.values(userRole)?.map(item => item?.value)]
+const allRoles = [...Object.values(userRole)]
 for (const [key, value] of Object.entries(routes)) {
   if (excludePages.includes(value)) continue
 
@@ -33,13 +33,13 @@ for (const [key, value] of Object.entries(routes)) {
         role: allRoles
       }
       break
-  
+
     case routes.SCHOOLS:
       menuItem = {
         ...menuItem,
-        label: 'Trường & Tài khoản',
+        label: 'Trường & Nhân viên',
         icon: <BankOutlined />,
-        role: [userRole.ADMIN.value]
+        role: [userRole.ADMIN]
       }
       break
 
@@ -48,7 +48,7 @@ for (const [key, value] of Object.entries(routes)) {
         ...menuItem,
         label: 'Tài khoản',
         icon: <UserOutlined />,
-        role: [userRole.ADMIN.value]
+        role: [userRole.ADMIN]
       }
       break
 
@@ -57,7 +57,7 @@ for (const [key, value] of Object.entries(routes)) {
         ...menuItem,
         label: 'Thiết lập chung',
         icon: <SettingOutlined />,
-        role: [userRole.ADMIN.value],
+        role: [userRole.ADMIN],
 
       }
       break

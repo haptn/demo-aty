@@ -31,15 +31,15 @@ function FormLogin() {
               ? 'Trần Thị B'
               : 'Lê Thị C',
           role: username === 'kt.q1@aty.edu.vn'
-            ? userRole.ACCOUNTER.value
+            ? userRole.ACCOUNTER
             : username === 'admin.q1@aty.edu.vn'
-              ? userRole.SCHOOL_ADMIN.value
-              : userRole.ADMIN.value,
-          roleName: username === 'kt.q1@aty.edu.vn'
-            ? userRole.ACCOUNTER.name
-            : username === 'admin.q1@aty.edu.vn'
-              ? userRole.SCHOOL_ADMIN.name
-              : userRole.ADMIN.name,
+              ? userRole.SCHOOL_ADMIN
+              : userRole.ADMIN,
+          // roleName: username === 'kt.q1@aty.edu.vn'
+          //   ? userRole.ACCOUNTER.name
+          //   : username === 'admin.q1@aty.edu.vn'
+          //     ? userRole.SCHOOL_ADMIN.name
+          //     : userRole.ADMIN.name,
         })
         navigate(0)
       }

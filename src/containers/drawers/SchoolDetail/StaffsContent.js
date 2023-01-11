@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react'
-import { Col, Input, Row, Space } from 'antd'
 import { OrganizationGraph } from '@ant-design/graphs'
 import { schoolOrganizations } from '../../../mock/data'
 import { staffStatus } from '../../../config/constants'
 
 function StaffsContent({ schoolData }) {
-  const data = useMemo(() => 
+  const data = useMemo(() =>
     schoolOrganizations?.[schoolData?.key], [schoolData]
   )
 
@@ -14,8 +13,8 @@ function StaffsContent({ schoolData }) {
       data={data}
       nodeCfg={{
         style: node => {
-          console.log('node', node)
-          
+          // console.log('node', node)
+
           return ({
             fill: node?.value?.status === staffStatus.QUITTED
               ? '#ddd' : 'transparent',
@@ -27,7 +26,7 @@ function StaffsContent({ schoolData }) {
         },
         label: {
           style: (node, _group, type) => {
-            console.log({node, _group, type})
+            // console.log({ node, _group, type })
 
             const styles = {
               title: {

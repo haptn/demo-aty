@@ -1,17 +1,11 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import _ from 'lodash';
-import { Tabs, Tag } from 'antd'
-import { listAccounts } from '../../../mock/data';
+import { Tabs } from 'antd'
 import Drawer from '../Drawer'
 import { OverviewContent, ReportContent, StaffsContent } from './';
 import styles from './SchoolDetailDrawer.module.scss'
 
 function SchoolDetailDrawer({ open, setOpen, data }) {
-  const listStaffs = useMemo(() => {
-    return listAccounts.map(({schoolId}) => schoolId)
-      ?.filter(item => item === data?.key)
-  }, [data])
-
   const handleClose = () => {
     setOpen(false)
   }
@@ -40,8 +34,6 @@ function SchoolDetailDrawer({ open, setOpen, data }) {
             }} />,
           },
           {
-            // label: <div>Nhân sự <Tag color="geekblue">{listStaffs?.length}</Tag></div>,
-            // label: `Nhân sự (${listStaffs?.length})`,
             label: 'Sơ đồ tổ chức',
             key: '2',
             children: <StaffsContent {...{ schoolData: data }} />,
