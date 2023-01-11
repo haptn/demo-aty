@@ -5,10 +5,10 @@ import { Breadcrumb, Header, Sidebar } from '../../components'
 const { Content } = Layout
 
 function MainLayout(props) {
-  const { 
+  const {
     children,
     hasBreadcrumb = true,
-    title = ''
+    // title = ''
   } = props
 
   const [collapsed, setCollapsed] = useState(false)
@@ -17,10 +17,10 @@ function MainLayout(props) {
     <Layout style={{ minHeight: '100vh' }}>
       <Sidebar {...{ collapsed, setCollapsed }} />
       <Layout className="site-layout">
-        <Header {...{title}} />
-        <Content style={{ padding: '2rem', backgroundColor: '#e5e5e5' }}>
+        <Header />    {/*  {...{ title }} */}
+        <Content style={{ padding: '2rem', backgroundColor: '#eaeaea' }}>
           {hasBreadcrumb &&
-            <Breadcrumb/>
+            <Breadcrumb />
           }
           <div className="site-layout-background">
             {children}

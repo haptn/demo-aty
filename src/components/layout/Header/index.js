@@ -18,7 +18,7 @@ const ListNoti = () => (
     size='large'
     itemLayout="horizontal"
     dataSource={listNoti}
-    renderItem={({title, description, time, isNew }) => (
+    renderItem={({ title, description, time, isNew }) => (
       <List.Item
         style={isNew
           ? { borderLeft: '4px solid #eab830', marginBottom: '.8rem', padding: '1rem' }
@@ -51,7 +51,7 @@ const ListNoti = () => (
   />
 )
 
-function Header({ title }) {
+function Header() {   // { title }
   const navigate = useNavigate()
   const user = getLocal(keys.USER)
 
@@ -67,11 +67,11 @@ function Header({ title }) {
       case routes.PROFILE:
         navigate(menu?.key)
         break;
-    
+
       case routes.LOGIN:
         handleLogout()
         break;
-    
+
       default:
         break;
     }
@@ -87,40 +87,40 @@ function Header({ title }) {
 
   return (
     <AntdHeader
-      className={clsx("site-layout-background flex-between", styles.header)}
-    >
-      <h2>{title}</h2>
+      className={clsx("site-layout-background flex-row-end", styles.header)}
+    > {/* flex-between */}
+      {/* <h2>{title}</h2> */}
 
       <div className='flex-row-end'>
         <Popover
           title='Thông báo'
-          content={<ListNoti/>}
-          placement="bottomRight" 
+          content={<ListNoti />}
+          placement="bottomRight"
           trigger="click"
         >
           <Badge count={2}
             style={{ marginRight: '1.6rem' }}
           >
             <BellOutlined
-              style={{ marginRight: '1.6rem', fontSize: '2.2rem', cursor: 'pointer' }}
+              style={{ marginRight: '1.6rem', fontSize: '2.2rem', cursor: 'pointer', color: '#222' }}
             />
           </Badge>
         </Popover>
-      
+
         {/* <div
           onMouseLeave={() => toggleDropdown('noti', false)}
         > */}
         <Dropdown
-          menu={{ 
+          menu={{
             items: userMenuItems,
             onClick: handleClickUserMenu,
             rootClassName: styles.myDropdown
           }}
-          // open={openDropdown?.user}
-          >
+        // open={openDropdown?.user}
+        >
           <div
             className={clsx('flex-align-center', styles.user_box)}
-            // onMouseEnter={() => toggleDropdown('user', true)}
+          // onMouseEnter={() => toggleDropdown('user', true)}
           >
             <img src={NewLogoImg} alt='avatar' />
             <span>
@@ -131,7 +131,7 @@ function Header({ title }) {
         </Dropdown>
         {/* </div> */}
       </div>
-     
+
       {/* <button
         onClick={handleLogout}
         style={{ width: '7rem' }}

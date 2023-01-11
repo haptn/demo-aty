@@ -18,7 +18,7 @@ function Breadcrumb() {
   }, [pathname])
 
   return (
-    <AntdBreadcrumb separator='>' style={{ marginBottom: '1.6rem' }}>
+    <AntdBreadcrumb separator='>' style={{ marginBottom: '1rem' }}>
       <BreadcrumbItem onClick={() => navigate('/')}
         style={{ cursor: 'pointer' }}
       >

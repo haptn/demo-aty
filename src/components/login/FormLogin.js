@@ -6,9 +6,10 @@ import { setLocal } from '../../utils/storage'
 import { keys, userRole } from '../../config/constants'
 
 function FormLogin() {
-  const navigate  = useNavigate()
+  const navigate = useNavigate()
   const [errMsg, setErrMsg] = useState('')
 
+  // Handle Login
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
 
@@ -52,7 +53,7 @@ function FormLogin() {
       name="normal_login"
       className="login-form"
       initialValues={{
-        remember: true,
+        remember: false,
       }}
       onFinish={onFinish}
     >
@@ -92,7 +93,7 @@ function FormLogin() {
           onChange={() => setErrMsg('')}
         />
       </Form.Item>
-      
+
       {!!errMsg && (
         <span style={{ fontStyle: 'italic', color: 'red' }}>
           {errMsg}

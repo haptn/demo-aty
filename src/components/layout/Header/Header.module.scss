@@ -9,6 +9,8 @@ $header-height: 5.4rem;
     height: $header-height;
     background-color: #b4ccd4;
     background-color: #eab830;
+    background-color: #253a97;
+    background-color: #b6beeb;
   }
 
   position: sticky;
@@ -22,8 +24,10 @@ $header-height: 5.4rem;
   }
 
   .user_box {
+    min-width: 15rem;
+    max-width: 18rem;
     height: $header-height;
-    padding: .8rem;
+    padding: .8rem 1.6rem;
   
     img {
       height: 100%;
@@ -31,7 +35,8 @@ $header-height: 5.4rem;
       object-fit: cover;
   
       border-radius: 100%;
-      border: 1px solid #555;
+      // border: 1px solid #555;
+      box-shadow: 0 0 1rem rgba(255, 255, 255, .7);
     }
 
     & > span {
@@ -39,9 +44,17 @@ $header-height: 5.4rem;
       display: flex;
       flex-flow: column nowrap;
       line-height: 1.6;
-      
+
+      b {
+        color: #222;
+        font-size: 1.1em;
+        line-height: 1.35;
+      }
+
       small {
         color: #444;
+        font-weight: 500;
+        // color: #e5e5e5;
       }
     }
 

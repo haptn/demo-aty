@@ -16,11 +16,14 @@
 .sider {
   [class~="ant-layout-sider-children"] {
     background-color: rgba(234, 184, 48, .75);
+    background-color: #b6beeb;
   }
 
   .logo_box,
   [class~="ant-layout-sider-trigger"] {
     background-color: rgb(234, 184, 48) !important;
+    background-color: #253a97 !important;
+    background-color: #b6beeb !important;
     color: rgba(0, 0, 0, .88);
   }
 
@@ -64,12 +67,16 @@
       border-radius: 0;
       
       &[class~="ant-menu-item-selected"] {
-        border-right: 4px solid #063970;
-        background-color: #b4ccd4;
+        // border-right: 4px solid #063970;
+        // background-color: #b4ccd4;
+        border-right: 4px solid #4f65df;
+        background-color: #97a3e6;
+        // background-color: rgb(234, 184, 48, .6);
       }
 
       &:not([class~="ant-menu-item-selected"]):active {
-        background-color: #b4ccd4 !important;
+        // background-color: #b4ccd4 !important;
+        background-color: #97a3e6 !important;
       }
     }
   }
