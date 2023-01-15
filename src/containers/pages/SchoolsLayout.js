@@ -295,9 +295,9 @@ function SchoolsLayout() {
   ]
 
   return (
-    <MainLayout>  {/* title="Quản lý Trường & Nhân viên" */}
+    <MainLayout>  {/* title="Quản lý Trường & Tài khoản" */}
       <div className='w-100 flex-between'>
-        <h2>Quản lý Trường & Nhân viên</h2>
+        <h2>Quản lý Trường & Tài khoản</h2>
 
         {/* Buttons */}
         <Space size='small'>
@@ -309,7 +309,7 @@ function SchoolsLayout() {
           <Button type="primary" icon={<PlusOutlined />} size='middle'
             className='p-btn'
           >
-            Thêm Nhân viên
+            Thêm Tài khoản
           </Button>
           <Button type="default" icon={<FileExcelOutlined />} size='middle' className='p-btn'>
             Xuất file Excel

@@ -38,6 +38,7 @@ function Sidebar({collapsed, setCollapsed}) {
         className={clsx('w-100 flex-center px-1 py-1', styles.logo_box, {
           [styles.expanded]: !collapsed
         })}
+        onClick={() => navigate('/')}
       >
         <img src={LogoNoBgImg} alt='logo'/>
       </div>

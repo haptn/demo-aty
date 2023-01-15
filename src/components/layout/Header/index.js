@@ -98,13 +98,11 @@ function Header() {   // { title }
           placement="bottomRight"
           trigger="click"
         >
-          <Badge count={2}
-            style={{ marginRight: '1.6rem' }}
-          >
-            <BellOutlined
-              style={{ marginRight: '1.6rem', fontSize: '2.2rem', cursor: 'pointer', color: '#222' }}
-            />
-          </Badge>
+          <div className={styles.header__noti_box}>
+            <Badge count={2}>
+              <BellOutlined />
+            </Badge>
+          </div>
         </Popover>
 
         {/* <div
@@ -119,7 +117,7 @@ function Header() {   // { title }
         // open={openDropdown?.user}
         >
           <div
-            className={clsx('flex-align-center', styles.user_box)}
+            className={clsx('flex-align-center', styles.header__user_box)}
           // onMouseEnter={() => toggleDropdown('user', true)}
           >
             <img src={NewLogoImg} alt='avatar' />
