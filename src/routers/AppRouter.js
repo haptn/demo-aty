@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import { Accounts, Categories, Dashboard, Login, NotFound, Profile, Setting, Schools, Taxes } from '../pages';
 import { keys, userRole } from '../config/constants';
 import { getLocal } from '../utils/storage';
@@ -18,7 +18,7 @@ function AppRouter() {
           <Route element={<ProtectedRoute isAllowed={!!user} />}>
             <Route path="/" element={<Dashboard/>} />
             <Route path="profile" element={<Profile/>} />
-            <Route path="categories" element={<Categories/>} />
+            {/* <Route path="categories" element={<Categories/>} /> */}
             <Route path="taxes" element={<Taxes/>} />
             {/* ... */}
           </Route>
@@ -30,9 +30,14 @@ function AppRouter() {
               isAllowed={!!user && user?.role === userRole.ADMIN}
             />
           }>
-            <Route path="setting" element={<Setting/>} />
-            <Route path="accounts" element={<Accounts/>} />
-            <Route path="schools" element={<Schools/>} />
+            <Route path="settings" element={<Outlet/>}>
+              <Route index element={<Setting/>} />
+              <Route path="accounts" element={<Accounts/>} />
+              <Route path="schools" element={<Schools/>} />
+            </Route>
+            {/* <Route path="settings" element={<Setting/>} /> */}
+            {/* <Route path="accounts" element={<Accounts/>} />
+            <Route path="schools" element={<Schools/>} /> */}
             {/* ... */}
           </Route>
 

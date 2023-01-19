@@ -1,4 +1,4 @@
-import { routes } from "../config/path"
+import { routes, SETTINGS } from "../config/path"
 import {
   AppstoreAddOutlined,
   AreaChartOutlined,
@@ -22,28 +22,31 @@ for (const [key, value] of Object.entries(routes)) {
   const menuName = toCapital(key)
   let menuItem = {
     key: value,
-    label: menuName
+    label: menuName,
+    title: menuName
   }
 
   switch (value) {
     case routes.DASHBOARD:
       menuItem = {
         ...menuItem,
+        label: 'Báo cáo tổng quan',
+        title: 'Báo cáo tổng quan',
         icon: <AreaChartOutlined />,
         role: allRoles
       }
       break
 
-    case routes.SCHOOLS:
-      menuItem = {
-        ...menuItem,
-        label: 'Trường & Nhân viên',
-        icon: <BankOutlined />,
-        role: [userRole.ADMIN]
-      }
-      break
+    // case routes.SCHOOLS:
+    //   menuItem = {
+    //     ...menuItem,
+    //     label: 'Trường & Nhân viên',
+    //     icon: <BankOutlined />,
+    //     role: [userRole.ADMIN]
+    //   }
+    //   break
 
-    case routes.ACCOUNTS:
+    // case routes.ACCOUNTS:
       menuItem = {
         ...menuItem,
         label: 'Tài khoản',
@@ -52,35 +55,41 @@ for (const [key, value] of Object.entries(routes)) {
       }
       break
 
-    case routes.SETTING:
+    case routes.SETTINGS:
+      const label = 'Thiết lập chung'
+
       menuItem = {
-        ...menuItem,
-        label: 'Thiết lập chung',
+        key: SETTINGS,
+        label,
+        title: label,
         icon: <SettingOutlined />,
         role: [userRole.ADMIN],
 
       }
       break
 
-    case routes.CATEGORIES:
-      menuItem = {
-        ...menuItem,
-        label: 'Quản lý phân loại',
-        icon: <AppstoreAddOutlined />,
-        role: allRoles
-      }
-      break
+    // case routes.CATEGORIES:
+    //   menuItem = {
+    //     ...menuItem,
+    //     label: 'Quản lý phân loại',
+    //     icon: <AppstoreAddOutlined />,
+    //     role: allRoles
+    //   }
+    //   break
 
     case routes.TAXES:
       menuItem = {
         ...menuItem,
-        label: 'Quản lý thuế',
+        label: 'Thuế',
         icon: <DollarOutlined />,
         role: allRoles
       }
       break
 
     default:
+      menuItem = {
+        type: 'divider'
+      }
       break
   }
 
@@ -297,7 +306,235 @@ const listAccounts = [
 // Roles & privileges
 
 
-// 
+// Categories     // Sau chuyển cái này qua bên API để users có thể CRUD list danh mục này
+const listSettings = [
+  {
+    id: '1',
+    name: 'Nội bộ ATY',
+    children: [
+      // {
+      //   id: '1.1',
+      //   name: 'Tài khoản',
+      //   pathName: '/settings/accounts',
+      // },
+      {
+        id: '1.2',
+        name: 'Trường & Cơ sở',
+        pathName: '/settings/schools',
+      },
+      {
+        id: '1.3',
+        name: 'Lớp',
+        pathName: '/settings/classes',
+        description: 'Phần cấu hình này có thể khác nhau ở từng cơ sở, từng năm học'
+      },
+      {
+        id: '1.4',
+        name: 'Chương trình, khóa học',
+        pathName: '/settings/courses',
+        description: 'Danh sách tất cả các khóa học của ATY, học phí, mô tả,...'
+      },
+      // {
+      //   id: '1.5',
+      //   name: 'Học sinh, học viên',
+      //   pathName: '/settings/students',
+      // },
+      // {
+      //   id: '1.6',
+      //   name: 'Nhân viên, giáo viên',
+      //   pathName: '/settings/staffs',
+      // },
+      {
+        id: '1.12',
+        name: 'Học phí',
+        pathName: '/settings/tuition-fees',
+        description: 'Học phí từng cấp học, khối lớp, chương trình,...'
+      },
+      {
+        id: '1.7',
+        name: 'Bậc lương, thưởng, phụ cấp',
+        pathName: '/settings/salary',
+      },
+      {
+        id: '1.8',
+        name: 'Loại dịch vụ của trường',   // bán trú, nội trú, căn-tin,...
+        pathName: '/settings/school-services',
+      },
+      {
+        id: '1.9',
+        name: 'Bảng giá bán trú, nội trú',
+        pathName: '/settings/boarding-price',
+        description: 'Bảng giá bán trú, nội trú dành cho HS nam/nữ, loại phòng, kỳ đóng (theo tháng/học kỳ/...)'
+      },
+      {
+        id: '1.10',
+        name: 'Bảng giá đồng phục',
+        pathName: '/settings/uniforms-price',
+      },
+      {
+        id: '1.11',
+        name: 'Bảng giá thực đơn',
+        pathName: '/settings/menu-price',
+      },
+    ],
+  },
+  {
+    id: '2',
+    name: 'Đối tác của ATY',  // Long Bình Tân, NK Người Có Công,... (nơi chuyên cho thuê địa điểm tổ chức chtr / trường học liên kết)
+    children: [
+      {
+        id: '2.1',
+        name: 'Loại đối tác',
+        pathName: '/settings/partner-types',
+      },
+      {
+        id: '2.2',
+        name: 'Đối tác',
+        pathName: '/settings/partners',
+      },
+    ],
+  },
+  {
+    id: '3',
+    name: 'Nghiệp vụ kế toán',
+    children: [
+      {
+        id: '3.1',
+        name: 'Khoản mục thu nhập',
+        pathName: '/settings/income',
+      },
+      {
+        id: '3.2',
+        name: 'Khoản mục chi phí',
+        pathName: '/settings/costs',
+      },
+      {
+        id: '3.3',
+        name: 'Hình thức thanh toán',   // tiền mặt, chuyển khoản NH, ví điện tử
+        pathName: '/settings/payment-methods',
+      },
+      {
+        id: '3.4',
+        name: 'Loại tiền tệ',
+        pathName: '/settings/currencies',
+      },
+      {
+        id: '3.5',
+        name: 'Loại chứng từ',
+        pathName: '/settings/documents',
+      },
+      {
+        id: '3.6',
+        name: 'Chu kỳ làm mới sổ',  // hàng tháng/quý/học kỳ/năm học/năm
+        pathName: '/settings/renew-cycle',
+      },
+    ],
+  },
+  {
+    id: '4',
+    name: 'Thuế, phí, bảo hiểm',
+    children: [
+      {
+        id: '4.1',
+        name: 'Loại thuế',
+        pathName: '/settings/taxes',
+      },
+      {
+        id: '4.2',
+        name: 'Biểu thuế',
+        pathName: '/settings/tariffs',
+      },
+      {
+        id: '4.3',
+        name: 'Loại phí',
+        pathName: '/settings/fees',
+      },
+      {
+        id: '4.4',
+        name: 'Loại bảo hiểm',
+        pathName: '/settings/insurances',
+      },
+    ],
+  },
+  {
+    id: '5',
+    name: 'Ngân hàng',
+    children: [
+      {
+        id: '5.1',
+        name: 'Ngân hàng',
+        pathName: '/settings/banks',
+      },
+      {
+        id: '5.2',
+        name: 'Tài khoản ngân hàng',
+        pathName: '/settings/bank-accounts',
+      },
+    ],
+  },
+  {
+    id: '6',
+    name: 'Tài sản',
+    children: [
+      {
+        id: '6.1',
+        name: 'Loại tài sản cố định',
+        pathName: '/settings/fixed-assets',
+      },
+      {
+        id: '6.2',
+        name: 'Loại công cụ, dụng cụ',
+        pathName: '/settings/equipments',
+      },
+      {
+        id: '6.3',
+        name: 'Đơn vị tính',
+        pathName: '/settings/units',
+      },
+    ],
+  },
+  {
+    id: '7',
+    name: 'Hệ thống',
+    children: [
+      {
+        id: '7.1',
+        name: 'Thông tin công ty',
+        pathName: '/settings/aty-info',
+        description: 'Dùng để tự chèn thông tin của ATY vào hợp đồng, hóa đơn,...'
+      },
+      {
+        id: '7.2',
+        name: 'Tài khoản & Quyền hạn',
+        pathName: '/settings/accounts',
+        description: 'Quyền hạn xemthêm/xóa/sửa của mỗi tài khoản trong hệ thống'
+      },
+      {
+        id: '7.3',
+        name: 'Loại vai trò',
+        pathName: '/settings/roles',
+        description: 'Vai trò của người dùng trong hệ thống (VD: kế toán, admin,...)'
+      },
+    ],
+  },
+  {
+    id: '8',
+    name: 'Khác',
+    children: [
+      {
+        id: '8.1',
+        name: 'Tùy chỉnh Sidebar Menu',
+        pathName: '/settings/sidebar-menu',
+        description: 'Tùy chỉnh những mục được hiển thị trên sidebar menu bên trái'
+      },
+      {
+        id: '8.2',
+        name: 'Chức năng thêm nhanh',
+        pathName: '/settings/quick-add',
+      },
+    ],
+  },
+]
 
 export {
   menuItems,
@@ -305,5 +542,6 @@ export {
   listNoti,
   listSchools,
   listAccounts,
+  listSettings,
   schoolOrganizations
 }

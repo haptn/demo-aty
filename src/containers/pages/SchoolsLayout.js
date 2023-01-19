@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import _ from 'lodash'
 import clsx from 'clsx'
-import { Button, Input, Popconfirm, Select, Space, Switch, Table, Tag } from 'antd'
+import { Button, Popconfirm, Select, Space, Switch, Table, Tag } from 'antd'
 import {
   EditOutlined, EyeOutlined, StopOutlined,
   FileExcelOutlined, PlusOutlined,
@@ -11,8 +11,6 @@ import { MainLayout, SchoolDetailDrawer, AccountDetailDrawer } from '..'
 import { listAccounts, listSchools } from '../../mock/data'
 import { filterSchools, schoolStatus, schoolType, staffStatus } from '../../config/constants'
 import styles from '../../styles/pages/SchoolLayout.module.scss'
-
-const { Search } = Input
 
 function SchoolsLayout() {
   const [openSchoolDrawer, setOpenSchoolDrawer] = useState(false)
@@ -295,11 +293,10 @@ function SchoolsLayout() {
   ]
 
   return (
-    <MainLayout>  {/* title="Quản lý Trường & Nhân viên" */}
-      <div className='w-100 flex-between'>
-        <h2>Quản lý Trường & Nhân viên</h2>
-
-        {/* Buttons */}
+    <MainLayout
+      title="Trường & Cơ sở"  // Quản lý 
+      breadcrumbs={[{ path: '/settings', name: 'Thiết lập chung' }]}
+      pageActions={
         <Space size='small'>
           <Button type="primary" icon={<PlusOutlined />} size='middle'
             className='p-btn'
@@ -309,17 +306,15 @@ function SchoolsLayout() {
           <Button type="primary" icon={<PlusOutlined />} size='middle'
             className='p-btn'
           >
-            Thêm Nhân viên
+            Thêm Tài khoản
           </Button>
           <Button type="default" icon={<FileExcelOutlined />} size='middle' className='p-btn'>
             Xuất file Excel
           </Button>
         </Space>
-      </div>
-
-      <div className='w-100 pt-2 flex-between'>
-        {/* Filters */}
-        <Space size='small'>
+      }
+      pageFilters={
+        <>
           <Select
             value={filters[filterSchools.STATUS]}
             onChange={value => handleFilter(filterSchools.STATUS, value)}
@@ -356,18 +351,16 @@ function SchoolsLayout() {
               }))
             ]}
           />
-        </Space>
-
-        {/* Search */}
-        <Search allowClear enterButton
-          value={searchKeyword}
-          placeholder="Tìm theo tên, SĐT, địa chỉ"
-          onChange={e => setSearchKeyword(e?.target?.value)}
-          onSearch={handleSearch}
-          style={{ width: 250 }}
-        />
-      </div>
-
+        </>
+      }
+      hasPageSearch
+      pageSearchProps={{
+        value: searchKeyword,
+        placeholder: 'Tìm theo tên, SĐT, địa chỉ',
+        onChange: e => setSearchKeyword(e?.target?.value),
+        onSearch: handleSearch,
+      }}
+    >
       {/* Table */}
       <div className='w-100 pt-2'>
         <Table

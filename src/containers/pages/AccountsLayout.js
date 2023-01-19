@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import qs from 'qs'
 import _ from 'lodash'
 import clsx from 'clsx'
-import { Button, Input, Popconfirm, Select, Space, Spin, Switch, Table, Tag, Tooltip } from 'antd'
+import { Button, Popconfirm, Select, Space, Spin, Switch, Table, Tag, Tooltip } from 'antd'
 import {
   FileExcelOutlined, PlusOutlined,
   EditOutlined, LockOutlined, KeyOutlined
@@ -300,10 +300,10 @@ function AccountsLayout() {
   ]
 
   return (
-    <MainLayout>  {/* title="Quản lý Tài khoản" */}
-      <div className='w-100 flex-between'>
-        <h2>Quản lý Tài khoản</h2>
-
+    <MainLayout
+      title="Tài khoản & Quyền hạn"   // Quản lý 
+      breadcrumbs={[{ path: '/settings', name: 'Thiết lập chung' }]}
+      pageActions={
         <Space size='small'>
           <Button type="primary" icon={<PlusOutlined />}
             size='middle' className='p-btn'
@@ -316,11 +316,9 @@ function AccountsLayout() {
             Xuất file Excel
           </Button>
         </Space>
-      </div>
-
-      <div className='w-100 pt-2 flex-between'>
-        {/* Filters */}
-        <Space size='small'>
+      }
+      pageFilters={
+        <>
           <Select
             value={filters[filterAccounts.STATUS]}
             onChange={value => handleFilter(filterAccounts.STATUS, value)}
@@ -371,17 +369,15 @@ function AccountsLayout() {
               }))
             ]}
           />
-        </Space>
-
-        {/* Search */}
-        <Input.Search allowClear enterButton
-          value={searchKeyword}
-          placeholder="Tìm theo tên, SĐT, địa chỉ"
-          onChange={e => setSearchKeyword(e?.target?.value)}
-          style={{ width: 250 }}
-        />
-      </div>
-
+        </>
+      }
+      hasPageSearch
+      pageSearchProps={{
+        value: searchKeyword,
+        placeholder: 'Tìm theo tên, SĐT, địa chỉ',
+        onChange: e => setSearchKeyword(e?.target?.value),
+      }}
+    >
       <div className='w-100 pt-2'>
         <Spin spinning={loading}>
           <Table

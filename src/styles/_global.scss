@@ -11,8 +11,14 @@
 .mt-1 {
   margin-top: .25rem;
 }
+.mt-2 {
+  margin-top: 1.5rem;
+}
 .mr-1 {
   margin-right: 0.8rem;
+}
+.p-1 {
+  padding: .75rem;
 }
 .px-1 {
   padding-left: 0.75rem;
@@ -22,6 +28,13 @@
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
+.p-2 {
+  padding: 1.5rem;
+}
+.px-2 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
 .py-2 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
@@ -29,31 +42,11 @@
 .pt-2 {
   padding-top: 1.5rem;
 }
+.p-3 {
+  padding: 2.5rem;
+}
 .p-btn {
   padding: .4rem .8rem;
-}
-
-.block {
-  display: block;
-}
-.flex {
-  display: flex;
-}
-.flex-align-center {
-  display: flex;
-  align-items: center;
-}
-.flex-center {
-  @extend .flex-align-center;
-  justify-content: center;
-}
-.flex-between {
-  @extend .flex-align-center;
-  justify-content: space-between;
-}
-.flex-row-end {
-  @extend .flex-align-center;
-  justify-content: flex-end;
 }
 
 .text-center {
@@ -64,6 +57,19 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+// Colors
+.bg-white {
+  background-color: white;
+}
+
+// Border-radius
+.border-r-1 {
+  border-radius: 4px;
+}
+.border-r-2 {
+  border-radius: 8px;
 }
 
 // Custom antd styles
