@@ -1,5 +1,15 @@
 $header-height: 5.4rem;
 
+%nav_item {
+  height: $header-height;
+  padding: .8rem 1.6rem;
+
+  &:hover {
+    background-color: rgba($color: #000000, $alpha: .1);
+    cursor: pointer;
+  }
+}
+
 .header {
   width: 100%;
   padding-left: 2rem !important;
@@ -23,11 +33,22 @@ $header-height: 5.4rem;
     font-size: 1.8rem;
   }
 
-  .user_box {
+  &__noti_box {
+    @extend %nav_item;
+    padding-top: 0;
+
+    & > span[class~="ant-badge"] span[role="img"] {
+      color: #222;
+      font-size: 2.5rem;
+    }
+  }
+
+  &__user_box {
     min-width: 15rem;
     max-width: 18rem;
-    height: $header-height;
-    padding: .8rem 1.6rem;
+    @extend %nav_item;
+    // height: $header-height;
+    // padding: .8rem 1.6rem;
   
     img {
       height: 100%;
@@ -56,11 +77,6 @@ $header-height: 5.4rem;
         font-weight: 500;
         // color: #e5e5e5;
       }
-    }
-
-    &:hover {
-      background-color: rgba($color: #000000, $alpha: .1);
-      cursor: pointer;
     }
   }
 }
