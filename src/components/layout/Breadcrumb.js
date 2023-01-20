@@ -7,10 +7,10 @@ const { Item: BreadcrumbItem } = AntdBreadcrumb
 
 const REMOVE_TEXT = 'Quản lý '
 
-function Breadcrumb({ data = [], title = '' }) {
+function Breadcrumb({ data = [], title = '' }) {    // , hasTabs = false  // làm sau
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  
+
   const pageTitle = useMemo(() => {
     return title?.includes(REMOVE_TEXT)
       ? title.replace(new RegExp(REMOVE_TEXT), '')
@@ -19,6 +19,7 @@ function Breadcrumb({ data = [], title = '' }) {
 
   const breadcrumbs = useMemo(() => {
     return [...data, pageTitle]
+    // return hasTabs ? [...data] : [...data, pageTitle]   // Nếu có tabs thì ko có pageTitle (?)
   }, [pathname])
   const isLast = idx => idx < breadcrumbs?.length - 1
 
@@ -30,20 +31,17 @@ function Breadcrumb({ data = [], title = '' }) {
         <HomeOutlined />
       </BreadcrumbItem>
       {pathname !== routes.DASHBOARD &&
-        breadcrumbs?.map((item, idx) => {
-          console.log('idx, data?.length', idx, data?.length)
-
-
-          return (
-            <BreadcrumbItem>
-              {isLast(idx)
-                ? <Link to={item?.path}>{item?.name}</Link>
-                : pageTitle
-              }  {/* getCurrentPageTitle() */}
-            </BreadcrumbItem>
-          )
-        }
-      )}
+        breadcrumbs?.map((item, idx) => (
+          <BreadcrumbItem>
+            {isLast(idx)
+              ? <Link to={item?.path}>
+                <span style={{ fontWeight: 500 }}>{item?.name}</span>
+              </Link>
+              : pageTitle
+            }
+          </BreadcrumbItem>
+        )
+        )}
     </AntdBreadcrumb>
   )
 }

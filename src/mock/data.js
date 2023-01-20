@@ -37,16 +37,16 @@ for (const [key, value] of Object.entries(routes)) {
       }
       break
 
-    // case routes.SCHOOLS:
-    //   menuItem = {
-    //     ...menuItem,
-    //     label: 'Trường & Nhân viên',
-    //     icon: <BankOutlined />,
-    //     role: [userRole.ADMIN]
-    //   }
-    //   break
+      // case routes.SCHOOLS:
+      //   menuItem = {
+      //     ...menuItem,
+      //     label: 'Trường & Nhân viên',
+      //     icon: <BankOutlined />,
+      //     role: [userRole.ADMIN]
+      //   }
+      //   break
 
-    // case routes.ACCOUNTS:
+      // case routes.ACCOUNTS:
       menuItem = {
         ...menuItem,
         label: 'Tài khoản',
@@ -511,7 +511,7 @@ const listSettings = [
       },
       {
         id: '7.3',
-        name: 'Loại vai trò',
+        name: 'Loại người dùng',
         pathName: '/settings/roles',
         description: 'Vai trò của người dùng trong hệ thống (VD: kế toán, admin,...)'
       },

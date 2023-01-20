@@ -7,10 +7,10 @@ import {
   FileExcelOutlined, PlusOutlined,
   DownOutlined, RightOutlined, MinusOutlined
 } from '@ant-design/icons'
-import { MainLayout, SchoolDetailDrawer, AccountDetailDrawer } from '..'
-import { listAccounts, listSchools } from '../../mock/data'
-import { filterSchools, schoolStatus, schoolType, staffStatus } from '../../config/constants'
-import styles from '../../styles/pages/SchoolLayout.module.scss'
+import { MainLayout, SchoolDetailDrawer, AccountDetailDrawer } from '../..'
+import { listAccounts, listSchools } from '../../../mock/data'
+import { filterSchools, schoolStatus, schoolType, staffStatus } from '../../../config/constants'
+import styles from '../../../styles/pages/SchoolLayout.module.scss'
 
 function SchoolsLayout() {
   const [openSchoolDrawer, setOpenSchoolDrawer] = useState(false)
@@ -295,7 +295,10 @@ function SchoolsLayout() {
   return (
     <MainLayout
       title="Trường & Cơ sở"  // Quản lý 
-      breadcrumbs={[{ path: '/settings', name: 'Thiết lập chung' }]}
+      breadcrumbs={[
+        { path: '/settings', name: 'Thiết lập chung' },
+        // { path: '/settings', name: 'Nội bộ ATY' },
+      ]}
       pageActions={
         <Space size='small'>
           <Button type="primary" icon={<PlusOutlined />} size='middle'

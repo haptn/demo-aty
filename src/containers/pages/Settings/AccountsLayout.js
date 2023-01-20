@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import qs from 'qs'
 import _ from 'lodash'
 import clsx from 'clsx'
@@ -7,12 +8,12 @@ import {
   FileExcelOutlined, PlusOutlined,
   EditOutlined, LockOutlined, KeyOutlined
 } from '@ant-design/icons'
-import api from '../../config/api'
-import { filterAccounts, staffStatus, userRole } from '../../config/constants'
-import { URL_ACCOUNTS, URL_SCHOOLS } from '../../config/endpoints'
-import { AccountDetailDrawer, MainLayout } from '..'
-import styles from '../../styles/pages/SchoolLayout.module.scss'
-import { toast } from 'react-toastify'
+
+import api from '../../../config/api'
+import { filterAccounts, staffStatus, userRole } from '../../../config/constants'
+import { URL_ACCOUNTS, URL_SCHOOLS } from '../../../config/endpoints'
+import { AccountDetailDrawer, MainLayout } from '../..'
+import styles from '../../../styles/pages/SchoolLayout.module.scss'
 
 function AccountsLayout() {
   const [loading, setLoading] = useState(false)
@@ -302,7 +303,10 @@ function AccountsLayout() {
   return (
     <MainLayout
       title="Tài khoản & Quyền hạn"   // Quản lý 
-      breadcrumbs={[{ path: '/settings', name: 'Thiết lập chung' }]}
+      breadcrumbs={[
+        { path: '/settings', name: 'Thiết lập chung' },
+        // { path: '/settings', name: 'Nội bộ ATY' },
+      ]}
       pageActions={
         <Space size='small'>
           <Button type="primary" icon={<PlusOutlined />}
@@ -377,6 +381,9 @@ function AccountsLayout() {
         placeholder: 'Tìm theo tên, SĐT, địa chỉ',
         onChange: e => setSearchKeyword(e?.target?.value),
       }}
+      // tabs={[
+      //   { key: '1', label: '' }
+      // ]}  // Làm sao đó để lấy đc data của những phần thiết lập cùng loại (lớp, học phí, lương,...)
     >
       <div className='w-100 pt-2'>
         <Spin spinning={loading}>

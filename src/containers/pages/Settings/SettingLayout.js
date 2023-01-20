@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Button, Space } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
-import { MainLayout } from '..'
-import { listSettings } from '../../mock/data'
-import { SettingItem } from '../../components'
+import { MainLayout } from '../..'
+import { listSettings } from '../../../mock/data'
+import { SettingItem } from '../../../components'
 
 function SettingLayout() {
   const [searchKeyword, setSearchKeyword] = useState('')

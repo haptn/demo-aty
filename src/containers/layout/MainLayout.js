@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Input, Layout, Space } from 'antd'
+import { Input, Layout, Space, Tabs } from 'antd'
 import { ToastContainer } from 'react-toastify'
 import { Breadcrumb, Header, Sidebar } from '../../components'
 
@@ -10,6 +10,8 @@ function MainLayout(props) {
     children,
     hasBreadcrumb = true,
     breadcrumbs = [],
+    // tabs = [],  // để làm cái này sau, hơi phức tạp vụ lấy list của những settings trong cùng 1 group
+    // onChangeTabs, // làm sau chung vs phần "tabs"
     title = '',
     pageActions,
     pageFilters,
@@ -27,9 +29,22 @@ function MainLayout(props) {
         <Header />    {/*  {...{ title }} */}
         <Content style={{ padding: '2rem', backgroundColor: '#eaeaea' }}>
           {hasBreadcrumb &&
-            <Breadcrumb {...{ data: breadcrumbs, title }} />
+            <Breadcrumb {...{
+              data: breadcrumbs,
+              title,
+              // hasTabs: tabs && tabs?.length > 0    // làm sau
+            }} />
           }
           <div className="site-layout-background">
+            {/* Tabs (optional) */}
+            {/* {(tabs && tabs?.length > 0) && (
+              <Tabs {...{
+                defaultActiveKey: tabs?.[0]?.key,
+                items: tabs,
+                onChange: onChangeTabs
+              }} />
+            )} */}
+
             {/* Page header */}
             <div className='w-100 flex-between'>
               <h2>{title}</h2>
@@ -52,7 +67,7 @@ function MainLayout(props) {
                     />
                   )}
                 </Space>
-        
+
                 {/* Search */}
                 {hasPageSearch && (
                   <Input.Search
