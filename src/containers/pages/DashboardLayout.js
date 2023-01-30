@@ -3,7 +3,10 @@ import { MainLayout } from '..'
 
 function DashboardLayout() {
   return (
-    <MainLayout hasBreadcrumb={false}>
+    <MainLayout
+      title="Báo cáo tổng quan"
+      hasBreadcrumb={false}
+    >
       DashboardLayout
     </MainLayout>
   )

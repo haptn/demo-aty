@@ -1,21 +1,26 @@
 import React, { useMemo } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { HomeOutlined } from '@ant-design/icons'
 import { Breadcrumb as AntdBreadcrumb } from 'antd'
 import { routes } from '../../config/path'
-import { toCapital } from '../../utils/string'
-import { menuItems } from '../../mock/data'
 const { Item: BreadcrumbItem } = AntdBreadcrumb
 
-function Breadcrumb() {
+const REMOVE_TEXT = 'Quản lý '
+
+function Breadcrumb({ data = [], title = '' }) {
   const navigate = useNavigate()
   const { pathname } = useLocation()
+  
+  const pageTitle = useMemo(() => {
+    return title?.includes(REMOVE_TEXT)
+      ? title.replace(new RegExp(REMOVE_TEXT), '')
+      : title
+  }, [title])
 
-  const currentPage = useMemo(() => {
-    return toCapital(
-      menuItems.find(item => item?.key === pathname)?.label
-    )
+  const breadcrumbs = useMemo(() => {
+    return [...data, pageTitle]
   }, [pathname])
+  const isLast = idx => idx < breadcrumbs?.length - 1
 
   return (
     <AntdBreadcrumb separator='>' style={{ marginBottom: '1rem' }}>
@@ -24,8 +29,20 @@ function Breadcrumb() {
       >
         <HomeOutlined />
       </BreadcrumbItem>
-      {pathname !== routes.DASHBOARD && (
-        <BreadcrumbItem>{currentPage}</BreadcrumbItem>
+      {pathname !== routes.DASHBOARD &&
+        breadcrumbs?.map((item, idx) => {
+          console.log('idx, data?.length', idx, data?.length)
+
+
+          return (
+            <BreadcrumbItem>
+              {isLast(idx)
+                ? <Link to={item?.path}>{item?.name}</Link>
+                : pageTitle
+              }  {/* getCurrentPageTitle() */}
+            </BreadcrumbItem>
+          )
+        }
       )}
     </AntdBreadcrumb>
   )

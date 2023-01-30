@@ -542,5 +542,6 @@ export {
   listNoti,
   listSchools,
   listAccounts,
+  listSettings,
   schoolOrganizations
 }

@@ -1,0 +1,52 @@
+.block {
+  display: block;
+}
+
+// Flex
+.flex {
+  display: flex;
+}
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+.flex-center {
+  @extend .flex-align-center;
+  justify-content: center;
+}
+.flex-between {
+  @extend .flex-align-center;
+  justify-content: space-between;
+}
+.flex-row-end {
+  @extend .flex-align-center;
+  justify-content: flex-end;
+}
+
+// Grid
+.grid {
+  display: grid;
+}
+.grid-item {
+  
+}
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
+
+// Masonry
+.masonry {
+  column-count: 4;
+  column-gap: 1rem;
+
+  & > * {
+    break-inside: avoid;
+  }
+
+  &-item {
+    & + & {
+      margin-top: 2.5rem;
+    }
+  }
+}
