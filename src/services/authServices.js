@@ -1,3 +1,7 @@
-export const loginRequest = (data) => {
-  
+export const login = (data) => {
+
+}
+
+export const logout = (data) => {
+
 }

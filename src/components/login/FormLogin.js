@@ -15,17 +15,17 @@ function FormLogin() {
 
     const { username, password } = values
 
-    if (['kt.q1@aty.edu.vn',
+    if (['kt.q1@aty.edu.vn', 'annv@aty.edu.vn',
       'admin.q1@aty.edu.vn',
       'admin.aty@aty.edu.vn'].includes(username)
     ) {
-      if (password !== '123')
+      if (password !== '123456')
         setErrMsg('Mật khẩu không đúng')
       else {
         setErrMsg('')
         setLocal(keys.USER, {
           username,
-          name: username === 'kt.q1@aty.edu.vn'
+          name: username === 'annv@aty.edu.vn' // 'kt.q1@aty.edu.vn'
             ? 'Nguyễn Văn A'
             : username === 'admin.q1@aty.edu.vn'
               ? 'Trần Thị B'
@@ -101,11 +101,11 @@ function FormLogin() {
       )}
 
       {/* <Form.Item> */}
-        <Form.Item name="remember" valuePropName="checked" //noStyle
-          style={{ marginTop: '1.5rem' }}
-        >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
+      <Form.Item name="remember" valuePropName="checked" //noStyle
+        style={{ marginTop: '1.5rem' }}
+      >
+        <Checkbox>Remember me</Checkbox>
+      </Form.Item>
       {/* </Form.Item> */}
 
       <Form.Item>

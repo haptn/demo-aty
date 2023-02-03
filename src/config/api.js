@@ -1,16 +1,22 @@
 import axios from 'axios'
-import qs from 'qs'
 
 export const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
   timeout: 60000,   // 60s (1 min)
+  headers: {
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache',
+    'Pragma': 'no-cache',
+    'Expires': '0',
+    'Access-Control-Allow-Origin': '*'
+  },
 })
 
 // Set default headers
-axios.defaults.headers.common['Cache-Control'] = 'no-cache'
-axios.defaults.headers.post['Content-Type'] = 'application/json'
-axios.defaults.headers.common['Cache-Control'] = 'max-age=0'
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+// axios.defaults.headers.common['Cache-Control'] = 'no-cache'
+// axios.defaults.headers.post['Content-Type'] = 'application/json'
+// axios.defaults.headers.common['Cache-Control'] = 'max-age=0'
+// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
 /**
  * get request headers
@@ -71,7 +77,9 @@ export default {
    * @param {boolean} isAuth
    */
   post: (endpoint, data, isAuth = false) => {
-    return axiosInstance.post(endpoint, data, { headers: getHeaders(isAuth) })
+    return axiosInstance.post(endpoint, data, {
+      headers: getHeaders(isAuth)
+    })
   },
 
   /**
@@ -81,7 +89,7 @@ export default {
    * @param {boolean} isAuth
    */
   put: (endpoint, data, isAuth = false) => {
-    return axiosInstance.put(endpoint, qs.stringify(data), {
+    return axiosInstance.put(endpoint, data, {
       headers: getHeaders(isAuth),
     })
   },
@@ -93,7 +101,7 @@ export default {
    * @param {boolean} isAuth
    */
   patch: (endpoint, data, isAuth = false) => {
-    return axiosInstance.patch(endpoint, qs.stringify(data), {
+    return axiosInstance.patch(endpoint, data, {
       headers: getHeaders(isAuth),
     })
   },

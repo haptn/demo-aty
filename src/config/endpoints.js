@@ -15,3 +15,7 @@ export const URL_TAXES = '/taxes'
 export const URL_SETTING = '/setting'
 
 
+export const URL_CLASSES = '/classes'
+export const URL_STUDENTS = '/students'
+export const URL_STAFFS = '/staffs'
+export const URL_COURSES = '/courses'
