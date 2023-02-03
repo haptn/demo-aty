@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
-import { Avatar, Badge, Dropdown, Layout, List, Popover } from 'antd'
+import { Avatar, Badge, Dropdown, Layout, List, Popover, Space } from 'antd'
 import { BellOutlined } from '@ant-design/icons'
 
 import { NewLogoImg } from '../../../assets'
@@ -9,6 +9,8 @@ import { listNoti, userMenuItems } from '../../../mock/data'
 import { getLocal, removeLocal } from '../../../utils/storage'
 import { routes } from '../../../config/path'
 import { keys } from '../../../config/constants'
+import FilterBookYear from './FilterBookYear'
+import FilterSchool from './FilterSchool'
 import styles from './Header.module.scss'
 
 const { Header: AntdHeader } = Layout
@@ -87,9 +89,16 @@ function Header() {   // { title }
 
   return (
     <AntdHeader
-      className={clsx("site-layout-background flex-row-end", styles.header)}
-    > {/* flex-between */}
+      className={clsx("site-layout-background flex-between", styles.header)}
+    > {/* flex-row-end */}
       {/* <h2>{title}</h2> */}
+
+      <Space size='middle'>
+        <FilterSchool />
+        <FilterBookYear />
+
+        {/* Global Search (???) */}
+      </Space>
 
       <div className='flex-row-end'>
         <Popover

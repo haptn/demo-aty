@@ -1,5 +1,7 @@
 // charts
 
+// common
+export { default as HeaderFilter } from './common/HeaderFilter'
 
 // layout
 export { default as Breadcrumb } from './layout/Breadcrumb'

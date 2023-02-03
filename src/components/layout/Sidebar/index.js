@@ -11,7 +11,7 @@ import styles from './Sidebar.module.scss'
 
 const { Sider } = Layout
 
-function Sidebar({collapsed, setCollapsed}) {
+function Sidebar({ collapsed, setCollapsed }) {
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -40,9 +40,9 @@ function Sidebar({collapsed, setCollapsed}) {
         })}
         onClick={() => navigate('/')}
       >
-        <img src={LogoNoBgImg} alt='logo'/>
+        <img src={LogoNoBgImg} alt='logo' />
       </div>
-      <Menu mode="inline" 
+      <Menu mode="inline"
         items={menu}
         defaultSelectedKeys={[pathname]}
         onClick={handleChangeMenu}
