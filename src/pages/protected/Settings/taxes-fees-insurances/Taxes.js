@@ -1,9 +1,9 @@
 import React from 'react'
-import { TaxesLayout } from '../../containers'
+import { TaxesLayout } from '../../../../containers'
 
 function Taxes() {
   return (
-    <TaxesLayout/>
+    <TaxesLayout />
   )
 }
 

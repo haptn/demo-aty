@@ -27,6 +27,14 @@ export const staffStatus = {
   QUITTED: 'Đã nghỉ'
 }
 
+export const courseStatus = {
+  READIED: 'Sẵn sàng',
+  PAUSED: 'Tạm dừng',
+  COMING_SOON: 'Sắp ra mắt'
+}
+
+
+// =========== Filter types ===========
 export const filterSchools = {
   STATUS: 'status',
   TYPE: 'type'
@@ -36,4 +44,10 @@ export const filterAccounts = {
   STATUS: 'status',
   ROLE: 'role',
   SCHOOL: 'school'
+}
+
+export const filterCourses = {
+  STATUS: 'status',
+  // AGE: 'age',
+  PRICE: 'price'
 }

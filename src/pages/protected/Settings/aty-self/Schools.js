@@ -1,9 +1,9 @@
 import React from 'react'
-import { SchoolsLayout } from '../../containers'
+import { SchoolsLayout } from '../../../../containers'
 
 function Schools() {
   return (
-    <SchoolsLayout/>
+    <SchoolsLayout />
   )
 }
 

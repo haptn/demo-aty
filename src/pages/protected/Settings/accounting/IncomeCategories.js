@@ -1,5 +1,5 @@
 import React from 'react'
-import { IncomeCategoriesLayout } from '../../containers'
+import { IncomeCategoriesLayout } from '../../../../containers'
 
 function IncomeCategories() {
   return (

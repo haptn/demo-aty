@@ -32,7 +32,7 @@ function Breadcrumb({ data = [], title = '' }) {    // , hasTabs = false  // là
       </BreadcrumbItem>
       {pathname !== routes.DASHBOARD &&
         breadcrumbs?.map((item, idx) => (
-          <BreadcrumbItem>
+          <BreadcrumbItem key={idx}>
             {isLast(idx)
               ? <Link to={item?.path}>
                 <span style={{ fontWeight: 500 }}>{item?.name}</span>

@@ -31,9 +31,9 @@ function SettingLayout() {
         <div className='masonry grid-3'>
           {listSettings?.length > 0 &&
             listSettings?.map(group => (
-              <div className='masonry-item'>
+              <div className='masonry-item' key={group?.id}>
                 <SettingItem {...{
-                  key: group?.id,
+                  // key: group?.id,
                   title: group?.name,
                   list: group?.children
                 }} />

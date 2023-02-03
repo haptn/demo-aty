@@ -1,9 +1,9 @@
 import React from 'react'
-import { SettingLayout } from '../../containers'
+import { SettingLayout } from '../../../containers'
 
 function Setting() {
   return (
-    <SettingLayout/>
+    <SettingLayout />
   )
 }
 

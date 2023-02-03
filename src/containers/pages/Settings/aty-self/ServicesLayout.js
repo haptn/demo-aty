@@ -9,13 +9,13 @@ import {
   EditOutlined, LockOutlined, KeyOutlined
 } from '@ant-design/icons'
 
-import api from '../../../config/api'
-import { filterAccounts, staffStatus, userRole } from '../../../config/constants'
-import { URL_ACCOUNTS, URL_SCHOOLS } from '../../../config/endpoints'
-import { AccountDetailDrawer, MainLayout } from '../..'
-import styles from '../../../styles/pages/SchoolLayout.module.scss'
+import api from '../../../../config/api'
+import { filterAccounts, staffStatus, userRole } from '../../../../config/constants'
+import { URL_ACCOUNTS, URL_SCHOOLS } from '../../../../config/endpoints'
+import { AccountDetailDrawer, MainLayout } from '../../..'
+import styles from '../../../../styles/pages/SchoolLayout.module.scss'
 
-function AccountsLayout() {
+function ServicesLayout() {
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState([])
   const [detailData, setDetailData] = useState(null)
@@ -47,7 +47,7 @@ function AccountsLayout() {
       }))
       setListSchools(list)
     })
-  
+
     return () => {
       setListSchools([])
     }
@@ -128,9 +128,9 @@ function AccountsLayout() {
         return clone
       })
 
-      toast.update(toastId, { 
-        render: "Cập nhật trạng thái thành công!", 
-        type: "success", 
+      toast.update(toastId, {
+        render: "Cập nhật trạng thái thành công!",
+        type: "success",
         isLoading: false,
         autoClose: 1500
       });
@@ -163,14 +163,14 @@ function AccountsLayout() {
         lockAccount: null,
         resetPass: null
       })
-      toast.update(toastId, { 
+      toast.update(toastId, {
         render: (
           <>
             <h4 style={{ marginBottom: '.35rem' }}>Đặt lại mật khẩu thành công!</h4>
             <p>Mật khẩu mới: <b>{res?.password}</b></p>
           </>
-        ), 
-        type: "success", 
+        ),
+        type: "success",
         isLoading: false,
         autoClose: 2500
       })
@@ -302,7 +302,7 @@ function AccountsLayout() {
 
   return (
     <MainLayout
-      title="Tài khoản & Quyền hạn"   // Quản lý 
+      title="Loại dịch vụ của trường"
       breadcrumbs={[
         { path: '/settings', name: 'Thiết lập chung' },
         // { path: '/settings', name: 'Nội bộ ATY' },
@@ -381,9 +381,9 @@ function AccountsLayout() {
         placeholder: 'Tìm theo tên, SĐT, địa chỉ',
         onChange: e => setSearchKeyword(e?.target?.value),
       }}
-      // tabs={[
-      //   { key: '1', label: '' }
-      // ]}  // Làm sao đó để lấy đc data của những phần thiết lập cùng loại (lớp, học phí, lương,...)
+    // tabs={[
+    //   { key: '1', label: '' }
+    // ]}  // Làm sao đó để lấy đc data của những phần thiết lập cùng loại (lớp, học phí, lương,...)
     >
       <div className='w-100 pt-2'>
         <Spin spinning={loading}>
@@ -391,8 +391,8 @@ function AccountsLayout() {
             columns={columns} dataSource={data}
             size='middle'
             className={clsx(styles.table, 'w-100')}
-            pagination={{ 
-              size: 'default', 
+            pagination={{
+              size: 'default',
               showTotal: total => `Tổng cộng ${total} dòng`,
               onChange: _page => setPage(_page)
             }}
@@ -411,4 +411,4 @@ function AccountsLayout() {
   )
 }
 
-export default AccountsLayout
+export default ServicesLayout

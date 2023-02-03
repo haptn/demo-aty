@@ -1,5 +1,5 @@
 import React from 'react'
-import { MainLayout } from '../..'
+import { MainLayout } from '../../..'
 
 function TaxesLayout() {
   return (

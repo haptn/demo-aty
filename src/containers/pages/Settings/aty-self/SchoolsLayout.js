@@ -1,35 +1,34 @@
 import React, { useMemo, useState } from 'react'
 import _ from 'lodash'
 import clsx from 'clsx'
-import { Button, Popconfirm, Select, Space, Switch, Table, Tag } from 'antd'
+import { Button, Popconfirm, Select, Space, Spin, Switch, Table, Tag } from 'antd'
 import {
   EditOutlined, EyeOutlined, StopOutlined,
   FileExcelOutlined, PlusOutlined,
   DownOutlined, RightOutlined, MinusOutlined
 } from '@ant-design/icons'
-import { MainLayout, SchoolDetailDrawer, AccountDetailDrawer } from '../..'
-import { listAccounts, listSchools } from '../../../mock/data'
-import { filterSchools, schoolStatus, schoolType, staffStatus } from '../../../config/constants'
-import styles from '../../../styles/pages/SchoolLayout.module.scss'
+import { MainLayout, SchoolDetailDrawer, AccountDetailDrawer } from '../../..'
+import { listAccounts } from '../../../../mock/data'
+import { useSchools } from '../../../../services'
+import { filterSchools, schoolStatus, schoolType, staffStatus } from '../../../../config/constants'
+import styles from '../../../../styles/pages/SchoolLayout.module.scss'
 
 function SchoolsLayout() {
-  const [openSchoolDrawer, setOpenSchoolDrawer] = useState(false)
-  const [openAccountDrawer, setOpenAccountDrawer] = useState(false)
-  const [openPopConfirm, setOpenPopConfirm] = useState(null)
+  const { data = [], isLoading } = useSchools().getList
 
   // const [opennedSchool, setOpennedSchool] = useState(null)
-  const [data, setData] = useState(listSchools || [])
+  // const [_, setData] = useState(listSchools || [])
   const [detailData, setDetailData] = useState(null)
   const [schoolStatuses, setSchoolStatuses] = useState(() => {
     const obj = {}
-    data.forEach(({ key, status }) => {
+    data?.forEach(({ key, status }) => {
       obj[key] = status
     })
     return obj
   })
   const [workingStatuses, setWorkingStatuses] = useState(() => {
     const obj = {}
-    listAccounts.forEach(({ key, status }) => {
+    listAccounts?.forEach(({ key, status }) => {
       obj[key] = status
     })
     return obj
@@ -48,6 +47,10 @@ function SchoolsLayout() {
     )
     return clone
   }, [data])
+
+  const [openSchoolDrawer, setOpenSchoolDrawer] = useState(false)
+  const [openAccountDrawer, setOpenAccountDrawer] = useState(false)
+  const [openPopConfirm, setOpenPopConfirm] = useState(null)
 
   const handleChangeWorkingStatuses = ({ key, status }) => {
     setWorkingStatuses(prevStatus => {
@@ -68,14 +71,14 @@ function SchoolsLayout() {
   }
 
   const handleSearch = keyword => {
-    setData(() => {
-      const clone = [...listSchools]
-      return clone?.filter(school =>
-        school?.name?.toLowerCase()?.includes(keyword?.toLowerCase())
-        ||
-        school?.address?.toLowerCase()?.includes(keyword?.toLowerCase())
-      )
-    })
+    // setData(() => {
+    //   const clone = [...listSchools]
+    //   return clone?.filter(school =>
+    //     school?.name?.toLowerCase()?.includes(keyword?.toLowerCase())
+    //     ||
+    //     school?.address?.toLowerCase()?.includes(keyword?.toLowerCase())
+    //   )
+    // })
   }
 
   const handleFilter = (type = '', value) => {
@@ -83,22 +86,22 @@ function SchoolsLayout() {
 
     switch (type) {
       case filterSchools.STATUS:
-        setData(prevData => {
-          console.log('__status: ', prevData);
+        // setData(prevData => {
+        //   console.log('__status: ', prevData);
 
-          const clone = !value ? [...listSchools] : [...prevData]
-          return clone?.filter(({ status }) => status === value)
-        })
+        //   const clone = !value ? [...listSchools] : [...prevData]
+        //   return clone?.filter(({ status }) => status === value)
+        // })
         break;
 
       case filterSchools.TYPE:
-        setData(prevData => {
-          console.log('```type: ', prevData);
+        // setData(prevData => {
+        //   console.log('```type: ', prevData);
 
-          const clone = (value?.includes('all') || value?.length <= 0)
-            ? [...listSchools] : [...prevData]
-          return clone?.filter(({ type }) => value?.includes(type))
-        })
+        //   const clone = (value?.includes('all') || value?.length <= 0)
+        //     ? [...listSchools] : [...prevData]
+        //   return clone?.filter(({ type }) => value?.includes(type))
+        // })
         break;
 
       default:
@@ -366,72 +369,74 @@ function SchoolsLayout() {
     >
       {/* Table */}
       <div className='w-100 pt-2'>
-        <Table
-          columns={columns} dataSource={data}
-          size='middle'
-          className={clsx(styles.table, 'w-100')}
-          expandable={{
-            columnTitle: () => {
-              return expandedKeys.length >= expandableRows.length ? (
-                <Button type="text"
-                  shape='circle'
-                  onClick={() => setExpandedKeys([])}
-                  icon={<DownOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
-                />
-              )
-                : expandedKeys.length > 0 ? (
+        <Spin spinning={isLoading}>
+          <Table
+            columns={columns} dataSource={data}
+            size='middle'
+            className={clsx(styles.table, 'w-100')}
+            expandable={{
+              columnTitle: () => {
+                return expandedKeys.length >= expandableRows.length ? (
                   <Button type="text"
                     shape='circle'
                     onClick={() => setExpandedKeys([])}
-                    icon={<MinusOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
+                    icon={<DownOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
                   />
-                ) : ( // expandedKeys.length <= 0
+                )
+                  : expandedKeys.length > 0 ? (
+                    <Button type="text"
+                      shape='circle'
+                      onClick={() => setExpandedKeys([])}
+                      icon={<MinusOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
+                    />
+                  ) : ( // expandedKeys.length <= 0
+                    <Button type="text"
+                      shape='circle'
+                      onClick={() => setExpandedKeys([...expandableRows.map(item => item?.key)])}
+                      icon={<RightOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
+                    />
+                  )
+              },
+              expandedRowKeys: expandedKeys,
+              rowExpandable: record => listAccounts.map(item => item?.schoolId).includes(record?.key),
+              expandedRowRender,
+              expandIcon: ({ expanded, onExpand, record }) => {
+                if (listAccounts
+                  .filter(item => item?.schoolId === record?.key)
+                  .length <= 0
+                )
+                  return <></>
+
+                return expanded ? (
                   <Button type="text"
                     shape='circle'
-                    onClick={() => setExpandedKeys([...expandableRows.map(item => item?.key)])}
+                    onClick={e => onExpand(record, e)}
+                    icon={<DownOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
+                  />
+                ) : (
+                  <Button type="text"
+                    shape='circle'
+                    onClick={e => onExpand(record, e)}
                     icon={<RightOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
                   />
                 )
-            },
-            expandedRowKeys: expandedKeys,
-            rowExpandable: record => listAccounts.map(item => item?.schoolId).includes(record?.key),
-            expandedRowRender,
-            expandIcon: ({ expanded, onExpand, record }) => {
-              if (listAccounts
-                .filter(item => item?.schoolId === record?.key)
-                .length <= 0
-              )
-                return <></>
+              },
+              onExpand: (expanded, record) => {
+                // setOpennedSchool(key)
+                setExpandedKeys(prevList => {
+                  let clone = [...prevList]
 
-              return expanded ? (
-                <Button type="text"
-                  shape='circle'
-                  onClick={e => onExpand(record, e)}
-                  icon={<DownOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
-                />
-              ) : (
-                <Button type="text"
-                  shape='circle'
-                  onClick={e => onExpand(record, e)}
-                  icon={<RightOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
-                />
-              )
-            },
-            onExpand: (expanded, record) => {
-              // setOpennedSchool(key)
-              setExpandedKeys(prevList => {
-                let clone = [...prevList]
+                  if (expanded && !clone.includes(record.key))
+                    clone.push(record.key)
+                  else if (!expanded)
+                    _.pull(clone, record.key)
 
-                if (expanded && !clone.includes(record.key))
-                  clone.push(record.key)
-                else if (!expanded)
-                  _.pull(clone, record.key)
-
-                return clone
-              })
-            },
-          }}
-        />
+                  return clone
+                })
+              },
+            }}
+          />
+        </Spin>
       </div>
 
       {openSchoolDrawer && (

@@ -456,22 +456,22 @@ const listSettings = [
       },
     ],
   },
-  {
-    id: '5',
-    name: 'Ngân hàng',
-    children: [
-      {
-        id: '5.1',
-        name: 'Ngân hàng',
-        pathName: '/settings/banks',
-      },
-      {
-        id: '5.2',
-        name: 'Tài khoản ngân hàng',
-        pathName: '/settings/bank-accounts',
-      },
-    ],
-  },
+  // {
+  //   id: '5',
+  //   name: 'Ngân hàng',
+  //   children: [
+  //     {
+  //       id: '5.1',
+  //       name: 'Ngân hàng',
+  //       pathName: '/settings/banks',
+  //     },
+  //     {
+  //       id: '5.2',
+  //       name: 'Thông tin chuyển khoản',
+  //       pathName: '/settings/bank-accounts',
+  //     },
+  //   ],
+  // },
   {
     id: '6',
     name: 'Tài sản',
@@ -505,14 +505,19 @@ const listSettings = [
       },
       {
         id: '7.2',
+        name: 'Thông tin chuyển khoản',
+        pathName: '/settings/bank-accounts',
+      },
+      {
+        id: '7.3',
         name: 'Tài khoản & Quyền hạn',
         pathName: '/settings/accounts',
         description: 'Quyền hạn xemthêm/xóa/sửa của mỗi tài khoản trong hệ thống'
       },
       {
-        id: '7.3',
+        id: '7.4',
         name: 'Loại người dùng',
-        pathName: '/settings/roles',
+        pathName: '/settings/user-roles',
         description: 'Vai trò của người dùng trong hệ thống (VD: kế toán, admin,...)'
       },
     ],
