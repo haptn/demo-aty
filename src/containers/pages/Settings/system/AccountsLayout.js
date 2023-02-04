@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import _ from 'lodash'
@@ -9,17 +9,13 @@ import {
   EditOutlined, LockOutlined, KeyOutlined
 } from '@ant-design/icons'
 
-import api from '../../../../config/api'
 import { filterAccounts, staffStatus, userRole } from '../../../../config/constants'
-import { URL_ACCOUNTS } from '../../../../config/endpoints'
-import { useAccounts, useSchools } from '../../../../services'
+import { useListSchools } from '../../../../services/schoolServices'
+import { useListAccounts, useMutationUpdateAccount } from '../../../../services/accountServices'
 import { AccountDetailDrawer, MainLayout } from '../../..'
 import styles from '../../../../styles/pages/SchoolLayout.module.scss'
 
 function AccountsLayout() {
-  // const [loading, setLoading] = useState(false)
-  // const [data, setData] = useState([])
-  // const [workingStatuses, setWorkingStatuses] = useState({})
   const [detailData, setDetailData] = useState(null)
 
   const [params, setParams] = useState(null)
@@ -38,18 +34,10 @@ function AccountsLayout() {
   })
 
   const queryClient = useQueryClient()
-  const { data: accounts, isLoading } = useAccounts({ params }).getList
-  const accountMutation = useAccounts().update
+  const { data: accounts = [], isLoading } = useListAccounts(params)
+  const accountMutation = useMutationUpdateAccount()
 
-  const { data: schools } = useSchools().getList
-  const listSchools = useMemo(() => {
-    if (!schools || schools?.length <= 0) return []
-
-    return schools?.map(({ id, name }) => ({
-      value: id,
-      label: name,
-    }))
-  }, [schools])
+  const { data: schools = [] } = useListSchools(undefined, { isCustom: true })
 
   useEffect(() => {
     // Update params
@@ -76,7 +64,7 @@ function AccountsLayout() {
       if (!filters[filterAccounts.SCHOOL]?.includes('all'))
         params.schoolId = filters[filterAccounts.SCHOOL]
       else
-        params.schoolId = [...listSchools]?.map(({ value }) => value)
+        params.schoolId = [...schools]?.map(({ value }) => value)
     }
 
     setParams(params)
@@ -131,12 +119,6 @@ function AccountsLayout() {
 
   // Chờ confirm, ko biết có nên dùng ko
   const handleLockAccount = id => {
-    // Call API to PATCH
-    // setSchoolStatuses(prevStatus => {
-    //   const clone = { ...prevStatus }
-    //   clone[id] = schoolStatus.CLOSED
-    //   return clone
-    // })
     setOpenPopConfirm({
       lockAccount: null,
       resetPass: null
@@ -147,7 +129,7 @@ function AccountsLayout() {
   const handleResetPass = id => {
     const toastId = toast.loading("Loading...")
 
-    accountMutation.mutateAsync(
+    accountMutation.mutate(
       {
         id,
         data: { password: '123456' }
@@ -232,6 +214,17 @@ function AccountsLayout() {
       dataIndex: 'phone',
       key: 'phone',
       // width: '12rem'
+    },
+    {
+      title: 'Cơ sở',
+      dataIndex: 'school',
+      key: 'school',
+      // width: '12rem',
+      render: (_, { schoolId }) => (
+        <span style={{ fontWeight: 500, color: '#444' }}>
+          {schools?.find(({ value }) => value === schoolId)?.label ?? '-'}
+        </span>
+      )
     },
     {
       title: 'Trạng thái',
@@ -375,7 +368,7 @@ function AccountsLayout() {
                 value: 'all',
                 label: 'Tất cả cơ sở',
               },
-              ...listSchools?.map(item => ({
+              ...schools?.map(item => ({
                 ...item,
                 disabled: filters[filterAccounts.SCHOOL]?.includes('all')
               }))

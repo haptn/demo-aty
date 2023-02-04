@@ -1,10 +1,10 @@
 import React from 'react'
-import { Divider, Input, Space } from 'antd'
+import { Divider, Input, Space, Spin } from 'antd'
 import { HeaderFilter } from '../..'
-import { useSchools } from '../../../services'
+import { useListSchools } from '../../../services/schoolServices'
 
 function FilterSchool() {
-  const { data } = useSchools().getList
+  const { data = [], isFetching } = useListSchools(undefined, { isCustom: true })
 
   return (
     <HeaderFilter {...{
@@ -36,9 +36,11 @@ function FilterSchool() {
           <Divider
             style={{ margin: '8px 0' }}
           />
-          <div style={{ padding: '0 4px 4px' }}>
-            {menu}
-          </div>
+          <Spin spinning={isFetching}>
+            <div style={{ padding: '0 4px 4px' }}>
+              {menu}
+            </div>
+          </Spin>
         </>
       )
     }} />
