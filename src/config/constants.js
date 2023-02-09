@@ -51,3 +51,24 @@ export const filterCourses = {
   // AGE: 'age',
   PRICE: 'price'
 }
+
+export const filterPeriodTypes = {
+  // TODAY: 'Hôm nay',
+  // THIS_WEEK: 'Tuần này',
+  THIS_MONTH: 'Tháng này',
+  LAST_MONTH: 'Tháng trước',
+  // THIS_WEEK: 'Tháng sau',
+  THIS_QUARTER: 'Quý này',
+  LAST_QUARTER: 'Quý trước',
+  THIS_YEAR: 'Năm nay',
+  LAST_YEAR: 'Năm trước',
+  FIRST_6_MONTHS: '6 tháng đầu năm',
+  LAST_6_MONTHS: '6 tháng cuối năm',
+  CUSTOM: 'Tùy chọn',   // (bung ra ô chọn from - to)
+}
+
+export const filterReportPeriods = {
+  MONTH: 'Tháng',
+  QUARTER: 'Quý',
+  YEAR: 'Năm'
+}

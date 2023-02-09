@@ -1,8 +1,13 @@
+@import "./styles/variables";
 @import "./styles/function";
 @import "./styles/global";
 @import "./styles/layout";
 @import "./styles/mixin";
-@import "./styles/variables";
+// @use 'styles/variables' as *;
+// @use 'styles/function' as *;
+// @use 'styles/global' as *;
+// @use 'styles/layout' as *;
+// @use 'styles/mixin' as *;
 
 * {
   margin: 0;

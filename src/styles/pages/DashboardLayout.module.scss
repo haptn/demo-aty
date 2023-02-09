@@ -1,0 +1,155 @@
+@import '../components/table';
+
+%box {
+  & > div {
+    height: 100%;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: .15rem .25rem .5rem rgba(#000, .2);
+  }
+  &:not(.statistics_box) > div {
+    padding: 1rem 1.2rem 1rem 1.5rem;
+
+
+  }
+}
+
+.dashboard {
+  &__total_values {
+    display: grid;
+    grid-template-columns: repeat(3, 10rem);
+    gap: 1rem;
+  }
+
+  &__total {
+    margin-top: 1.2rem;
+
+    b {
+      font-size: 1.7rem;
+    }
+    &_label {
+      margin-top: 3px;
+      font-size: 1.6rem;
+      font-variant: small-caps;
+      color: #888;
+    }
+    &_unit {
+      font-size: 1.3rem;
+    }
+  }
+  
+  &__unit {
+    margin-left: auto;
+    font-size: 1.2rem;
+    color: #888;
+  }
+}
+
+.statistics_box {
+  height: 12rem;
+  @extend %box;
+
+  .statistics {
+    padding: 1.2rem .8rem;
+    border-top: 6px solid #4f65df;
+    // border-left: 5px solid #b6beeb;
+    background: linear-gradient(135deg, #eff0c0, #d8d8fe);
+  
+    small {
+      color: #888;
+      font-weight: 500;
+    }
+  
+    &__head {
+      h3 {
+        font-variant: small-caps;
+        margin-bottom: .15em;
+      }
+    }
+    &__icon {
+      width: 3.2rem;
+      height: 3.2rem;
+      // background-color: white;
+      // border: 1px solid #888;
+    }
+  
+    &__changes {
+      margin-right: .4rem;
+      font-weight: 700;
+  
+      &--up {
+        color: #4caf50;
+      }
+      &--down {
+        color: #f44336;
+      }
+    }
+  
+    &__label {
+      color: #888;
+      font-weight: 500;
+    }
+  
+    &__values {
+      margin-top: 1.6rem;
+      padding: 0 .4rem;
+  
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .8rem;
+    }
+    &__value {
+      margin-top: 2px;
+      font-size: 1.9rem;
+  
+      &.current {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.summary_box {
+  @extend %box;
+
+  .summary {
+    &__list {
+      padding-right: .4rem;
+      overflow-y: auto;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+    }
+
+    &__item {
+      padding: .9rem 0;
+      border-bottom: 2px dashed #d9d9d9;
+
+      &.child {
+        padding-left: 2rem;
+      }
+
+      span {
+        &.parent {
+          text-transform: uppercase;
+        }
+      }
+      b {
+        color: #2680EB;
+        &.parent {
+          color: unset;
+        }
+      }
+    }
+  }
+}
+
+.chart_box {
+  min-height: 25rem;
+  @extend %box;
+}
+
+.ranking_box {
+  @extend %box;
+}

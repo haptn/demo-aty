@@ -6,6 +6,10 @@
 .flex {
   display: flex;
 }
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
 .flex-align-center {
   display: flex;
   align-items: center;
@@ -14,13 +18,24 @@
   @extend .flex-align-center;
   justify-content: center;
 }
+.flex-around {
+  @extend .flex-align-center;
+  justify-content: space-around;
+}
 .flex-between {
   @extend .flex-align-center;
   justify-content: space-between;
 }
+.flex-evenly {
+  @extend .flex-align-center;
+  justify-content: space-evenly;
+}
 .flex-row-end {
   @extend .flex-align-center;
   justify-content: flex-end;
+}
+.flex-1 {
+  flex: 1;
 }
 
 // Grid
@@ -49,4 +64,22 @@
       margin-top: 2.5rem;
     }
   }
+}
+
+// Table (layout with same-height column in grid)
+// Ko dùng nữa vì Antd giờ tự động adjust col-height trong grid gòi
+.table {
+  // display: table;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.6rem;
+}
+.table-cell {
+  // float: none;
+  // display: table-cell;
+  // vertical-align: top;
+  // border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }

@@ -79,6 +79,9 @@ export const useListSchools = (params, options) => {
         if (!options?.isCustom)
           return data
 
+        if (options?.customField)
+          return data?.map(item => item?.[options?.customField])
+
         return data?.map(({ id, name }) => ({
           value: id,
           label: name,
