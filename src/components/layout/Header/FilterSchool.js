@@ -9,10 +9,7 @@ function FilterSchool() {
   return (
     <HeaderFilter {...{
       allowClear: true,
-      options: !data ? [] : data?.map(({ id, name }) => ({
-        label: name,
-        value: id,
-      })),
+      options: data ?? [],
       placeholder: 'Cơ sở',
       defaultValue: 'Tất cả cơ sở',
       dropdownRender: menu => (

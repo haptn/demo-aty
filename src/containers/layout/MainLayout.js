@@ -27,7 +27,7 @@ function MainLayout(props) {
       <Sidebar {...{ collapsed, setCollapsed }} />
       <Layout className="site-layout">
         <Header />    {/*  {...{ title }} */}
-        <Content style={{ padding: '2rem', backgroundColor: '#eaeaea' }}>
+        <Content style={{ padding: '2rem', backgroundColor: '#eaeaea', overflowY: 'hidden' }}>
           {hasBreadcrumb &&
             <Breadcrumb {...{
               data: breadcrumbs,
@@ -91,6 +91,7 @@ function MainLayout(props) {
         closeOnClick
         pauseOnFocusLoss
         pauseOnHover
+      // enableMultiContainer   // chưa biết này là gì
       />
     </Layout>
   )

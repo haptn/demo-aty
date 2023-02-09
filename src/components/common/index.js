@@ -1,1 +1,0 @@
-export { default as HeaderFilter } from './HeaderFilter'
