@@ -37,23 +37,23 @@ for (const [key, value] of Object.entries(routes)) {
       }
       break
 
-      // case routes.SCHOOLS:
-      //   menuItem = {
-      //     ...menuItem,
-      //     label: 'Trường & Nhân viên',
-      //     icon: <BankOutlined />,
-      //     role: [userRole.ADMIN]
-      //   }
-      //   break
+    // case routes.SCHOOLS:
+    //   menuItem = {
+    //     ...menuItem,
+    //     label: 'Trường & Nhân viên',
+    //     icon: <BankOutlined />,
+    //     role: [userRole.ADMIN]
+    //   }
+    //   break
 
-      // case routes.ACCOUNTS:
-      menuItem = {
-        ...menuItem,
-        label: 'Tài khoản',
-        icon: <UserOutlined />,
-        role: [userRole.ADMIN]
-      }
-      break
+    // case routes.ACCOUNTS:
+    // menuItem = {
+    //   ...menuItem,
+    //   label: 'Tài khoản',
+    //   icon: <UserOutlined />,
+    //   role: [userRole.ADMIN]
+    // }
+    // break
 
     case routes.SETTINGS:
       const label = 'Thiết lập chung'
@@ -100,12 +100,12 @@ for (const [key, value] of Object.entries(routes)) {
 const userMenuItems = [
   {
     key: '/profile',
-    label: 'View Profile',
+    label: 'Hồ sơ của tôi',
     icon: <UserOutlined />
   },
   {
     key: '/login',
-    label: 'Log out',
+    label: 'Đăng xuất',
     icon: <LogoutOutlined />
   }
 ]

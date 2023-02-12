@@ -83,38 +83,42 @@ function AccountsLayout() {
   const handleChangeWorkingStatuses = async (id, newStatus) => {
     const toastId = toast.loading("Loading...")
 
-    accountMutation.mutateAsync(
-      {
-        id,
-        data: {
-          status: newStatus ? staffStatus.WORKING : staffStatus.QUITTED
+    try {
+      await accountMutation.mutateAsync(
+        {
+          id,
+          data: {
+            status: newStatus ? staffStatus.WORKING : staffStatus.QUITTED
+          }
+        },
+        {
+          onSuccess: () => {
+            return queryClient.invalidateQueries(['accounts', { ...params }])
+          },
         }
-      },
-      {
-        onSuccess: () => {
-          toast.update(toastId, {
-            render: "Cập nhật trạng thái thành công!",
-            type: "success",
-            isLoading: false,
-            autoClose: 1500
-          });
-          queryClient.invalidateQueries(['accounts', { ...params }])
-        },
-        onError: error => {
-          toast.update(toastId, {
-            render: (
-              <>
-                <h4>Cập nhật trạng thái thất bại!</h4>
-                <p>{error?.message}</p>
-              </>
-            ),
-            type: "error",
-            isLoading: false,
-            autoClose: 1500,
-          })
-        },
-      }
-    )
+      )
+      toast.success(
+        'Cập nhật trạng thái thành công!',
+        {
+          updateId: toastId,
+          autoClose: 1500
+        }
+      )
+    }
+    catch (error) {
+      toast.error(
+        (
+          <>
+            <h4>Cập nhật trạng thái thất bại!</h4>
+            <p>{error?.message}</p>
+          </>
+        ),
+        {
+          updateId: toastId,
+          autoClose: 1500
+        }
+      )
+    }
   }
 
   // Chờ confirm, ko biết có nên dùng ko
@@ -136,12 +140,8 @@ function AccountsLayout() {
       },
       {
         onSuccess: res => {
-          setOpenPopConfirm({
-            lockAccount: null,
-            resetPass: null
-          })
-          toast.update(toastId, {
-            render: (
+          toast.success(
+            (
               <>
                 <h4 style={{ marginBottom: '.35rem' }}>
                   Đặt lại mật khẩu thành công!
@@ -151,24 +151,30 @@ function AccountsLayout() {
                 </p>
               </>
             ),
-            type: "success",
-            isLoading: false,
-            autoClose: 2500
-          })
+            { updateId: toastId }
+          )
+          return queryClient.invalidateQueries(['accounts', { ...params }])
         },
         onError: error => {
-          toast.update(toastId, {
-            render: (
+          toast.error(
+            (
               <>
                 <h4>Đặt lại mật khẩu thất bại!</h4>
                 <p>{error?.message}</p>
               </>
             ),
-            type: "error",
-            isLoading: false,
-            autoClose: 1500,
-          })
+            {
+              updateId: toastId,
+              autoClose: 1500
+            }
+          )
         },
+        onSettled: () => {
+          setOpenPopConfirm({
+            lockAccount: null,
+            resetPass: null
+          })
+        }
       }
     )
   }
