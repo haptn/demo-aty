@@ -87,7 +87,7 @@ function PieChart(props) {
     <Chart {...{
       ...state,
       type: 'donut',
-      height: 500,
+      height: 400,
       // width: '98%'
     }} />
   )

@@ -4,7 +4,7 @@ export { default as NotFound } from './public/NotFound'
 
 // ================= Protected pages =================
 export { default as Profile } from './protected/Profile'
-export { default as Dashboard } from './protected/Dashboard'
+export { Dashboard } from './protected/Dashboard'
 // SuperAdmin
 export { default as Settings } from './protected/Settings/'
 export { default as Boarding } from './protected/Settings/aty-self/Boarding'

@@ -6,7 +6,12 @@ import styles from '../../styles/pages/DashboardLayout.module.scss'
 import clsx from 'clsx'
 
 function BoxHeader(props) {
-  const { title, additionalFilters, filterPeriod, onFilter, totalValues } = props
+  const {
+    title,
+    filterPeriod, additionalFilters,
+    onFilter, onRefresh,
+    totalValues, isShowUnit = true
+  } = props
 
   return (
     <div id='box-header'>
@@ -42,7 +47,11 @@ function BoxHeader(props) {
           )}
 
           {/* BtnReset */}
-          <Button type='text' shape='circle' icon={<ReloadOutlined />} />
+          <Button
+            type='text' shape='circle'
+            icon={<ReloadOutlined />}
+            onClick={onRefresh}
+          />
         </div>
       </div>
 
@@ -63,7 +72,9 @@ function BoxHeader(props) {
                 <div>
                   <b>{item?.value}</b>
                   <span className={styles.dashboard__total_unit}>
-                    {' Triệu đồng'}
+                    {' '}
+                    {item?.unit ?? (item?.unit || 'Triệu đồng')}
+                    {/* undefined ?? '' || 'Triệu đồng'  */}
                   </span>
                 </div>
                 <span className={styles.dashboard__total_label}>
@@ -74,9 +85,11 @@ function BoxHeader(props) {
           </div>
         )}
 
-        <span className={styles.dashboard__unit}>
-          {'Đvt: Triệu đồng'}
-        </span>
+        {isShowUnit && (
+          <span className={styles.dashboard__unit}>
+            {'Đvt: Triệu đồng'}
+          </span>
+        )}
       </div>
     </div>
   )

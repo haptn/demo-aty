@@ -76,7 +76,7 @@ export const useListSchools = (params, options) => {
       staleTime: Infinity,
       // cacheTime: 10 * 60 * 1000,  // 10min
       select: data => {
-        if (!options?.isCustom)
+        if (!options?.isCustom && !options?.customField)
           return data
 
         if (options?.customField)

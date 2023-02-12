@@ -27,8 +27,8 @@ function BarChart(props) {
       },
       plotOptions: {
         bar: {
-          borderRadius: 4,
-          columnWidth: '55%',
+          // borderRadius: 2,
+          columnWidth: '65%',
           dataLabels: {
             position: 'top', // top, center, bottom
           },
@@ -37,7 +37,7 @@ function BarChart(props) {
       dataLabels: {
         enabled: true,
         formatter: function (val) {
-          return parseFloat(val).toFixed(1)
+          return parseFloat(val).toFixed(0)
         },
         offsetY: -20,
         style: {

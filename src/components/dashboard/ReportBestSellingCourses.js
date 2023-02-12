@@ -1,16 +1,17 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import _ from 'lodash'
-import { Spin } from 'antd'
+import { Segmented, Space, Spin } from 'antd'
 
 import { useDashboard } from '../../contexts'
 import { filterPeriodTypes } from '../../config/constants'
 import { useListSchools } from '../../services/schoolServices'
-import { BoxHeader, DropdownCheckbox, PieChart } from '..'
+import { BoxHeader, CoursesTable, DropdownCheckbox } from '..'
 
-function ReportRevenueStream() {
+function ReportBestSellingCourses() {
   const [filters, setFilters] = useState({
     period: filterPeriodTypes.THIS_YEAR,
-    schools: {}
+    schools: {},
+    type: 'Học viên'
   })
   const { loadings, reload } = useDashboard()
 
@@ -28,7 +29,6 @@ function ReportRevenueStream() {
           [school]: isCheckAll
         }
       })
-
       return clone
     })
   }
@@ -51,8 +51,8 @@ function ReportRevenueStream() {
     })
   }
 
-  const handleFilterPeriod = value => {
-    setFilters({ ...filters, period: value })
+  const handleFilter = (type, value) => {
+    setFilters(prev => ({ ...prev, [type]: value }))
   }
 
   const checkedSchoolsLabel = useMemo(() => {
@@ -70,43 +70,57 @@ function ReportRevenueStream() {
     <div>
       {/* Header */}
       <BoxHeader {...{
-        title: 'Nguồn thu',
+        key: 'courses-ranking',
+        title: 'Khóa học bán chạy',
         filterPeriod: filters.period,
-        onFilter: handleFilterPeriod,
-        onRefresh: () => reload('revenueStream'),
+        onFilter: value => handleFilter('period', value),
+        onRefresh: () => reload('coursesRanking'),
+        totalValues: [
+          {
+            label: 'khóa học',
+            value: 12,
+            unit: ''
+          },
+          {
+            label: 'học viên',
+            value: 2115,
+            unit: ''
+          },
+          {
+            label: 'học phí',
+            value: '14,25',
+            unit: 'Tỷ đồng'
+          },
+        ],
         additionalFilters: {
-          position: 'below-title',
+          position: 'left',
           component: (
-            <DropdownCheckbox {...{
-              btnLabel: checkedSchoolsLabel,
-              items: schools,
-              onCheck: handleFilterSchools,
-              checkedItems: filters.schools,
-            }} />
+            <Space size='small'>
+              <DropdownCheckbox {...{
+                btnLabel: checkedSchoolsLabel,
+                items: schools,
+                onCheck: handleFilterSchools,
+                checkedItems: filters.schools,
+              }} />
+              <Segmented {...{
+                options: ['Học viên', 'Học phí'],
+                value: filters.type,
+                onChange: value => handleFilter('type', value)
+              }} />
+            </Space>
           )
-        }
+        },
+        isShowUnit: false
       }} />
 
-      {/* Main Chart */}
-      <Spin spinning={loadings?.revenueStream}>
+      {/* Main List */}
+      <Spin spinning={loadings?.coursesRanking}>
         <div className='mt-2'>
-          <PieChart {...{
-            title: 'Doanh thu phân theo nguồn thu',
-            values: [234, 123, 35, 35, 20, 15, 15],
-            labels: [
-              'Học phí chương trình',
-              'Học phí phổ thông',
-              'Mạnh thường quân',
-              'Diễn thuyết',
-              'Bán sách',
-              'Quỹ nội bộ',
-              'Khác'
-            ]
-          }} />
+          <CoursesTable filterType={filters?.type} />
         </div>
       </Spin>
     </div>
   )
 }
 
-export default React.memo(ReportRevenueStream)
+export default React.memo(ReportBestSellingCourses)

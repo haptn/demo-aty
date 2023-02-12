@@ -9,8 +9,6 @@
   }
   &:not(.statistics_box) > div {
     padding: 1rem 1.2rem 1rem 1.5rem;
-
-
   }
 }
 
@@ -18,7 +16,7 @@
   &__total_values {
     display: grid;
     grid-template-columns: repeat(3, 10rem);
-    gap: 1rem;
+    gap: 2.4rem;
   }
 
   &__total {
@@ -148,8 +146,58 @@
 .chart_box {
   min-height: 25rem;
   @extend %box;
-}
 
-.ranking_box {
-  @extend %box;
+  .rankings {
+    &__table {
+      margin-top: 2.4rem;
+      margin-right: .3rem;
+      border-radius: 1rem 1rem 0 0;
+      overflow: hidden;
+    }
+    
+    &__item {
+      &_tr {
+        height: 5.2rem;
+        border-bottom: 2px dashed #d9d9d9;
+        
+        // &:not(:last-child) {
+        //   border-bottom: 2px dashed #d9d9d9;
+        // }
+        
+        &.thead {
+          height: unset;
+          border-bottom: 2px solid #ddd;
+          background-color: #eee;
+          font-weight: 600;
+
+          & > .rankings__item_td {
+            padding: 1.2rem 1.6rem;
+          }
+        }
+      }
+
+      &_td {
+        min-width: max-content;
+        flex-shrink: 0;
+        padding: .8rem 1.6rem;
+
+        &.num {
+          max-width: 8rem;
+          width: 100%;
+          font-weight: 600;
+          text-align: center;
+  
+          & > img {
+            max-width: 3.6rem;
+          }
+        }
+
+        &.value {
+          min-width: 11.5rem;
+          width: max-content;
+          text-align: right;
+        }
+      }
+    }
+  }
 }
