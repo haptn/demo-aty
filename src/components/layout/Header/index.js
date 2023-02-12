@@ -57,8 +57,6 @@ function Header() {   // { title }
   const navigate = useNavigate()
   const user = getLocal(keys.USER)
 
-  // const [openDropdown, setOpenDropdown] = useState(null)
-
   const handleLogout = () => {
     removeLocal(keys.USER)
     navigate(0) // refresh page to check the protected route
@@ -78,14 +76,6 @@ function Header() {   // { title }
         break;
     }
   }
-
-  // const toggleDropdown = (type, isOpen) => {
-  //   setOpenDropdown(prevState => {
-
-  //   })
-  // }
-
-  // console.log('openDropdown: ', openDropdown)
 
   return (
     <AntdHeader
@@ -123,11 +113,9 @@ function Header() {   // { title }
             onClick: handleClickUserMenu,
             rootClassName: styles.myDropdown
           }}
-        // open={openDropdown?.user}
         >
           <div
             className={clsx('flex-align-center', styles.header__user_box)}
-          // onMouseEnter={() => toggleDropdown('user', true)}
           >
             <img src={NewLogoImg} alt='avatar' />
             <span>
@@ -138,13 +126,6 @@ function Header() {   // { title }
         </Dropdown>
         {/* </div> */}
       </div>
-
-      {/* <button
-        onClick={handleLogout}
-        style={{ width: '7rem' }}
-      >
-        Log out
-      </button> */}
     </AntdHeader>
   )
 }

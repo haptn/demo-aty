@@ -1,21 +1,25 @@
 import React from 'react'
-import { Outlet, Route, Routes } from 'react-router-dom';
-import { Accounts, Dashboard, Login, NotFound, Profile, Schools, Taxes, Settings, Classes, Courses, TuitorFees, Salary, Services, Boarding, Uniform, FoodMenu, IncomeCategories, CostsCategories } from '../pages';
-import { keys, userRole } from '../config/constants';
-import { getLocal } from '../utils/storage';
-import ProtectedRoute from './ProtectedRoute';
+import { Outlet, Route, Routes } from 'react-router-dom'
+import { Accounts, Dashboard, Login, NotFound, Profile, Schools, Taxes, Settings, Classes, Courses, TuitorFees, Salary, Services, Boarding, Uniform, FoodMenu, IncomeCategories, CostsCategories } from '../pages'
+import { DashboardProvider } from '../contexts'
+import { useAuth } from '../hooks'
+import ProtectedRoute from './ProtectedRoute'
 
 function AppRouter() {
-  const user = getLocal(keys.USER)
+  const { isAuthen, isAdmin } = useAuth()
 
   return (
     <Routes>
-      {/* <Route index element={<ProtectedRoute isAllowed={!!user} />} /> */}
-      <Route path='login' element={<Login {...{ user }} />} />
+      {/* <Route index element={<ProtectedRoute isAllowed={isAuthen} />} /> */}
+      <Route path='login' element={<Login />} />
 
       {/* Authenticated users */}
-      <Route element={<ProtectedRoute isAllowed={!!user} />}>
-        <Route path="/" element={<Dashboard />} />
+      <Route element={<ProtectedRoute isAllowed={isAuthen} />}>
+        <Route path="/" element={
+          <DashboardProvider>
+            <Dashboard />
+          </DashboardProvider>
+        } />
         <Route path="profile" element={<Profile />} />
         <Route path="taxes" element={<Taxes />} />
         {/* ... */}
@@ -23,10 +27,7 @@ function AppRouter() {
 
       {/* Super Admin */}
       <Route element={
-        <ProtectedRoute
-          redirectPath='/'
-          isAllowed={!!user && user?.role === userRole.ADMIN}
-        />
+        <ProtectedRoute redirectPath='/' isAllowed={isAdmin} />
       }>
         <Route path="settings" element={<Outlet />}>
           <Route index element={<Settings />} />

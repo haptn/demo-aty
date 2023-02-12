@@ -64,6 +64,19 @@ export const useAccount = id => {
   )
 }
 
+export const useAccountForLogin = email => {
+  return useQuery(
+    ['account-login', email],
+    () => api.get(`${URL_ACCOUNTS}?email=${email}`),
+    {
+      staleTime: 60 * 1000,   // 1 min
+      cacheTime: 60 * 1000,   // 1 min
+      enabled: !!email,
+      select: data => data[0]
+    }
+  )
+}
+
 export const useMutationAddAccount = () => {
   return useMutation({
     mutationFn: data => api.post(URL_ACCOUNTS, data),

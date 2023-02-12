@@ -5,13 +5,20 @@ import { useListSchools } from '../../../services/schoolServices'
 
 function FilterSchool() {
   const { data = [], isFetching } = useListSchools(undefined, { isCustom: true })
+  const options = [
+    {
+      value: 'all',
+      label: 'Tất cả cơ sở',
+    },
+    ...data
+  ]
 
   return (
     <HeaderFilter {...{
-      allowClear: true,
-      options: data ?? [],
-      placeholder: 'Cơ sở',
-      defaultValue: 'Tất cả cơ sở',
+      // allowClear: true,
+      options,
+      placeholder: 'Chọn Cơ sở',
+      defaultValue: options[0],
       dropdownRender: menu => (
         <>
           <Space style={{ padding: '4px 4px 0' }}>
