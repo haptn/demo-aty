@@ -15,7 +15,7 @@ function SchoolDetailDrawer({ open, setOpen, data }) {
   }
 
   return (
-    <Drawer title="Thông tin trường" 
+    <Drawer title="Thông tin trường"
       open={open}
       onClose={handleClose}
       // onSave={handleSave}
@@ -28,16 +28,16 @@ function SchoolDetailDrawer({ open, setOpen, data }) {
           {
             label: 'Tổng quan',
             key: '1',
-            children: <OverviewContent {...{ 
+            children: <OverviewContent {...{
               data,
               onClose: handleClose
             }} />,
           },
-          {
-            label: 'Sơ đồ tổ chức',
-            key: '2',
-            children: <StaffsContent {...{ schoolData: data }} />,
-          },
+          // {
+          //   label: 'Sơ đồ tổ chức',
+          //   key: '2',
+          //   children: <StaffsContent {...{ schoolData: data }} />,
+          // },
           {
             label: 'Báo cáo thu & chi',
             key: '3',
