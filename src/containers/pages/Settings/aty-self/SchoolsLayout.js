@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import _ from 'lodash'
 import clsx from 'clsx'
 import { Button, Popconfirm, Select, Space, Spin, Switch, Table, Tag } from 'antd'
@@ -8,37 +8,33 @@ import {
   DownOutlined, RightOutlined, MinusOutlined
 } from '@ant-design/icons'
 import { MainLayout, SchoolDetailDrawer, AccountDetailDrawer } from '../../..'
-import { listAccounts } from '../../../../mock/data'
-import { useSchools } from '../../../../services'
+import { useListSchools, useListAccountsInSchool } from '../../../../services/schoolServices'
 import { filterSchools, schoolStatus, schoolType, staffStatus } from '../../../../config/constants'
 import styles from '../../../../styles/pages/SchoolLayout.module.scss'
 
 function SchoolsLayout() {
-  const { data = [], isLoading } = useSchools().getList
-
-  // const [opennedSchool, setOpennedSchool] = useState(null)
-  // const [_, setData] = useState(listSchools || [])
   const [detailData, setDetailData] = useState(null)
-  const [schoolStatuses, setSchoolStatuses] = useState(() => {
-    const obj = {}
-    data?.forEach(({ key, status }) => {
-      obj[key] = status
-    })
-    return obj
-  })
-  const [workingStatuses, setWorkingStatuses] = useState(() => {
-    const obj = {}
-    listAccounts?.forEach(({ key, status }) => {
-      obj[key] = status
-    })
-    return obj
-  })
+  const [schoolId, setSchoolId] = useState('')
 
+  const [params, setParams] = useState(null)
   const [searchKeyword, setSearchKeyword] = useState('')
   const [filters, setFilters] = useState({
     [filterSchools.STATUS]: null,
     [filterSchools.TYPE]: []
   })
+  const [page, setPage] = useState(1)
+
+  const [openSchoolDrawer, setOpenSchoolDrawer] = useState(false)
+  const [openAccountDrawer, setOpenAccountDrawer] = useState(false)
+  const [openPopConfirm, setOpenPopConfirm] = useState(null)
+
+  const { data = [], isLoading } = useListSchools(params)
+  const {
+    data: listAccounts = [],
+    isFetching,
+    refetch: refetchListAccounts
+  } = useListAccountsInSchool(schoolId)
+
   const [expandedKeys, setExpandedKeys] = useState([])
   const expandableRows = useMemo(() => {
     let clone = [...data]
@@ -48,25 +44,47 @@ function SchoolsLayout() {
     return clone
   }, [data])
 
-  const [openSchoolDrawer, setOpenSchoolDrawer] = useState(false)
-  const [openAccountDrawer, setOpenAccountDrawer] = useState(false)
-  const [openPopConfirm, setOpenPopConfirm] = useState(null)
+  useEffect(() => {
+    // Update params
+    let params = {}
+
+    if (searchKeyword) {
+      if (searchKeyword.startsWith('0'))
+        params.phone_like = searchKeyword
+      else {
+        params.name_like = searchKeyword
+        // params.address_like = searchKeyword    // hiện tại chưa thể search 2 cái này cùng lúc
+      }
+    }
+
+    if (filters[filterSchools.STATUS])
+      params.status = filters[filterSchools.STATUS]
+
+    if (filters[filterSchools.TYPE]?.length > 0) {
+      if (!filters[filterSchools.TYPE]?.includes('all'))
+        params.type = filters[filterSchools.TYPE]
+      else
+        params.type = [...Object.values(schoolType)]
+    }
+
+    setParams(params)
+  }, [searchKeyword, filters])
 
   const handleChangeWorkingStatuses = ({ key, status }) => {
-    setWorkingStatuses(prevStatus => {
-      const clone = { ...prevStatus }
-      clone[key] = status === staffStatus.WORKING
-        ? staffStatus.QUITTED : staffStatus.WORKING
-      return clone
-    })
+    // setWorkingStatuses(prevStatus => {
+    //   const clone = { ...prevStatus }
+    //   clone[key] = status === staffStatus.WORKING
+    //     ? staffStatus.QUITTED : staffStatus.WORKING
+    //   return clone
+    // })
   }
 
   const handleCloseSchool = key => {
-    setSchoolStatuses(prevStatus => {
-      const clone = { ...prevStatus }
-      clone[key] = schoolStatus.CLOSED
-      return clone
-    })
+    // setSchoolStatuses(prevStatus => {
+    //   const clone = { ...prevStatus }
+    //   clone[key] = schoolStatus.CLOSED
+    //   return clone
+    // })
     setOpenPopConfirm(null)
   }
 
@@ -83,35 +101,19 @@ function SchoolsLayout() {
 
   const handleFilter = (type = '', value) => {
     setFilters(prev => ({ ...prev, [type]: value }))
-
-    switch (type) {
-      case filterSchools.STATUS:
-        // setData(prevData => {
-        //   console.log('__status: ', prevData);
-
-        //   const clone = !value ? [...listSchools] : [...prevData]
-        //   return clone?.filter(({ status }) => status === value)
-        // })
-        break;
-
-      case filterSchools.TYPE:
-        // setData(prevData => {
-        //   console.log('```type: ', prevData);
-
-        //   const clone = (value?.includes('all') || value?.length <= 0)
-        //     ? [...listSchools] : [...prevData]
-        //   return clone?.filter(({ type }) => value?.includes(type))
-        // })
-        break;
-
-      default:
-        break;
-    }
   }
 
   const handleViewSchoolDetail = record => {
     setOpenSchoolDrawer(true)
     setDetailData(record)
+  }
+
+  const handleExpandAll = () => {
+    setExpandedKeys([...expandableRows.map(item => item?.key)])
+
+    data?.forEach(({ id }) => {
+      refetchListAccounts(id)
+    })
   }
 
   const expandedRowRender = rowData => {
@@ -122,10 +124,10 @@ function SchoolsLayout() {
     const columns = [
       {
         title: '#',
-        // dataIndex: 'key',
+        // dataIndex: 'id',
         key: 'id',
         align: 'center',
-        render: (_, _data, idx) => <span>{idx + 1}</span>
+        render: (_, _data, idx) => <span>{(page - 1) * 10 + idx + 1}</span>
       },
       {
         title: 'Họ và tên',
@@ -162,7 +164,7 @@ function SchoolsLayout() {
         align: 'center',
         render: (_, { key, status }) => (
           <Switch
-            checked={workingStatuses[key] === staffStatus.WORKING}
+            checked={status === staffStatus.WORKING}
             onChange={() => handleChangeWorkingStatuses({ key, status })}
             checkedChildren={staffStatus.WORKING}
             unCheckedChildren={staffStatus.QUITTED}
@@ -193,8 +195,16 @@ function SchoolsLayout() {
         ),
       },
     ]
+
     return (
-      <Table columns={columns} dataSource={data} size='small' pagination={false} />
+      <Spin spinning={isFetching}>
+        <Table {...{
+          columns,
+          dataSource: data,
+          size: 'small',
+          pagination: false
+        }} />
+      </Spin>
     )
   }
 
@@ -248,8 +258,7 @@ function SchoolsLayout() {
       dataIndex: 'status',
       align: 'center',
       width: '12rem',
-      render: (_, { key }) => {
-        const status = schoolStatuses[key]
+      render: (_, { status }) => {
         let color = status === schoolStatus.WORKING
           ? 'green'
           : status === schoolStatus.CLOSED
@@ -276,18 +285,18 @@ function SchoolsLayout() {
           />
           <Popconfirm
             title="Bạn có chắc muốn đóng cơ sở này?"
-            onConfirm={() => handleCloseSchool(record?.key)}
+            onConfirm={() => handleCloseSchool(record?.id)}
             onCancel={() => setOpenPopConfirm(null)}
             okText="Có, đóng"
             cancelText="Không"
-            open={openPopConfirm === record?.key}
+            open={openPopConfirm === record?.id}
             okButtonProps={{ danger: true }}
           >
             <Button type="text" danger
               shape='circle'
               icon={<StopOutlined />}
-              onClick={() => setOpenPopConfirm(record?.key)}
-              disabled={schoolStatuses[record?.key] === schoolStatus.CLOSED}
+              onClick={() => setOpenPopConfirm(record?.id)}
+              disabled={record?.status === schoolStatus.CLOSED}
             />
           </Popconfirm>
         </Space>
@@ -392,7 +401,7 @@ function SchoolsLayout() {
                   ) : ( // expandedKeys.length <= 0
                     <Button type="text"
                       shape='circle'
-                      onClick={() => setExpandedKeys([...expandableRows.map(item => item?.key)])}
+                      onClick={handleExpandAll}
                       icon={<RightOutlined style={{ fontSize: '1rem', color: '#1677ff' }} />}
                     />
                   )
@@ -422,18 +431,24 @@ function SchoolsLayout() {
                 )
               },
               onExpand: (expanded, record) => {
-                // setOpennedSchool(key)
+                // setOpennedSchool(id)
+                setSchoolId(record?.id)
                 setExpandedKeys(prevList => {
                   let clone = [...prevList]
 
-                  if (expanded && !clone.includes(record.key))
-                    clone.push(record.key)
+                  if (expanded && !clone.includes(record?.key))
+                    clone.push(record?.key)
                   else if (!expanded)
-                    _.pull(clone, record.key)
+                    _.pull(clone, record?.key)
 
                   return clone
                 })
               },
+            }}
+            pagination={{
+              size: 'default',
+              showTotal: total => `Tổng cộng ${total} dòng`,
+              onChange: _page => setPage(_page)
             }}
           />
         </Spin>
