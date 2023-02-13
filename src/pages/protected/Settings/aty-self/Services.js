@@ -1,9 +1,9 @@
 import React from 'react'
-import { ServicesLayout } from '../../../../containers'
+import { StServicesLayout } from '../../../../containers'
 
 function Services() {
   return (
-    <ServicesLayout />
+    <StServicesLayout />
   )
 }
 

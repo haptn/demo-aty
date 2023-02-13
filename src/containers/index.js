@@ -6,33 +6,50 @@ export { default as MainLayout } from './layout/MainLayout'
 export { default as DashboardLayout } from './pages/DashboardLayout'
 export { default as ProfileLayout } from './pages/ProfileLayout'
 
+export { default as BudgetLayout } from './pages/BudgetLayout'
+export { default as CashBookLayout } from './pages/CashBookLayout'
+export { default as StaffsLayout } from './pages/StaffsLayout'
+export { default as StudentsLayout } from './pages/StudentsLayout'
+export { default as BoardingLayout } from './pages/BoardingLayout'
+export { default as InvoicesLayout } from './pages/InvoicesLayout'
+export { default as LoanDebtLayout } from './pages/LoanDebtLayout'
+export { default as PurchaseRentalLayout } from './pages/PurchaseRentalLayout'
 export { default as TaxesLayout } from './pages/TaxesLayout'
 
+//----- Assets
+export { default as AssetsLayout } from './pages/AssetsLayout'
+export { default as FixedAssetsLayout } from './pages/FixedAssetsLayout'
+export { default as EquipmentsLayout } from './pages/EquipmentsLayout'
+
+//----- Programs
+export { default as ProgramsLayout } from './pages/ProgramsLayout'
+export { default as CoursesLayout } from './pages/CoursesLayout'
+export { default as ActivitiesLayout } from './pages/ActivitiesLayout'
 
 //----- Settings
 export { default as SettingLayout } from './pages/Settings/SettingLayout'
 
 // aty-self
-export { default as BoardingLayout } from './pages/Settings/aty-self/BoardingLayout'
-export { default as ClassesLayout } from './pages/Settings/aty-self/ClassesLayout'
-export { default as CoursesLayout } from './pages/Settings/aty-self/CoursesLayout'
-export { default as FoodMenuLayout } from './pages/Settings/aty-self/FoodMenuLayout'
-export { default as SalaryLayout } from './pages/Settings/aty-self/SalaryLayout'
-export { default as SchoolsLayout } from './pages/Settings/aty-self/SchoolsLayout'
-export { default as ServicesLayout } from './pages/Settings/aty-self/ServicesLayout'
-export { default as TuitorFeesLayout } from './pages/Settings/aty-self/TuitorFeesLayout'
-export { default as UniformLayout } from './pages/Settings/aty-self/UniformLayout'
+export { default as StBoardingLayout } from './pages/Settings/aty-self/BoardingLayout'
+export { default as StClassesLayout } from './pages/Settings/aty-self/ClassesLayout'
+export { default as StCoursesLayout } from './pages/Settings/aty-self/CoursesLayout'
+export { default as StFoodMenuLayout } from './pages/Settings/aty-self/FoodMenuLayout'
+export { default as StSalaryLayout } from './pages/Settings/aty-self/SalaryLayout'
+export { default as StSchoolsLayout } from './pages/Settings/aty-self/SchoolsLayout'
+export { default as StServicesLayout } from './pages/Settings/aty-self/ServicesLayout'
+export { default as StTuitorFeesLayout } from './pages/Settings/aty-self/TuitorFeesLayout'
+export { default as StUniformLayout } from './pages/Settings/aty-self/UniformLayout'
 // aty-partners
 // accounting
-export { default as IncomeCategoriesLayout } from './pages/Settings/accounting/IncomeCategoriesLayout'
-export { default as CostsCategoriesLayout } from './pages/Settings/accounting/CostsCategoriesLayout'
+export { default as StIncomeCategoriesLayout } from './pages/Settings/accounting/IncomeCategoriesLayout'
+export { default as StCostsCategoriesLayout } from './pages/Settings/accounting/CostsCategoriesLayout'
 // taxes-fees-insurances
-export { default as SettingsTaxesLayout } from './pages/Settings/taxes-fees-insurances/TaxesLayout'
+export { default as StTaxesLayout } from './pages/Settings/taxes-fees-insurances/TaxesLayout'
 // banks
 // assets
 
 // system
-export { default as AccountsLayout } from './pages/Settings/system/AccountsLayout'
+export { default as StAccountsLayout } from './pages/Settings/system/AccountsLayout'
 // others
 
 // ===================== Modals =====================

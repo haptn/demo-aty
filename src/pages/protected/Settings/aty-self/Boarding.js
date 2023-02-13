@@ -1,9 +1,9 @@
 import React from 'react'
-import { BoardingLayout } from '../../../../containers'
+import { StBoardingLayout } from '../../../../containers'
 
 function Boarding() {
   return (
-    <BoardingLayout />
+    <StBoardingLayout />
   )
 }
 

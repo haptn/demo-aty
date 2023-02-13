@@ -1,9 +1,9 @@
 import React from 'react'
-import { CostsCategoriesLayout } from '../../../../containers'
+import { StCostsCategoriesLayout } from '../../../../containers'
 
 function CostsCategories() {
   return (
-    <CostsCategoriesLayout />
+    <StCostsCategoriesLayout />
   )
 }
 

@@ -1,9 +1,9 @@
 import React from 'react'
-import { FoodMenuLayout } from '../../../../containers'
+import { StFoodMenuLayout } from '../../../../containers'
 
 function FoodMenu() {
   return (
-    <FoodMenuLayout />
+    <StFoodMenuLayout />
   )
 }
 

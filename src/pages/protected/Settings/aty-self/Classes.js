@@ -1,9 +1,9 @@
 import React from 'react'
-import { ClassesLayout } from '../../../../containers'
+import { StClassesLayout } from '../../../../containers'
 
 function Classes() {
   return (
-    <ClassesLayout />
+    <StClassesLayout />
   )
 }
 

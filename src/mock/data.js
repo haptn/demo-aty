@@ -1,13 +1,20 @@
-import { routes, SETTINGS } from "../config/path"
 import {
-  AppstoreAddOutlined,
   AreaChartOutlined,
   BankOutlined,
   DollarOutlined,
+  DropboxOutlined,
+  FileProtectOutlined,
   LogoutOutlined,
+  PercentageOutlined,
+  ReadOutlined,
+  RocketOutlined,
   SettingOutlined,
+  ShopOutlined,
+  TeamOutlined,
+  TransactionOutlined,
   UserOutlined
 } from '@ant-design/icons'
+import { ASSETS, PROGRAMS, routes, SETTINGS } from "../config/path"
 import { schoolStatus, staffStatus, userRole } from "../config/constants"
 import { toCapital } from "../utils/string"
 
@@ -17,6 +24,7 @@ const menuItems = []
 const excludePages = ['/login', '/profile']
 const allRoles = [...Object.values(userRole)]
 for (const [key, value] of Object.entries(routes)) {
+
   if (excludePages.includes(value)) continue
 
   const menuName = toCapital(key)
@@ -25,6 +33,7 @@ for (const [key, value] of Object.entries(routes)) {
     label: menuName,
     title: menuName
   }
+  let label = ''
 
   switch (value) {
     case routes.DASHBOARD:
@@ -37,52 +46,117 @@ for (const [key, value] of Object.entries(routes)) {
       }
       break
 
-    // case routes.SCHOOLS:
-    //   menuItem = {
-    //     ...menuItem,
-    //     label: 'Trường & Nhân viên',
-    //     icon: <BankOutlined />,
-    //     role: [userRole.ADMIN]
-    //   }
-    //   break
-
-    // case routes.ACCOUNTS:
-    // menuItem = {
-    //   ...menuItem,
-    //   label: 'Tài khoản',
-    //   icon: <UserOutlined />,
-    //   role: [userRole.ADMIN]
-    // }
-    // break
-
-    case routes.SETTINGS:
-      const label = 'Thiết lập chung'
-
+    case routes.BUDGET:
       menuItem = {
-        key: SETTINGS,
-        label,
-        title: label,
-        icon: <SettingOutlined />,
-        role: [userRole.ADMIN],
-
+        ...menuItem,
+        label: 'Ngân sách',
+        icon: <DollarOutlined />,
+        role: allRoles
       }
       break
 
-    // case routes.CATEGORIES:
-    //   menuItem = {
-    //     ...menuItem,
-    //     label: 'Quản lý phân loại',
-    //     icon: <AppstoreAddOutlined />,
-    //     role: allRoles
-    //   }
-    //   break
+    case routes.CASH_BOOK:
+      menuItem = {
+        ...menuItem,
+        label: 'Sổ quỹ',
+        icon: <ReadOutlined />,
+        role: allRoles
+      }
+      break
+
+    case routes.STAFFS:
+      menuItem = {
+        ...menuItem,
+        label: 'Nhân viên',
+        icon: <UserOutlined />,
+        role: allRoles
+      }
+      break
+
+    case routes.STUDENTS:
+      menuItem = {
+        ...menuItem,
+        label: 'Học viên',
+        icon: <TeamOutlined />,
+        role: allRoles
+      }
+      break
+
+    case routes.PROGRAMS:
+      label = 'Chương trình'
+      menuItem = {
+        key: PROGRAMS,
+        label,
+        title: label,
+        icon: <RocketOutlined />,
+        role: allRoles
+      }
+      break
+
+    case routes.BOARDING:
+      menuItem = {
+        ...menuItem,
+        label: 'Bán trú / Nội trú',
+        icon: <BankOutlined />,
+        role: allRoles
+      }
+      break
 
     case routes.TAXES:
       menuItem = {
         ...menuItem,
         label: 'Thuế',
-        icon: <DollarOutlined />,
+        icon: <PercentageOutlined />,
         role: allRoles
+      }
+      break
+
+    case routes.ASSETS:
+      label = 'Tài sản'
+      menuItem = {
+        key: ASSETS,
+        label,
+        title: label,
+        icon: <DropboxOutlined />,
+        role: allRoles
+      }
+      break
+
+    case routes.PURCHASE_RENTAL:
+      menuItem = {
+        ...menuItem,
+        label: 'Mua / Bán / Thuê',
+        icon: <ShopOutlined />,
+        role: allRoles
+      }
+      break
+
+    case routes.LOAN_DEBT:
+      menuItem = {
+        ...menuItem,
+        label: 'Vay / Nợ',
+        icon: <TransactionOutlined />,
+        role: allRoles
+      }
+      break
+
+    case routes.INVOICES:
+      menuItem = {
+        ...menuItem,
+        label: 'Quản lý hóa đơn',
+        icon: <FileProtectOutlined />,
+        role: allRoles
+      }
+      break
+
+    case routes.SETTINGS:
+      label = 'Thiết lập chung'
+      menuItem = {
+        key: SETTINGS,
+        label,
+        title: label,
+        icon: <SettingOutlined />,
+        role: [userRole.ADMIN]
       }
       break
 

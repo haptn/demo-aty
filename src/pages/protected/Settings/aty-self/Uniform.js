@@ -1,9 +1,9 @@
 import React from 'react'
-import { UniformLayout } from '../../../../containers'
+import { StUniformLayout } from '../../../../containers'
 
 function Uniform() {
   return (
-    <UniformLayout />
+    <StUniformLayout />
   )
 }
 

@@ -1,9 +1,9 @@
 import React from 'react'
-import { IncomeCategoriesLayout } from '../../../../containers'
+import { StIncomeCategoriesLayout } from '../../../../containers'
 
 function IncomeCategories() {
   return (
-    <IncomeCategoriesLayout />
+    <StIncomeCategoriesLayout />
   )
 }
 

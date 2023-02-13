@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { Button, Space } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
 import { MainLayout } from '../..'
 import { listSettings } from '../../../mock/data'
 import { SettingItem } from '../../../components'
@@ -11,15 +9,15 @@ function SettingLayout() {
   return (
     <MainLayout
       title="Thiết lập chung"
-      pageActions={
-        <Space size='small'>
-          <Button type="primary" icon={<PlusOutlined />} size='middle'
-            className='p-btn'
-          >
-            Thêm Danh mục
-          </Button>
-        </Space>
-      }
+      // pageActions={
+      //   <Space size='small'>
+      //     <Button type="primary" icon={<PlusOutlined />} size='middle'
+      //       className='p-btn'
+      //     >
+      //       Thêm Danh mục
+      //     </Button>
+      //   </Space>
+      // }
       hasSearchSameRow
       pageSearchProps={{
         value: searchKeyword,

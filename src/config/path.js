@@ -1,10 +1,28 @@
 export const SETTINGS = '/settings'
+export const ASSETS = '/assets'
+export const PROGRAMS = '/programs'
 
 export const routes = {
   LOGIN: '/login',
   DASHBOARD: '/',
   PROFILE: '/profile',
+  BUDGET: '/budget',
+  CASH_BOOK: '/cash-books',
+  STAFFS: '/staffs',
+  STUDENTS: '/students',
+  PROGRAMS: {
+    COURSES: `${PROGRAMS}/courses`,
+    ACTIVITIES: `${PROGRAMS}/activities`,
+  },
+  BOARDING: '/boarding',
   TAXES: '/taxes',
+  ASSETS: {
+    FIXED_ASSETS: `${ASSETS}/fixed-assets`,
+    EQUIPMENTS: `${ASSETS}/equipments`,
+  },
+  PURCHASE_RENTAL: '/purchase-rental',
+  LOAN_DEBT: '/loan-debt',
+  INVOICES: '/invoices',
   '-': '-',
   SETTINGS: {
     // 1. Nội bộ ATY
@@ -55,7 +73,4 @@ export const routes = {
     SIDEBAR_MENU: `${SETTINGS}/sidebar-menu`,
     QUICK_ADD: `${SETTINGS}/quick-add`,
   },
-  // SCHOOLS: '/schools',
-  // ACCOUNTS: '/accounts',
-  // CATEGORIES: '/categories',
 }
