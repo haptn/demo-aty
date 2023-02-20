@@ -1,70 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import api from "../config/api"
+import { schoolStatus } from '../config/constants'
 import { URL_SCHOOLS } from "../config/endpoints"
 import { bindParams } from '../utils/format'
-
-// Ko đc import queryClient ở đây, chỉ đc import trong custom hook hoặc component
-// const queryClient = useQueryClient()    // chưa biết có xài hay ko
-
-// export default function useSchools(props = {}) {
-//   const { params, id } = props
-
-//   const getList = useQuery(
-//     ['schools', { ...params }],
-//     () => api.get(!!params ? `${URL_SCHOOLS}?${bindParams(params)}` : URL_SCHOOLS),
-//     {
-//       staleTime: 30 * 1000,   // 30s
-//       cacheTime: 10 * 60 * 1000,  // 10min
-//     },
-//   )
-
-//   const getListAccounts = useQuery(
-//     ['accounts-of-school'],
-//     () => api.get(`${URL_SCHOOLS}/${id}/accounts`),
-//     {
-//       staleTime: 30 * 1000,   // 30s
-//       cacheTime: 10 * 60 * 1000,  // 10min,
-//       // select: data => 
-//     },
-//   )
-
-//   const get = useQuery(
-//     ['school', id],
-//     () => id && api.get(`${URL_SCHOOLS}/${id}`),
-//     {
-//       staleTime: 60 * 1000,   // 1 min
-//     }
-//   )
-
-//   const add = useMutation({
-//     mutationFn: data => api.post(URL_SCHOOLS, data),
-//     // Nếu dùng mutateAsync() thay vì mutate() thì ở đây ko cần onSuccess()
-//   })
-
-//   const update = useMutation({
-//     mutationFn: data => api.patch(`${URL_SCHOOLS}/${id}`, data),  // gọi thử API xem nên pass "id" chỗ này hay ở trên args của hàm 
-//     // Nếu dùng mutateAsync() thay vì mutate() thì ở đây ko cần onSuccess()
-//     // onSuccess: (_, {id, name}) => {   // chưa biết có lấy ra đc name này ko
-//     //   toast.success(`Xóa thành công trường ${name}`)
-//     //   queryClient.setQueryData(['school', id], data)
-//     // }
-//   })
-
-//   const remove = useMutation({
-//     mutationFn: id => api.delete(`${URL_SCHOOLS}/${id}`),  // gọi thử API xem nên pass "id" chỗ này hay ở trên args của hàm 
-//     // onSuccess: data => {    // viết tạm, chưa đọc docs, ko chắc có chạy đc ko
-//     //   if (onSuccess && typeof onSuccess === 'function')
-//     //     onSuccess(data)
-//     // }
-//     // onSuccess: (_, name) => {   // chưa biết có lấy ra đc name này ko
-//     //   toast.success(`Xóa thành công trường ${name}`)
-//     //   queryClient.invalidateQueries({ queryKey: ['schools', {...params}] })
-//     // }
-//   })
-
-//   return ({ get, getList, getListAccounts, add, update, remove })
-// }
-
 
 export const useListSchools = (params, options) => {
   const url = !!params ? `${URL_SCHOOLS}?${bindParams(params)}` : URL_SCHOOLS
@@ -76,13 +14,18 @@ export const useListSchools = (params, options) => {
       staleTime: Infinity,
       // cacheTime: 10 * 60 * 1000,  // 10min
       select: data => {
+        let cloneData = [...data]
+
+        if (!options?.isAllSchools)
+          cloneData = cloneData?.filter(({ status }) => status === schoolStatus.WORKING)
+
         if (!options?.isCustom && !options?.customField)
-          return data
+          return cloneData
 
         if (options?.customField)
-          return data?.map(item => item?.[options?.customField])
+          return cloneData?.map(item => item?.[options?.customField])
 
-        return data?.map(({ id, name }) => ({
+        return cloneData?.map(({ id, name }) => ({
           value: id,
           label: name,
         }))
@@ -124,7 +67,7 @@ export const useMutationAddSchool = () => {
 
 export const useMutationUpdateSchool = () => {
   return useMutation({
-    mutationFn: (id, data) => api.patch(`${URL_SCHOOLS}/${id}`, data),
+    mutationFn: ({ id, data }) => api.patch(`${URL_SCHOOLS}/${id}`, data),
   })
 }
 

@@ -8,21 +8,21 @@ export const routes = {
   PROFILE: '/profile',
   BUDGET: '/budget',
   CASH_BOOK: '/cash-books',
-  STAFFS: '/staffs',
+  INVOICES: '/invoices',
+  SALARIES: '/salaries',  // STAFFS
+  TAXES: '/taxes',
   STUDENTS: '/students',
   PROGRAMS: {
     COURSES: `${PROGRAMS}/courses`,
     ACTIVITIES: `${PROGRAMS}/activities`,
   },
   BOARDING: '/boarding',
-  TAXES: '/taxes',
   ASSETS: {
     FIXED_ASSETS: `${ASSETS}/fixed-assets`,
     EQUIPMENTS: `${ASSETS}/equipments`,
   },
   PURCHASE_RENTAL: '/purchase-rental',
   LOAN_DEBT: '/loan-debt',
-  INVOICES: '/invoices',
   '-': '-',
   SETTINGS: {
     // 1. Nội bộ ATY
@@ -31,7 +31,7 @@ export const routes = {
     COURSES: `${SETTINGS}/courses`,
     STUDENTS: `${SETTINGS}/students`,
     STAFFS: `${SETTINGS}/staffs`,
-    SALARY: `${SETTINGS}/salary`,
+    SALARY: `${SETTINGS}/salary-levels`,
     SCHOOL_SERVICES: `${SETTINGS}/school-services`,
     BOARDING: `${SETTINGS}/boarding-price`,
     UNIFORMS: `${SETTINGS}/uniforms-price`,

@@ -11,9 +11,10 @@ export const URL_PROFILE = '/profile'   // account detail
 // export const URL_SCHOOLS= '/schools'
 
 export const URL_CATEGORIES = '/categories'
-export const URL_TAXES = '/taxes'
 export const URL_SETTING = '/setting'
 
+export const URL_TAXES = '/taxes'
+export const URL_TAX_TYPES = '/tax-types'
 
 export const URL_CLASSES = '/classes'
 export const URL_STUDENTS = '/students'

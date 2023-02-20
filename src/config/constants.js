@@ -33,6 +33,11 @@ export const courseStatus = {
   COMING_SOON: 'Sắp ra mắt'
 }
 
+export const taxStatus = {
+  APPLYING: 'Đang áp dụng',
+  NOT_APPLIED: 'Không áp dụng'
+}
+
 
 // =========== Filter types ===========
 export const filterSchools = {

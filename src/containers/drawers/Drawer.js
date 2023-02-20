@@ -5,8 +5,9 @@ import { CloseOutlined } from '@ant-design/icons'
 import styles from './Drawer.module.scss'
 
 function Drawer(props) {
-  const { 
+  const {
     width = 640,
+    height = '100%',
     placement = 'right',
     closable = false,
     onClose,
@@ -17,7 +18,7 @@ function Drawer(props) {
   return (
     <AntdDrawers {...{
       ...rest,
-      width, placement,
+      width, height, placement,
       closable, onClose,
       className: clsx(styles.drawer, {
         [className]: className

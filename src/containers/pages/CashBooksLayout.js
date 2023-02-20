@@ -1,7 +1,7 @@
 import React from 'react'
 import { MainLayout } from '..'
 
-function CashBookLayout() {
+function CashBooksLayout() {
   return (
     <MainLayout title="Sổ quỹ">
       Sổ quỹ
@@ -9,4 +9,4 @@ function CashBookLayout() {
   )
 }
 
-export default CashBookLayout
+export default CashBooksLayout

@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 import {
   Login, NotFound, Dashboard, Profile,
-  Budget, CashBook, Staffs, Students,
+  Budget, CashBook, Salaries, Students,
   Programs, Activities, Courses, Boarding,
   Assets, FixedAssets, Equipments,
   Taxes, PurchaseRental, LoanDebt, Invoices,
@@ -42,13 +42,20 @@ function AppRouter() {
         <Route path="budget" element={<Budget />} />
         <Route path="cash-books" element={<CashBook />} />
         <Route path="cash-books" element={<CashBook />} />
-        <Route path="staffs" element={<Staffs />} />
-        <Route path="students" element={<Students />} />
         <Route path="boarding" element={<Boarding />} />
         <Route path="taxes" element={<Taxes />} />
         <Route path="invoices" element={<Invoices />} />
         <Route path="purchase-rental" element={<PurchaseRental />} />
         <Route path="loan-debt" element={<LoanDebt />} />
+
+        <Route path="salaries" element={<Salaries />}>
+          <Route path="*" element={<Salaries />} />
+        </Route>
+
+        <Route path="students" element={<Students />}>
+          <Route path="*" element={<Students />} />
+        </Route>
+
 
         <Route path="assets" element={<Outlet />}>
           <Route index element={<Assets />} />
