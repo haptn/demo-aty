@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import _ from 'lodash'
-import clsx from 'clsx'
 import { Button, Popconfirm, Select, Space, Spin, Switch, Table, Tag, Tooltip } from 'antd'
 import {
   FileExcelOutlined, PlusOutlined,
@@ -13,7 +12,6 @@ import { filterAccounts, staffStatus, userRole } from '../../../../config/consta
 import { useListSchools } from '../../../../services/schoolServices'
 import { useListAccounts, useMutationUpdateAccount } from '../../../../services/accountServices'
 import { AccountDetailDrawer, MainLayout } from '../../..'
-import styles from '../../../../styles/pages/SchoolLayout.module.scss'
 
 function AccountsLayout() {
   const [detailData, setDetailData] = useState(null)
@@ -37,7 +35,9 @@ function AccountsLayout() {
   const { data: accounts = [], isLoading } = useListAccounts(params)
   const accountMutation = useMutationUpdateAccount()
 
-  const { data: schools = [] } = useListSchools(undefined, { isCustom: true })
+  const { data: schools = [] } = useListSchools(undefined,
+    { isCustom: true, isAllSchools: true }
+  )
 
   useEffect(() => {
     // Update params
@@ -324,7 +324,7 @@ function AccountsLayout() {
           <Button type="default" icon={<FileExcelOutlined />}
             size='middle' className='p-btn'
           >
-            Xuất file Excel
+            Xuất Excel
           </Button>
         </Space>
       }
@@ -397,7 +397,7 @@ function AccountsLayout() {
           <Table
             columns={columns} dataSource={accounts}
             size='middle'
-            className={clsx(styles.table, 'w-100')}
+            className={'w-100 my-table'}
             pagination={{
               size: 'default',
               showTotal: total => `Tổng cộng ${total} dòng`,

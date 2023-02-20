@@ -5,6 +5,8 @@ import {
   DropboxOutlined,
   FileProtectOutlined,
   LogoutOutlined,
+  MoneyCollectOutlined,
+  WalletOutlined,
   PercentageOutlined,
   ReadOutlined,
   RocketOutlined,
@@ -23,8 +25,8 @@ const menuItems = []
 
 const excludePages = ['/login', '/profile']
 const allRoles = [...Object.values(userRole)]
-for (const [key, value] of Object.entries(routes)) {
 
+for (const [key, value] of Object.entries(routes)) {
   if (excludePages.includes(value)) continue
 
   const menuName = toCapital(key)
@@ -64,16 +66,32 @@ for (const [key, value] of Object.entries(routes)) {
       }
       break
 
-    case routes.STAFFS:
+    case routes.SALARIES:
       menuItem = {
         ...menuItem,
-        label: 'Nhân viên',
-        icon: <UserOutlined />,
+        label: 'Lương thưởng',
+        icon: <WalletOutlined />,
+        // icon: <MoneyCollectOutlined />,
+        // label: 'Nhân viên',
+        // icon: <UserOutlined />,
+        role: allRoles
+      }
+      break
+
+    case routes.TAXES:
+      menuItem = {
+        ...menuItem,
+        label: 'Thuế',
+        icon: <PercentageOutlined />,
         role: allRoles
       }
       break
 
     case routes.STUDENTS:
+      menuItems.push({
+        type: 'divider', role: allRoles
+      })
+
       menuItem = {
         ...menuItem,
         label: 'Học viên',
@@ -102,16 +120,11 @@ for (const [key, value] of Object.entries(routes)) {
       }
       break
 
-    case routes.TAXES:
-      menuItem = {
-        ...menuItem,
-        label: 'Thuế',
-        icon: <PercentageOutlined />,
-        role: allRoles
-      }
-      break
-
     case routes.ASSETS:
+      menuItems.push({
+        type: 'divider', role: allRoles
+      })
+
       label = 'Tài sản'
       menuItem = {
         key: ASSETS,
@@ -143,13 +156,17 @@ for (const [key, value] of Object.entries(routes)) {
     case routes.INVOICES:
       menuItem = {
         ...menuItem,
-        label: 'Quản lý hóa đơn',
+        label: 'Hoá đơn',
         icon: <FileProtectOutlined />,
         role: allRoles
       }
       break
 
     case routes.SETTINGS:
+      menuItems.push({
+        type: 'divider', role: allRoles
+      })
+
       label = 'Thiết lập chung'
       menuItem = {
         key: SETTINGS,
@@ -161,9 +178,9 @@ for (const [key, value] of Object.entries(routes)) {
       break
 
     default:
-      menuItem = {
-        type: 'divider'
-      }
+      // menuItem = {
+      //   type: 'divider', role: allRoles
+      // }
       break
   }
 
@@ -427,7 +444,7 @@ const listSettings = [
       {
         id: '1.7',
         name: 'Bậc lương, thưởng, phụ cấp',
-        pathName: '/settings/salary',
+        pathName: '/settings/salary-levels',
       },
       {
         id: '1.8',

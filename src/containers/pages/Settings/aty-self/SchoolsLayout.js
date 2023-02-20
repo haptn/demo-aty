@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import _ from 'lodash'
-import clsx from 'clsx'
 import { Button, Popconfirm, Select, Space, Spin, Switch, Table, Tag } from 'antd'
 import {
   EditOutlined, EyeOutlined, StopOutlined,
@@ -10,7 +9,6 @@ import {
 import { MainLayout, SchoolDetailDrawer, AccountDetailDrawer } from '../../..'
 import { useListSchools, useListAccountsInSchool } from '../../../../services/schoolServices'
 import { filterSchools, schoolStatus, schoolType, staffStatus } from '../../../../config/constants'
-import styles from '../../../../styles/pages/SchoolLayout.module.scss'
 
 function SchoolsLayout() {
   const [detailData, setDetailData] = useState(null)
@@ -28,7 +26,7 @@ function SchoolsLayout() {
   const [openAccountDrawer, setOpenAccountDrawer] = useState(false)
   const [openPopConfirm, setOpenPopConfirm] = useState(null)
 
-  const { data = [], isLoading } = useListSchools(params)
+  const { data = [], isLoading } = useListSchools(params, { isAllSchools: true })
   const {
     data: listAccounts = [],
     isFetching,
@@ -324,7 +322,7 @@ function SchoolsLayout() {
             Thêm Tài khoản
           </Button>
           <Button type="default" icon={<FileExcelOutlined />} size='middle' className='p-btn'>
-            Xuất file Excel
+            Xuất Excel
           </Button>
         </Space>
       }
@@ -382,7 +380,7 @@ function SchoolsLayout() {
           <Table
             columns={columns} dataSource={data}
             size='middle'
-            className={clsx(styles.table, 'w-100')}
+            className={'w-100 my-table'}
             expandable={{
               columnTitle: () => {
                 return expandedKeys.length >= expandableRows.length ? (

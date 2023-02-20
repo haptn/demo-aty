@@ -1,13 +1,18 @@
 @import "./styles/variables";
 @import "./styles/function";
 @import "./styles/global";
+@import './styles/components';
 @import "./styles/layout";
 @import "./styles/mixin";
+
 // @use 'styles/variables' as *;
 // @use 'styles/function' as *;
 // @use 'styles/global' as *;
+// @use 'styles/components' as *;
 // @use 'styles/layout' as *;
 // @use 'styles/mixin' as *;
+
+// @use 'styles/components/table' as table;
 
 * {
   margin: 0;

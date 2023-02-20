@@ -18,7 +18,7 @@ import {
   ReportBizPerformance,
   ReportBestSellingCourses,
 } from '../../components'
-import styles from '../../styles/pages/DashboardLayout.module.scss'
+import styles from '../../styles/pages/Dashboard.module.scss'
 
 function DashboardLayout(props) {
   const { filterPeriod, onFilter, data } = props

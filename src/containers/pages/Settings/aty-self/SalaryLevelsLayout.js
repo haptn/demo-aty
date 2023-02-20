@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import qs from 'qs'
 import _ from 'lodash'
-import clsx from 'clsx'
 import { Button, Popconfirm, Select, Space, Spin, Switch, Table, Tag, Tooltip } from 'antd'
 import {
   FileExcelOutlined, PlusOutlined,
@@ -13,9 +12,8 @@ import api from '../../../../config/api'
 import { filterAccounts, staffStatus, userRole } from '../../../../config/constants'
 import { URL_ACCOUNTS, URL_SCHOOLS } from '../../../../config/endpoints'
 import { AccountDetailDrawer, MainLayout } from '../../..'
-import styles from '../../../../styles/pages/SchoolLayout.module.scss'
 
-function SalaryLayout() {
+function SalaryLevelsLayout() {
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState([])
   const [detailData, setDetailData] = useState(null)
@@ -317,7 +315,7 @@ function SalaryLayout() {
           <Button type="default" icon={<FileExcelOutlined />}
             size='middle' className='p-btn'
           >
-            Xuất file Excel
+            Xuất Excel
           </Button>
         </Space>
       }
@@ -390,7 +388,7 @@ function SalaryLayout() {
           <Table
             columns={columns} dataSource={data}
             size='middle'
-            className={clsx(styles.table, 'w-100')}
+            className={'w-100 my-table'}
             pagination={{
               size: 'default',
               showTotal: total => `Tổng cộng ${total} dòng`,
@@ -411,4 +409,4 @@ function SalaryLayout() {
   )
 }
 
-export default SalaryLayout
+export default SalaryLevelsLayout
