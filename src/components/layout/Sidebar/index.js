@@ -20,7 +20,7 @@ function Sidebar({ collapsed, setCollapsed }) {
   const menu = useMemo(() => {
     return _
       .filter(menuItems, item => item?.role?.includes(user?.role))
-      .map(({ key, label, icon }) => ({ key, label, icon }))
+      .map(({ key, label, icon, type }) => ({ key, label, icon, type }))
   }, [user])
 
   const handleChangeMenu = target => {

@@ -7,7 +7,7 @@ const { Item: BreadcrumbItem } = AntdBreadcrumb
 
 const REMOVE_TEXT = 'Quản lý '
 
-function Breadcrumb({ data = [], title = '' }) {    // , hasTabs = false  // làm sau
+function Breadcrumb({ data = [], title = '', hasTabs }) {    // , hasTabs = false  // làm sau
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -24,7 +24,9 @@ function Breadcrumb({ data = [], title = '' }) {    // , hasTabs = false  // là
   const isLast = idx => idx < breadcrumbs?.length - 1
 
   return (
-    <AntdBreadcrumb separator='>' style={{ marginBottom: '1rem' }}>
+    <AntdBreadcrumb separator='>'
+      style={!hasTabs ? { marginBottom: '1rem' } : {}}
+    >
       <BreadcrumbItem onClick={() => navigate('/')}
         style={{ cursor: 'pointer' }}
       >
