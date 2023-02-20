@@ -1,9 +1,9 @@
 import React from 'react'
-import { StSalaryLayout } from '../../../../containers'
+import { StSalaryLevelsLayout } from '../../../../containers'
 
 function Salary() {
   return (
-    <StSalaryLayout />
+    <StSalaryLevelsLayout />
   )
 }
 
