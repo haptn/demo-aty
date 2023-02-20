@@ -2,11 +2,11 @@ import React, { useMemo } from 'react'
 import clsx from 'clsx'
 import { BronzeMedalIcon, GoldMedalIcon, SilverMedalIcon } from '../../assets'
 import { formatNumber } from '../../utils/format'
-import styles from '../../styles/pages/DashboardLayout.module.scss'
+import styles from '../../styles/pages/Dashboard.module.scss'
 
 const RowCourse = (props) => {
   const {
-    rankNo, rankImg, courseName, value,
+    rankNo, rankImg, courseName, countCourses, value,
     isHead, isFilterTotal
   } = props
 
@@ -35,6 +35,9 @@ const RowCourse = (props) => {
       <div className={clsx('flex-1', styles.rankings__item_td)}>
         {courseName}
       </div>
+      <div className={clsx(styles.rankings__item_td)}>
+        {countCourses}
+      </div>
       <div className={clsx(styles.rankings__item_td, styles.value)}>
         {(isFilterTotal && !isHead) ? formatValue(value) : value}
       </div>
@@ -46,36 +49,42 @@ const rankings = [
   {
     id: 1,
     courseName: 'Học kỳ quân đội Bộ binh sơ cấp',
-    countStudents: 567,
-    total: 4536000000   // Tổng học phí đã thu
+    countCourses: 6,
+    countStudents: 413,
+    total: 3304000000   // Tổng học phí đã thu
   },
   {
     id: 2,
     courseName: 'Bootcamp Teen Extreme',
-    countStudents: 180,
-    total: 2700000000
+    countCourses: 2,
+    countStudents: 128,
+    total: 1920000000
   },
   {
     id: 3,
     courseName: 'Bootcamp Kid Extreme',
-    countStudents: 212,
-    total: 2544000000
+    countCourses: 3,
+    countStudents: 172,
+    total: 2064000000
   },
   {
     id: 4,
     courseName: 'Teen Leaders',
-    countStudents: 82,
-    total: 1640000000
+    countCourses: 3,
+    countStudents: 122,
+    total: 2440000000
   },
   {
     id: 5,
     courseName: 'Siêu Trí tuệ Teen-Kid',
-    countStudents: 162,
-    total: 972000000
+    countCourses: 2,
+    countStudents: 37,
+    total: 222000000
   },
   {
     id: 6,
     courseName: 'Dân vũ',
+    countCourses: 6,
     countStudents: 234,
     total: 468000000
   },
@@ -115,21 +124,25 @@ function CoursesTable(props) {
         <RowCourse {...{
           rankNo: 'Hạng',
           courseName: 'Tên chương trình',
+          countCourses: 'Số khóa',
           value: isFilterTotal ? 'Tổng học phí' : 'Số học viên',
           isHead: true
         }} />
 
         {/* Table body */}
-        {listRankings?.map(({ id, courseName, countStudents, total }, idx) => (
-          <RowCourse {...{
-            key: id,
-            rankNo: idx + 1,
-            rankImg: getRankImg(idx + 1),
-            courseName,
-            value: isFilterTotal ? total : countStudents,
-            isFilterTotal
-          }} />
-        ))}
+        {listRankings?.map(
+          ({ id, courseName, countCourses, countStudents, total }, idx) => (
+            <RowCourse {...{
+              key: id,
+              rankNo: idx + 1,
+              rankImg: getRankImg(idx + 1),
+              courseName,
+              countCourses,
+              value: isFilterTotal ? total : countStudents,
+              isFilterTotal
+            }} />
+          )
+        )}
       </div>
     </>
   )

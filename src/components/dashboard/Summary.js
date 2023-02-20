@@ -5,7 +5,7 @@ import { Spin } from 'antd'
 import { useDashboard } from '../../contexts'
 import { filterPeriodTypes } from '../../config/constants'
 import { BoxHeader, SummaryTable } from '../'
-import styles from '../../styles/pages/DashboardLayout.module.scss'
+import styles from '../../styles/pages/Dashboard.module.scss'
 
 function Summary() {
   const [filterPeriod, setFilterPeriod] = useState(filterPeriodTypes.THIS_MONTH)

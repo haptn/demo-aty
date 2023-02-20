@@ -78,17 +78,17 @@ function ReportBestSellingCourses() {
         totalValues: [
           {
             label: 'khóa học',
-            value: 12,
+            value: 31,
             unit: ''
           },
           {
             label: 'học viên',
-            value: 2115,
+            value: 1789,
             unit: ''
           },
           {
             label: 'học phí',
-            value: '14,25',
+            value: '11,75',
             unit: 'Tỷ đồng'
           },
         ],
