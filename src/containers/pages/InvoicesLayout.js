@@ -3,8 +3,8 @@ import { MainLayout } from '..'
 
 function InvoicesLayout() {
   return (
-    <MainLayout title="Quản lý hóa đơn">
-      Quản lý hóa đơn
+    <MainLayout title="Hoá đơn">
+      Hoá đơn
     </MainLayout>
   )
 }

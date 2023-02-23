@@ -1,62 +1,36 @@
-import React, { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
-import qs from 'qs'
+import React, { useEffect, useMemo, useState } from 'react'
 import _ from 'lodash'
-import clsx from 'clsx'
-import { Button, Popconfirm, Select, Space, Spin, Switch, Table, Tag, Tooltip } from 'antd'
+import { Button, Space, Spin, Table, Tooltip } from 'antd'
 import {
-  FileExcelOutlined, PlusOutlined,
-  EditOutlined, LockOutlined, KeyOutlined
+  FileExcelOutlined, PlusOutlined, EditOutlined,
 } from '@ant-design/icons'
 
-import api from '../../../../config/api'
-import { filterAccounts, staffStatus, userRole } from '../../../../config/constants'
-import { URL_ACCOUNTS, URL_SCHOOLS } from '../../../../config/endpoints'
+import { useListSchools } from '../../../../services/schoolServices'
+import { useListClasses } from '../../../../services/classServices'
 import { AccountDetailDrawer, MainLayout } from '../../..'
-import styles from '../../../../styles/pages/SchoolLayout.module.scss'
+import { DropdownCheckbox } from '../../../../components'
 
 function ClassesLayout() {
-  const [loading, setLoading] = useState(false)
-  const [data, setData] = useState([])
   const [detailData, setDetailData] = useState(null)
 
-  const [listSchools, setListSchools] = useState([])
-
+  const [params, setParams] = useState(null)
   const [searchKeyword, setSearchKeyword] = useState('')
   const [filters, setFilters] = useState({
-    [filterAccounts.STATUS]: null,
-    [filterAccounts.ROLE]: [],
-    [filterAccounts.SCHOOL]: [],
+    // [filterAccounts.STATUS]: null,
+    schools: [],
+    schoolNames: []
   })
-  const [workingStatuses, setWorkingStatuses] = useState({})
   const [page, setPage] = useState(1)
 
   const [openDetailDrawer, setOpenDetailDrawer] = useState(false)
-  const [openPopConfirm, setOpenPopConfirm] = useState({
-    lockAccount: null,
-    resetPass: null
-  })
+
+  const { data: classes = [], isLoading } = useListClasses(params)
+  const { data: schools = [] } = useListSchools(undefined,
+    { isCustom: true, isAllSchools: true }
+  )
 
   useEffect(() => {
-    api.get(URL_SCHOOLS).then(res => {
-      if (!res || res?.length <= 0) return
-
-      const list = res?.map(({ id, name }) => ({
-        value: id,
-        label: name,
-      }))
-      setListSchools(list)
-    })
-
-    return () => {
-      setListSchools([])
-    }
-  }, [])
-
-  useEffect(() => {
-    // Fetch data of accounts
-    setLoading(true)
-
+    // Update params
     let params = {}
 
     if (searchKeyword) {
@@ -66,122 +40,52 @@ function ClassesLayout() {
         params.name_like = searchKeyword
     }
 
-    if (filters[filterAccounts.STATUS])
-      params.status = filters[filterAccounts.STATUS]
+    // if (filters[filterAccounts.STATUS])
+    //   params.status = filters[filterAccounts.STATUS]
 
-    if (filters[filterAccounts.ROLE]?.length > 0) {
-      if (!filters[filterAccounts.ROLE]?.includes('all'))
-        params.role = filters[filterAccounts.ROLE]
-      else
-        params.role = [...Object.values(userRole)]
+    if (filters.schools?.length > 0) {
+      // if (!filters.schools?.includes('all'))
+      params.schoolId = filters.schools
+      // else
+      // params.schoolId = [...schools]?.map(({ value }) => value)
     }
 
-    if (filters[filterAccounts.SCHOOL]?.length > 0) {
-      if (!filters[filterAccounts.SCHOOL]?.includes('all'))
-        params.schoolId = filters[filterAccounts.SCHOOL]
-      else
-        params.schoolId = [...listSchools]?.map(({ value }) => value)
-    }
+    // console.log('filters.schools', filters.schools)
 
-    params = qs.stringify(params, { indices: false })
-
-    api.get(`${URL_ACCOUNTS}?${params}`)
-      .then(res => {
-        setData(res)
-        setWorkingStatuses(() => {
-          const obj = {}
-          res.forEach(({ id, status }) => {
-            obj[id] = status
-          })
-          return obj
-        })
-      })
-      .finally(() => setLoading(false))
-
-    return () => {
-      setData([])
-    }
+    setParams(params)
   }, [searchKeyword, filters])
 
-  // console.log('workingStatuses: ', workingStatuses)
-
   // Currently, I can only search by name or phone. Maybe in the future, I will enhance to be able to search by email 
-  const handleFilter = (type = '', value) => {
+  const handleFilter = (type = '', { value, checked }) => {
+    if (type === 'schools') {
+      const schoolId = value?.split('-')?.[0]
+
+      setFilters(prev => {
+        let clone = { ...prev }
+
+        if (checked && !clone?.schools?.includes(schoolId)) {
+          clone.schools = [...clone.schools, schoolId]
+          clone.schoolNames = [...clone.schoolNames, value]
+        }
+
+        if (!checked && clone?.schools?.includes(schoolId)) {
+          _.remove(clone.schools, item => item === schoolId)
+          _.remove(clone.schoolNames, item => item === value)
+        }
+
+        console.log('schoolId, filters, clone', schoolId, filters, clone)
+
+        return clone
+      })
+      return
+    }
+
     setFilters(prev => ({ ...prev, [type]: value }))
   }
 
   const handleViewDetail = record => {
     setDetailData(record)
     setOpenDetailDrawer(true)
-  }
-
-  const handleChangeWorkingStatuses = (id, newStatus) => {
-    const toastId = toast.loading("Loading...")
-
-    api.patch(
-      `${URL_ACCOUNTS}/${id}`,
-      { status: newStatus ? staffStatus.WORKING : staffStatus.QUITTED }
-    ).then(res => {
-      setWorkingStatuses(prevStatus => {
-        const clone = { ...prevStatus }
-        clone[id] = res?.status
-        return clone
-      })
-
-      toast.update(toastId, {
-        render: "Cập nhật trạng thái thành công!",
-        type: "success",
-        isLoading: false,
-        autoClose: 1500
-      });
-    })
-  }
-
-  // Chờ confirm, ko biết có nên dùng ko
-  const handleLockAccount = id => {
-    // Call API to PATCH
-    // setSchoolStatuses(prevStatus => {
-    //   const clone = { ...prevStatus }
-    //   clone[id] = schoolStatus.CLOSED
-    //   return clone
-    // })
-    setOpenPopConfirm({
-      lockAccount: null,
-      resetPass: null
-    })
-  }
-
-  // Default password = 123456
-  const handleResetPass = id => {
-    const toastId = toast.loading("Loading...")
-
-    api.patch(
-      `${URL_ACCOUNTS}/${id}`,
-      { password: '123456' }
-    ).then(res => {
-      setOpenPopConfirm({
-        lockAccount: null,
-        resetPass: null
-      })
-      toast.update(toastId, {
-        render: (
-          <>
-            <h4 style={{ marginBottom: '.35rem' }}>Đặt lại mật khẩu thành công!</h4>
-            <p>Mật khẩu mới: <b>{res?.password}</b></p>
-          </>
-        ),
-        type: "success",
-        isLoading: false,
-        autoClose: 2500
-      })
-    })
-
-
-    // setSchoolStatuses(prevStatus => {
-    //   const clone = { ...prevStatus }
-    //   clone[id] = schoolStatus.CLOSED
-    //   return clone
-    // })
   }
 
   const columns = [
@@ -193,112 +97,85 @@ function ClassesLayout() {
       render: (_, _data, idx) => <span>{(page - 1) * 10 + idx + 1}</span>
     },
     {
-      title: 'Họ và Tên',
+      title: 'Lớp',
       dataIndex: 'name',
       key: 'name',
+      // width: '20rem',
       render: (_, record) => {
         let color = record?.role === 'Admin trường'
           ? 'volcano' : record?.role === 'Admin ATY'
             ? 'magenta' : 'geekblue'
         return (
-          <div>
-            <a onClick={() => handleViewDetail(record)}>
-              <b>{record?.name}</b>
-            </a>
-            <br />
-            <Tag color={color} key={record?.role} className='mt-1'>
-              <span style={{ fontWeight: 500 }}>{record?.role}</span>
-            </Tag>
-          </div>
+          <a onClick={() => handleViewDetail(record)}>
+            <b>{record?.name}</b>
+          </a>
         )
       },
-      // width: '20rem'
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
-      // width: '12rem'
-    },
-    {
-      title: 'SĐT',
-      dataIndex: 'phone',
-      key: 'phone',
-      // width: '12rem'
-    },
-    {
-      title: 'Trạng thái',
-      key: 'status',
-      dataIndex: 'status',
-      align: 'center',
+      title: 'Cơ sở',
+      dataIndex: 'school',
+      key: 'school',
       // width: '12rem',
-      render: (_, { id }) => (
-        <Switch
-          checked={workingStatuses[id] === staffStatus.WORKING}
-          onChange={newStatus => handleChangeWorkingStatuses(id, newStatus)}
-          checkedChildren={staffStatus.WORKING}
-          unCheckedChildren={staffStatus.QUITTED}
-        />
+      render: (_, { schoolId }) => (
+        <span style={{ fontWeight: 500, color: '#444' }}>
+          {schools?.find(({ value }) => value === schoolId)?.label ?? '-'}
+        </span>
       )
     },
+    {
+      title: 'Sĩ số',
+      dataIndex: 'classSize',
+      key: 'classSize',
+      align: 'center'
+    },
+    // {
+    //   title: 'Trạng thái',
+    //   key: 'status',
+    //   dataIndex: 'status',
+    //   align: 'center',
+    //   // width: '12rem',
+    //   render: (_, { id, status }) => (
+    //     <Switch
+    //       // checked={workingStatuses[id] === staffStatus.WORKING}
+    //       checked={status === staffStatus.WORKING}
+    //       onChange={newStatus => handleChangeWorkingStatuses(id, newStatus)}
+    //       checkedChildren={staffStatus.WORKING}
+    //       unCheckedChildren={staffStatus.QUITTED}
+    //     />
+    //   )
+    // },
     {
       title: '',
       key: 'action',
       align: 'center',
       // width: '12rem',
       render: (_, record) => (
-        <Space size="small" align='end'>
-          <Tooltip title="Chi tiết">
-            <Button type="text"
-              shape='circle'
-              icon={<EditOutlined style={{ color: '#1677ff' }} />}
-              onClick={() => handleViewDetail(record)}
-            />
-          </Tooltip>
-
-          <Popconfirm
-            title="Bạn có chắc muốn khóa tài khoản này?"
-            onConfirm={() => handleLockAccount(record?.id)}
-            onCancel={() => setOpenPopConfirm({ lockAccount: null, resetPass: null })}
-            okText="Chắc chắn"
-            cancelText="Không"
-            open={openPopConfirm.lockAccount === record?.id}
-            okButtonProps={{ danger: true }}
-          >
-            <Tooltip title="Khóa tài khoản">
-              <Button type="text" danger
-                shape='circle'
-                icon={<LockOutlined />}
-                onClick={() => setOpenPopConfirm({ lockAccount: record?.id, resetPass: null })}
-                disabled={workingStatuses[record?.id] === staffStatus.QUITTED}
-              />
-            </Tooltip>
-          </Popconfirm>
-
-          {/* Đổi pass */}
-          <Popconfirm
-            title={(<span>Bạn có chắc muốn đặt lại mật khẩu cho <b>{record?.name}</b>?</span>)}
-            onConfirm={() => handleResetPass(record?.id)}
-            onCancel={() => setOpenPopConfirm({ lockAccount: null, resetPass: null })}
-            okText="Chắc chắn"
-            cancelText="Không"
-            open={openPopConfirm.resetPass === record?.id}
-            // okButtonProps={{ danger: true }}
-            placement='topRight'
-          >
-            <Tooltip title="Đặt lại pass">
-              <Button type="text"
-                shape='circle'
-                icon={<KeyOutlined style={{ color: '#1677ff' }} />}
-                onClick={() => setOpenPopConfirm({ lockAccount: null, resetPass: record?.id })}
-                disabled={workingStatuses[record?.id] === staffStatus.QUITTED}
-              />
-            </Tooltip>
-          </Popconfirm>
-        </Space>
+        <Tooltip title="Chi tiết">
+          <Button type="text"
+            shape='circle'
+            icon={<EditOutlined style={{ color: '#1677ff' }} />}
+            onClick={() => handleViewDetail(record)}
+          />
+        </Tooltip>
       ),
     },
   ]
+
+  const checkedSchoolsLabel = useMemo(() => {
+    if (!schools)
+      return 'Chọn cơ sở'
+
+    const checkedSchools = _.values(filters.schools)?.filter(item => !!item)
+
+    return checkedSchools?.length === 0
+      ? 'Chọn cơ sở'
+      : checkedSchools?.length === schools?.length
+        ? 'Tất cả cơ sở'
+        : `${checkedSchools?.length} cơ sở`
+  }, [schools, JSON.stringify(filters.schools)])
+
+  console.log(filters?.schoolNames);
 
   return (
     <MainLayout
@@ -312,19 +189,19 @@ function ClassesLayout() {
           <Button type="primary" icon={<PlusOutlined />}
             size='middle' className='p-btn'
           >
-            Thêm Tài khoản
+            Thêm Lớp
           </Button>
           <Button type="default" icon={<FileExcelOutlined />}
             size='middle' className='p-btn'
           >
-            Xuất file Excel
+            Xuất Excel
           </Button>
         </Space>
       }
       pageFilters={
         <>
-          <Select
-            value={filters[filterAccounts.STATUS]}
+          {/* <Select
+            value={filters.status}
             onChange={value => handleFilter(filterAccounts.STATUS, value)}
             placeholder='Trạng thái'
             allowClear
@@ -335,29 +212,16 @@ function ClassesLayout() {
                 label: item,
               }))
             ]}
-          />
-          <Select
+          /> */}
+          <DropdownCheckbox {...{
+            btnLabel: checkedSchoolsLabel,
+            items: schools?.map(({ label, value }) => `${value}-${label}`),
+            checkedItems: filters?.schoolNames,
+            onCheck: value => handleFilter('schools', value),
+          }} />
+          {/* <Select
             mode='multiple'
-            value={filters[filterAccounts.ROLE]}
-            onChange={value => handleFilter(filterAccounts.ROLE, value)}
-            placeholder='Vai trò'
-            allowClear
-            style={{ minWidth: 120 }}
-            options={[
-              {
-                value: 'all',
-                label: 'Tất cả vai trò',
-              },
-              ...Object.values(userRole)?.map(item => ({
-                value: item,
-                label: item,
-                disabled: filters[filterAccounts.ROLE]?.includes('all')
-              }))
-            ]}
-          />
-          <Select
-            mode='multiple'
-            value={filters[filterAccounts.SCHOOL]}
+            value={filters.schools}
             onChange={value => handleFilter(filterAccounts.SCHOOL, value)}
             placeholder='Cơ sở'
             allowClear
@@ -367,12 +231,12 @@ function ClassesLayout() {
                 value: 'all',
                 label: 'Tất cả cơ sở',
               },
-              ...listSchools?.map(item => ({
+              ...schools?.map(item => ({
                 ...item,
-                disabled: filters[filterAccounts.SCHOOL]?.includes('all')
+                disabled: filters.schools?.includes('all')
               }))
             ]}
-          />
+          /> */}
         </>
       }
       hasPageSearch
@@ -386,11 +250,11 @@ function ClassesLayout() {
     // ]}  // Làm sao đó để lấy đc data của những phần thiết lập cùng loại (lớp, học phí, lương,...)
     >
       <div className='w-100 pt-2'>
-        <Spin spinning={loading}>
+        <Spin spinning={isLoading}>
           <Table
-            columns={columns} dataSource={data}
+            columns={columns} dataSource={classes}
             size='middle'
-            className={clsx(styles.table, 'w-100')}
+            className={'w-100 my-table'}
             pagination={{
               size: 'default',
               showTotal: total => `Tổng cộng ${total} dòng`,

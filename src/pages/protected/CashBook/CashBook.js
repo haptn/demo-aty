@@ -1,9 +1,9 @@
 import React from 'react'
-import { CashBookLayout } from '../../../containers'
+import { CashBooksLayout } from '../../../containers'
 
 function CashBook() {
   return (
-    <CashBookLayout />
+    <CashBooksLayout />
   )
 }
 
