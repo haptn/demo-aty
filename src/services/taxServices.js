@@ -65,7 +65,7 @@ export const useListTaxTypes = (params, options) => {
   const url = !!params ? `${URL_TAX_TYPES}?${bindParams(params)}` : URL_TAX_TYPES
 
   return useQuery(
-    ['taxes', { ...params }],
+    ['tax-types', { ...params }],
     () => api.get(url),
     {
       staleTime: 10 * 60 * 1000,  // same as cacheTime
@@ -89,7 +89,7 @@ export const useListTaxTypes = (params, options) => {
 // Tạm thời bỏ qua vấn đề prefetching, chỉ viết hàm fetch bth trước
 export const useTaxType = id => {
   return useQuery(
-    ['tax', id],
+    ['tax-type', id],
     () => api.get(`${URL_TAX_TYPES}/${id}`),
     {
       staleTime: 60 * 1000,   // 1 min

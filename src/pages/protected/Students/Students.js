@@ -1,9 +1,9 @@
 import React from 'react'
-import { StudentsLayout } from '../../../containers'
+import { StudentsPageLayout } from '../../../containers'
 
 function Students() {
   return (
-    <StudentsLayout />
+    <StudentsPageLayout />
   )
 }
 

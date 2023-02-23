@@ -16,7 +16,12 @@ export const URL_SETTING = '/setting'
 export const URL_TAXES = '/taxes'
 export const URL_TAX_TYPES = '/tax-types'
 
+export const URL_SETTING_TUITION_FEES = '/tuition-fees'
+export const URL_TUITION_FEES = '/completed-tuition-fees'
+
+export const URL_COURSES = '/courses'
+export const URL_CURRENT_COURSES = '/current-courses'
+
 export const URL_CLASSES = '/classes'
 export const URL_STUDENTS = '/students'
 export const URL_STAFFS = '/staffs'
-export const URL_COURSES = '/courses'

@@ -32,6 +32,12 @@ export const courseStatus = {
   PAUSED: 'Tạm dừng',
   COMING_SOON: 'Sắp ra mắt'
 }
+export const classStatus = {
+  PERFORMING: 'Đang diễn ra',
+  ENROLLING: 'Đang tuyển sinh',
+  COMING_SOON: 'Sắp mở',
+  ENDED: 'Đã kết thúc'
+}
 
 export const taxStatus = {
   APPLYING: 'Đang áp dụng',
