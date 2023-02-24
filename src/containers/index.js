@@ -8,23 +8,15 @@ export { default as ProfileLayout } from './pages/ProfileLayout'
 
 export { default as BudgetLayout } from './pages/BudgetLayout'
 export { default as CashBooksLayout } from './pages/CashBooksLayout'
-export { default as SalaryPageLayout } from './pages/Salaries/SalaryPageLayout'
-export { default as StudentsPageLayout } from './pages/Students/StudentsPageLayout'
-export { default as BoardingLayout } from './pages/BoardingLayout'
+export { default as SalaryPage } from './pages/Salaries/SalaryPage'  // sau refractor kéo nó ra thẳng folder "pages" luôn
+export { default as StudentsPage } from './pages/Students/StudentsPage'
+export { default as BoardingPage } from './pages/Boarding/BoardingPage'
 export { default as InvoicesLayout } from './pages/InvoicesLayout'
 export { default as LoanDebtLayout } from './pages/LoanDebtLayout'
 export { default as PurchaseRentalLayout } from './pages/PurchaseRentalLayout'
 export { default as TaxesLayout } from './pages/TaxesLayout'
-
-//----- Assets
-export { default as AssetsLayout } from './pages/AssetsLayout'
-export { default as FixedAssetsLayout } from './pages/FixedAssetsLayout'
-export { default as EquipmentsLayout } from './pages/EquipmentsLayout'
-
-//----- Programs
-export { default as ProgramsLayout } from './pages/ProgramsLayout'
-export { default as CoursesLayout } from './pages/CoursesLayout'
-export { default as ActivitiesLayout } from './pages/ActivitiesLayout'
+export { default as ProgramsPageLayout } from './pages/Programs/ProgramsPageLayout'
+export { default as AssetsPage } from './pages/Assets/AssetsPage'
 
 //----- Settings
 export { default as SettingLayout } from './pages/Settings/SettingLayout'

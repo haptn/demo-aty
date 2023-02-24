@@ -14,7 +14,7 @@ import { useListSchools } from '../../../services/schoolServices'
 import { PageHeader } from '../../../components'
 
 function AccountingTab(props) {
-  const { setDetailData, setOpenDetailDrawer } = props   // from SalaryPageLayout
+  const { setDetailData, setOpenDetailDrawer } = props   // from SalaryPage
   const { token } = theme.useToken()
 
   const [params, setParams] = useState(null)

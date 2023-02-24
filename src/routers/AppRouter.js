@@ -3,8 +3,7 @@ import { Outlet, Route, Routes } from 'react-router-dom'
 import {
   Login, NotFound, Dashboard, Profile,
   Budget, CashBook, Salaries, Students,
-  Programs, Activities, Courses, Boarding,
-  Assets, FixedAssets, Equipments,
+  Programs, Boarding, Assets,
   Taxes, PurchaseRental, LoanDebt, Invoices,
   Settings, StSchools, StClasses, StCourses, StAccounts,
   StTaxes, StTuitorFees, StSalary, StServices,
@@ -42,7 +41,6 @@ function AppRouter() {
         <Route path="budget" element={<Budget />} />
         <Route path="cash-books" element={<CashBook />} />
         <Route path="cash-books" element={<CashBook />} />
-        <Route path="boarding" element={<Boarding />} />
         <Route path="taxes" element={<Taxes />} />
         <Route path="invoices" element={<Invoices />} />
         <Route path="purchase-rental" element={<PurchaseRental />} />
@@ -56,18 +54,25 @@ function AppRouter() {
           <Route path="*" element={<Students />} />
         </Route>
 
+        <Route path="programs" element={<Programs />}>
+          <Route path='*' element={<Programs />} />
+        </Route>
 
-        <Route path="assets" element={<Outlet />}>
+        <Route path="boarding" element={<Boarding />}>
+          <Route path='*' element={<Boarding />} />
+        </Route>
+
+        <Route path="assets" element={<Assets />}>
+          <Route path='*' element={<Assets />} />
+          {/* <Route path="fixed-assets" element={<FixedAssets />} />
+          <Route path="equipments" element={<Equipments />} /> */}
+        </Route>
+
+        {/* <Route path="assets" element={<Outlet />}>
           <Route index element={<Assets />} />
           <Route path="fixed-assets" element={<FixedAssets />} />
           <Route path="equipments" element={<Equipments />} />
-        </Route>
-
-        <Route path="programs" element={<Outlet />}>
-          <Route index element={<Programs />} />
-          <Route path="courses" element={<Courses />} />
-          <Route path="activities" element={<Activities />} />
-        </Route>
+        </Route> */}
 
         <Route path="settings" element={<Outlet />}>
           <Route index element={<Settings />} />
