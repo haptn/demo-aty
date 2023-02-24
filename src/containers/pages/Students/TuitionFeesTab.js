@@ -15,6 +15,7 @@ import { PageHeader } from '../../../components'
 import { AccountDetailDrawer } from '../..'
 import CollapsibleList from './components/CollapsibleList'
 import { formatMoney } from '../../../utils/format'
+import { classStatus } from '../../../config/constants'
 
 function TuitionFeesTab() {
   const [detailData, setDetailData] = useState(null)
@@ -46,7 +47,17 @@ function TuitionFeesTab() {
         totalStudents: listStudents?.length
       })
     })
+
+    const statusOrder = [
+      classStatus.ENROLLING,
+      classStatus.PERFORMING,
+      classStatus.COMING_SOON,
+      classStatus.ENDED,
+      classStatus.CANCELLED
+    ]
+
     return _.orderBy(clone, ['totalStudents'], ['desc'])
+      .sort((a, b) => statusOrder.indexOf(a?.status) - statusOrder.indexOf(b?.status))
   }, [JSON.stringify(courses), students])
 
   const sortedSchoolsByTotalStudents = useMemo(() => {
@@ -62,19 +73,15 @@ function TuitionFeesTab() {
     return _.orderBy(clone, ['totalStudents'], ['desc'])
   }, [schools, students])
 
-
-  // console.log('sortedCoursesByTotalStudents: ', sortedCoursesByTotalStudents)
-
-
   useEffect(() => {
     // Update params
     let params = {}
 
     if (searchKeyword) {
-      if (searchKeyword.startsWith('0'))
-        params.phone_like = searchKeyword
+      if (searchKeyword.startsWith('HP_'))
+        params.id_like = searchKeyword
       else
-        params.name_like = searchKeyword
+        params.studentName_like = searchKeyword
     }
 
     setParams(params)
@@ -94,9 +101,9 @@ function TuitionFeesTab() {
     // Mở dialog/drawer tương ứng
   }
 
-  const getOtherFeesColumns = () => {
+  // const getOtherFeesColumns = () => {
 
-  }
+  // }
 
   // const getColumns = schoolId => {
   //   let columns = [
@@ -517,10 +524,10 @@ function TuitionFeesTab() {
       dataIndex: 'className',
       key: 'className',
       // fixed: 'left',
-      width: 250,
-      render: (value, { schoolId }) =>
-        ['3', '4'].includes(schoolId)   // trường phổ thông
-          ? value : value?.substring(0, value?.lastIndexOf('-'))
+      width: 270,
+      // render: (value, { schoolId }) =>
+      //   ['3', '4'].includes(schoolId)   // trường phổ thông
+      //     ? value : value?.substring(0, value?.lastIndexOf('-'))
     },
     {
       title: <div style={{ textAlign: 'center' }}>Học phí</div>,
@@ -659,7 +666,7 @@ function TuitionFeesTab() {
       key: 'action',
       width: 60,
       align: 'center',
-      // fixed: 'right',
+      fixed: 'right',
       render: (_, record) => (
         <Space size="small" >
           <Tooltip title="Chi tiết">
@@ -788,7 +795,7 @@ function TuitionFeesTab() {
         hasPageSearch
         pageSearchProps={{
           value: searchKeyword,
-          placeholder: 'Tìm theo tên HV, PH',
+          placeholder: 'Tìm theo tên HV, mã HĐ',
           onChange: e => setSearchKeyword(e?.target?.value),
         }}
       />
@@ -809,7 +816,6 @@ function TuitionFeesTab() {
           <CollapsibleList {...{
             defaultActiveKeys: schools?.map(({ value }) => value),
             parentList: sortedSchoolsByTotalStudents,
-
             tableProps: {
               // columns: columnsViewBySchools,
               columns, // getColumns,

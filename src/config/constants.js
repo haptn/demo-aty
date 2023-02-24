@@ -34,16 +34,16 @@ export const courseStatus = {
 }
 export const classStatus = {
   PERFORMING: 'Đang diễn ra',
-  ENROLLING: 'Đang tuyển sinh',
-  COMING_SOON: 'Sắp mở',
-  ENDED: 'Đã kết thúc'
+  ENROLLING: 'Đang tuyển sinh', // chưa diễn ra, đã ấn định time cụ thể
+  COMING_SOON: 'Dự kiến',   // chưa diễn ra, chưa ấn định time tổ chức
+  ENDED: 'Đã kết thúc',
+  CANCELLED: 'Đã hủy'
 }
 
 export const taxStatus = {
   APPLYING: 'Đang áp dụng',
   NOT_APPLIED: 'Không áp dụng'
 }
-
 
 // =========== Filter types ===========
 export const filterSchools = {

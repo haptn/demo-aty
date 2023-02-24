@@ -22,8 +22,12 @@ function CollapsibleList(props) {
         tagProps = { color: 'gold' }
         break
 
-      default:
+      case classStatus.ENDED:
         tagProps = { color: 'red' } // magenta
+        break
+
+      default:    // cancelled
+        tagProps = { color: 'darkgray' }
         break
     }
 
