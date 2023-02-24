@@ -16,7 +16,7 @@ import { useListStaffs, useMutationUpdateStaff } from '../../../services/staffSe
 import { PageHeader } from '../../../components'
 
 function SalariesTab(props) {
-  const { setDetailData, setOpenDetailDrawer } = props   // from SalaryPageLayout
+  const { setDetailData, setOpenDetailDrawer } = props   // from SalaryPage
   const { token } = theme.useToken()
 
   const [params, setParams] = useState(null)

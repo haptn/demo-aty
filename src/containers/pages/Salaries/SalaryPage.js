@@ -6,7 +6,7 @@ import { AccountingTab, OverviewTab, SalariesTab, StaffsTab } from '.'
 import ModalRules from './modals/ModalRules'
 import { AccountingDetail, SalaryDetail, StaffDetail } from './drawers'
 
-function SalaryPageLayout() {
+function SalaryPage() {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -73,23 +73,6 @@ function SalaryPageLayout() {
 
   const activeTab = useMemo(() => {
     return location.pathname.replace('/salaries', '')?.replace('/', '')
-
-    // switch (location.pathname) {
-    //   case '/salaries/staffs':
-    //     return 'staffs'
-
-    //   case '/salaries/timesheet':
-    //     return 'timesheet'
-
-    //   case '/salaries/pay-table':
-    //     return 'pay-table'
-
-    //   case '/salaries/accounting':
-    //     return 'accounting'
-
-    //   default:
-    //     return ''
-    // }
   }, [location.pathname])
 
   return (
@@ -140,4 +123,4 @@ function SalaryPageLayout() {
   )
 }
 
-export default SalaryPageLayout
+export default SalaryPage
