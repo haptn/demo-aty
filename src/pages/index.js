@@ -7,9 +7,7 @@ export { Profile } from './protected/Profile'
 export { Dashboard } from './protected/Dashboard'
 // SuperAdmin
 
-export * from './protected/Assets'
-export * from './protected/Programs'
-export * from './protected/Salaries'
+export { Assets } from './protected/Assets'
 export { Boarding } from './protected/Boarding'
 export { Budget } from './protected/Budget'
 export { CashBook } from './protected/CashBook'
@@ -17,6 +15,8 @@ export { Invoices } from './protected/Invoices'
 export { LoanDebt } from './protected/LoanDebt'
 export { PurchaseRental } from './protected/PurchaseRental'
 export { Students } from './protected/Students'
+export { Salaries } from './protected/Salaries'
+export { Programs } from './protected/Programs'
 export { Taxes } from './protected/Taxes'
 
 // ----- Settings -----

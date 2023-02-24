@@ -1,9 +1,9 @@
 import React from 'react'
-import { BoardingLayout } from '../../../containers'
+import { BoardingPage } from '../../../containers'
 
 function Boarding() {
   return (
-    <BoardingLayout />
+    <BoardingPage />
   )
 }
 
