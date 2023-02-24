@@ -1,9 +1,9 @@
 import React from 'react'
-import { AssetsLayout } from '../../../containers'
+import { AssetsPage } from '../../../containers'
 
 function Assets() {
   return (
-    <AssetsLayout />
+    <AssetsPage />
   )
 }
 
