@@ -1,10 +1,10 @@
 import React from 'react'
-import { SalaryPageLayout } from '../../../containers'
+import { SalaryPage } from '../../../containers'
 
 function Salaries() {
   return (
     <>
-      <SalaryPageLayout />
+      <SalaryPage />
     </>
   )
 }
