@@ -15,7 +15,7 @@ import { PageHeader } from '../../../components'
 import { AccountDetailDrawer } from '../..'
 import CollapsibleList from './components/CollapsibleList'
 import { formatMoney } from '../../../utils/format'
-import { classStatus } from '../../../config/constants'
+import { currentCourseStatus } from '../../../config/constants'
 
 function TuitionFeesTab() {
   const [detailData, setDetailData] = useState(null)
@@ -49,11 +49,11 @@ function TuitionFeesTab() {
     })
 
     const statusOrder = [
-      classStatus.ENROLLING,
-      classStatus.PERFORMING,
-      classStatus.COMING_SOON,
-      classStatus.ENDED,
-      classStatus.CANCELLED
+      currentCourseStatus.ENROLLING,
+      currentCourseStatus.ON_GOING,
+      currentCourseStatus.COMING_SOON,
+      currentCourseStatus.ENDED,
+      currentCourseStatus.CANCELLED
     ]
 
     return _.orderBy(clone, ['totalStudents'], ['desc'])

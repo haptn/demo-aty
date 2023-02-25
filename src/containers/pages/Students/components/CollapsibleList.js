@@ -1,6 +1,6 @@
 import React from 'react'
 import { Badge, Collapse, Segmented, Space, Spin, Table, Tag, theme } from 'antd'
-import { classStatus } from '../../../../config/constants'
+import { currentCourseStatus } from '../../../../config/constants'
 
 function CollapsibleList(props) {
   const { token } = theme.useToken()
@@ -12,17 +12,17 @@ function CollapsibleList(props) {
     let tagProps = {}
 
     switch (status) {
-      case classStatus.COMING_SOON:
+      case currentCourseStatus.COMING_SOON:
         tagProps = { color: 'green' }
         break
-      case classStatus.ENROLLING:
+      case currentCourseStatus.ENROLLING:
         tagProps = { color: 'blue' }
         break
-      case classStatus.PERFORMING:
+      case currentCourseStatus.ON_GOING:
         tagProps = { color: 'gold' }
         break
 
-      case classStatus.ENDED:
+      case currentCourseStatus.ENDED:
         tagProps = { color: 'red' } // magenta
         break
 
