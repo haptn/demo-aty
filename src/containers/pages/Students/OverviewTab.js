@@ -56,7 +56,7 @@ function OverviewTab() {
             Dạng bảng hoặc biểu đồ thể hiện:
             <li>Tổng số học viên từng tháng, so sánh giữa các cơ sở hoặc các chương trình</li>
             <li>Xếp hạng trường/chương trình có nhiều học viên nhất / học phí cao nhất</li>
-            <li>Số dư / tổng thu kì trước, số dư / tổng thu của kì này</li>
+            <li>Số dư / tổng thu kì trước, số dư / tổng thu của kì này, tổng học viên</li>
             <li>Tổng học phí, tiền bảo hiểm (bắt buộc, tự nguyện) đã đóng trong tháng/kỳ/năm</li>
           </ul>
         </i>

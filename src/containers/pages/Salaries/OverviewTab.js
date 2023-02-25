@@ -46,7 +46,11 @@ function OverviewTab({ setOpenModal }) {
       <Col span={18}>
         <h3>Báo cáo</h3>
 
-        <i>(Dạng bảng hoặc biểu đồ thể hiện mức lương từng tháng)</i>
+        <i>
+          Dạng bảng hoặc biểu đồ thể hiện mức lương từng tháng (xem theo cơ sở, phòng ban,...).
+          <br /><br />
+          Thống kê nhanh: Số dư đầu kì, Tổng nhân sự, Tổng chi lương
+        </i>
         {/* <div style={{ borderTop: '1px solid #CCC' }}> */}
         {/* </div> */}
       </Col>

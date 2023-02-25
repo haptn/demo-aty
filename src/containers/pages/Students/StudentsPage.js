@@ -2,9 +2,9 @@ import React, { useMemo } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import _ from 'lodash'
 import { MainLayout } from '../..'
-import { InsurancesTab, OverviewTab, StudentsTab, TuitionFeesTab } from './'
+import { OverviewTab, StudentsTab, TuitionFeesTab } from '.'
 
-function SalaryPageLayout() {
+function StudentsPage() {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -69,4 +69,4 @@ function SalaryPageLayout() {
   )
 }
 
-export default SalaryPageLayout
+export default StudentsPage

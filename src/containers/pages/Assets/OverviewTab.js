@@ -43,10 +43,10 @@ function OverviewTab() {
         <h3>Báo cáo</h3>
 
         <i>
-          (Dạng bảng hoặc biểu đồ thể hiện tổng thu/chi cho các hoạt động bán trú/nội trú từng tháng)
+          Dạng bảng hoặc biểu đồ thể hiện tổng thu/chi cho các hoạt động mua bán CSVC, TSCĐ, DCTB.
+          <br /><br />
+          Thống kê nhanh: Số dư đầu kì, Tổng thu, Tổng chi
         </i>
-        {/* <div style={{ borderTop: '1px solid #CCC' }}> */}
-        {/* </div> */}
       </Col>
       <Col span={6}>
         <h3>Xem thêm</h3>
