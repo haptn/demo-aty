@@ -21,6 +21,7 @@ export const URL_TUITION_FEES = '/completed-tuition-fees'
 
 export const URL_COURSES = '/courses'
 export const URL_CURRENT_COURSES = '/current-courses'
+export const URL_CURRENT_ACTIVITIES = '/current-acitivities'
 
 export const URL_CLASSES = '/classes'
 export const URL_STUDENTS = '/students'

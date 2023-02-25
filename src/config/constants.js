@@ -32,10 +32,17 @@ export const courseStatus = {
   PAUSED: 'Tạm dừng',
   COMING_SOON: 'Sắp ra mắt'
 }
-export const classStatus = {
-  PERFORMING: 'Đang diễn ra',
+export const currentCourseStatus = {
+  COMING_SOON: 'Dự kiến',       // chưa diễn ra, chưa ấn định time tổ chức
   ENROLLING: 'Đang tuyển sinh', // chưa diễn ra, đã ấn định time cụ thể
-  COMING_SOON: 'Dự kiến',   // chưa diễn ra, chưa ấn định time tổ chức
+  ON_GOING: 'Đang diễn ra',
+  ENDED: 'Đã kết thúc',
+  CANCELLED: 'Đã hủy'
+}
+export const currentActivityStatus = {
+  COMING_SOON: 'Dự kiến',
+  PREPARING: 'Chuẩn bị',  // trong khoảng từ ngày thông báo --> trước lúc bắt đầu
+  ON_GOING: 'Đang diễn ra',
   ENDED: 'Đã kết thúc',
   CANCELLED: 'Đã hủy'
 }
