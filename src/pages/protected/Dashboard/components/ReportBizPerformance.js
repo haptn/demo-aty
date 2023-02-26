@@ -2,10 +2,11 @@ import React, { useEffect, useMemo, useState } from 'react'
 import _ from 'lodash'
 import { Segmented, Space, Spin } from 'antd'
 
-import { useDashboard } from '../../contexts'
-import { filterReportPeriods } from '../../config/constants'
-import { useListSchools } from '../../services/schoolServices'
-import { BoxHeader, DropdownCheckbox, MixedStackChart } from '..'
+import { BoxHeader } from '.'
+import { useDashboard } from '..'
+import { filterReportPeriods } from '../../../../config/constants'
+import { useListSchools } from '../../../../services/schoolServices'
+import { DropdownCheckbox, MixedStackChart } from '../../../../components'
 
 function ReportBizPerformance() {
   const [filters, setFilters] = useState({

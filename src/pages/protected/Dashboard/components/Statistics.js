@@ -1,7 +1,7 @@
 import { Col, Row } from 'antd'
 import React from 'react'
 import StatisticsBlock from './StatisticsBlock'
-import styles from '../../styles/pages/Dashboard.module.scss'
+import styles from '../../../../styles/pages/Dashboard.module.scss'
 
 function Statistics() {
   // Call API get statistics (array)

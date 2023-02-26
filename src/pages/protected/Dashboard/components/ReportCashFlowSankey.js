@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Select, Spin } from 'antd'
 
-import { useDashboard } from '../../contexts'
-import { filterPeriodTypes } from '../../config/constants'
-import { useListSchools } from '../../services/schoolServices'
-import { BoxHeader } from '..'
+import { BoxHeader } from '.'
+import { useDashboard } from '..'
+import { filterPeriodTypes } from '../../../../config/constants'
+import { useListSchools } from '../../../../services/schoolServices'
 // import SankeyChart from '../charts/SankeyChart'
 
 function ReportCashFlowSankey() {

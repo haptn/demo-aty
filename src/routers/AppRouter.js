@@ -10,7 +10,7 @@ import {
   StBoarding, StUniform, StFoodMenu,
   StIncomeCategories, StCostsCategories,
 } from '../pages'
-import { DashboardProvider } from '../contexts'
+import { DashboardProvider } from '../pages/protected/Dashboard'
 import { useAuth } from '../hooks'
 import ProtectedRoute from './ProtectedRoute'
 

@@ -2,12 +2,13 @@ import React, { useEffect, useMemo, useState } from 'react'
 import _ from 'lodash'
 import { Spin } from 'antd'
 
-import { useDashboard } from '../../contexts'
-import { filterPeriodTypes } from '../../config/constants'
-import { useListSchools } from '../../services/schoolServices'
-import { BoxHeader, DropdownCheckbox, PieChart } from '..'
+import { BoxHeader } from '.'
+import { useDashboard } from '..'
+import { filterPeriodTypes } from '../../../../config/constants'
+import { useListSchools } from '../../../../services/schoolServices'
+import { DropdownCheckbox, PieChart } from '../../../../components'
 
-function ReportExpenseCategory() {
+function ReportRevenueStream() {
   const [filters, setFilters] = useState({
     period: filterPeriodTypes.THIS_YEAR,
     schools: {}
@@ -28,6 +29,7 @@ function ReportExpenseCategory() {
           [school]: isCheckAll
         }
       })
+
       return clone
     })
   }
@@ -69,10 +71,10 @@ function ReportExpenseCategory() {
     <div>
       {/* Header */}
       <BoxHeader {...{
-        title: 'Khoản chi',
+        title: 'Nguồn thu',
         filterPeriod: filters.period,
         onFilter: handleFilterPeriod,
-        onRefresh: () => reload('expenseCate'),
+        onRefresh: () => reload('revenueStream'),
         additionalFilters: {
           position: 'below-title',
           component: (
@@ -87,20 +89,20 @@ function ReportExpenseCategory() {
       }} />
 
       {/* Main Chart */}
-      <Spin spinning={loadings?.expenseCate}>
+      <Spin spinning={loadings?.revenueStream}>
         <div className='mt-2'>
           <PieChart {...{
-            title: 'Chi phí phân theo khoản chi',
-            values: [234, 123, 20, 50, 10, 35, 5],
+            title: 'Doanh thu phân theo nguồn thu',
+            values: [234, 123, 35, 35, 20, 15, 15],
             labels: [
-              'Lương & Thưởng',
-              'Thuế & Bảo hiểm',
-              'CSVC',
-              'Hoạt động của trường',
-              'Tổ chức chương trình',
-              'Công tác xã hội',
+              'Học phí chương trình',
+              'Học phí phổ thông',
+              'Mạnh thường quân',
+              'Diễn thuyết',
+              'Bán sách',
+              'Quỹ nội bộ',
               'Khác'
-            ],
+            ]
           }} />
         </div>
       </Spin>
@@ -108,4 +110,4 @@ function ReportExpenseCategory() {
   )
 }
 
-export default React.memo(ReportExpenseCategory)
+export default React.memo(ReportRevenueStream)

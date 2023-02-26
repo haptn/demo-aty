@@ -3,9 +3,9 @@ import clsx from 'clsx'
 import { Button, Col, Row, Select, Space } from 'antd'
 import { FilePdfOutlined } from '@ant-design/icons'
 
-import { MainLayout } from '..'
-import { filterPeriodTypes } from '../../config/constants'
-import { useAuth } from '../../hooks'
+import { MainLayout } from '../../../containers'
+import { filterPeriodTypes } from '../../../config/constants'
+import { useAuth } from '../../../hooks'
 import {
   Statistics,
   Summary,
@@ -17,10 +17,10 @@ import {
   ReportCashFlowSankey,
   ReportBizPerformance,
   ReportBestSellingCourses,
-} from '../../components'
-import styles from '../../styles/pages/Dashboard.module.scss'
+} from './components'
+import styles from '../../../styles/pages/Dashboard.module.scss'
 
-function DashboardLayout(props) {
+function DashboardPage(props) {
   const { filterPeriod, onFilter, data } = props
   // const { isAdmin, isSchoolAdmin } = useAuth()    // check tùy vào userRole thì show charts phù hợp
 
@@ -145,4 +145,4 @@ function DashboardLayout(props) {
   )
 }
 
-export default DashboardLayout
+export default DashboardPage

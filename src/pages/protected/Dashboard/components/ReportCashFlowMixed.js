@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Select, Spin } from 'antd'
 
-import { useDashboard } from '../../contexts'
-import { filterPeriodTypes } from '../../config/constants'
-import { useListSchools } from '../../services/schoolServices'
-import { BoxHeader, MixedStackChart } from '..'
+import { BoxHeader } from '.'
+import { useDashboard } from '..'
+import { filterPeriodTypes } from '../../../../config/constants'
+import { useListSchools } from '../../../../services/schoolServices'
+import { MixedStackChart } from '../../../../components'
 
 function ReportCashFlowMixed() {
   const [filters, setFilters] = useState({

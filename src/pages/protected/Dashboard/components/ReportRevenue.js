@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { Segmented, Space, Spin } from 'antd'
 import _ from 'lodash'
 
-import { useDashboard } from '../../contexts'
-import { filterReportPeriods } from '../../config/constants'
-import { useListSchools } from '../../services/schoolServices'
-import { BoxHeader, BarChart } from '..'
+import { BoxHeader } from '.'
+import { useDashboard } from '..'
+import { filterReportPeriods } from '../../../../config/constants'
+import { useListSchools } from '../../../../services/schoolServices'
+import { BarChart } from '../../../../components'
 
 function ReportRevenue() {
   const [filters, setFilters] = useState({

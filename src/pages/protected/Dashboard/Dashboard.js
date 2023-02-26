@@ -1,5 +1,5 @@
 import React from 'react'
-import { DashboardLayout } from '../../../containers'
+import DashboardPage from './DashboardPage'
 
 function Dashboard() {
   // const { filterPeriod, onFilter } = props
@@ -9,7 +9,7 @@ function Dashboard() {
   // }
 
   return (
-    <DashboardLayout {...{
+    <DashboardPage {...{
       // data, filterPeriod, 
       // onFilter: handleFilter,
     }} />

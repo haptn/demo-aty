@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
 import clsx from 'clsx'
 import { Avatar, Space } from 'antd'
-import { formatMoneyReport, formatNumber } from '../../utils/format'
-import styles from '../../styles/pages/Dashboard.module.scss'
+import { formatMoneyReport, formatNumber } from '../../../../utils/format'
+import styles from '../../../../styles/pages/Dashboard.module.scss'
 
 function StatisticsBlock(props) {
   const { title, icon, period, values } = props

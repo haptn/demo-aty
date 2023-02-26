@@ -1,7 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
-import { formatNumber } from '../../utils/format'
-import styles from '../../styles/pages/Dashboard.module.scss'
+import { formatNumber } from '../../../../utils/format'
+import styles from '../../../../styles/pages/Dashboard.module.scss'
 
 function SummaryTable({ data }) {
   const formatValue = value => formatNumber((value / Math.pow(10, 6)).toFixed(2))

@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
 import clsx from 'clsx'
-import { BronzeMedalIcon, GoldMedalIcon, SilverMedalIcon } from '../../assets'
-import { formatNumber } from '../../utils/format'
-import styles from '../../styles/pages/Dashboard.module.scss'
+import { BronzeMedalIcon, GoldMedalIcon, SilverMedalIcon } from '../../../../assets'
+import { formatNumber } from '../../../../utils/format'
+import styles from '../../../../styles/pages/Dashboard.module.scss'
 
 const RowCourse = (props) => {
   const {

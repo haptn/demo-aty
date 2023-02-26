@@ -3,7 +3,6 @@ export { default as LoginLayout } from './layout/LoginLayout'
 export { default as MainLayout } from './layout/MainLayout'
 
 // ===================== Pages =====================
-export { default as DashboardLayout } from './pages/DashboardLayout'
 export { default as ProfileLayout } from './pages/ProfileLayout'
 
 export { default as BudgetLayout } from './pages/BudgetLayout'
@@ -15,7 +14,7 @@ export { default as InvoicesLayout } from './pages/InvoicesLayout'
 export { default as LoanDebtLayout } from './pages/LoanDebtLayout'
 export { default as PurchaseRentalLayout } from './pages/PurchaseRentalLayout'
 export { default as TaxesLayout } from './pages/TaxesLayout'
-export { default as ProgramsPageLayout } from './pages/Programs/ProgramsPageLayout'
+export { default as ProgramsPage } from './pages/Programs/ProgramsPage'
 export { default as AssetsPage } from './pages/Assets/AssetsPage'
 
 //----- Settings

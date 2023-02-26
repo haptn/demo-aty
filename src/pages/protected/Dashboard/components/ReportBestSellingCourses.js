@@ -2,10 +2,11 @@ import React, { useEffect, useMemo, useState } from 'react'
 import _ from 'lodash'
 import { Segmented, Space, Spin } from 'antd'
 
-import { useDashboard } from '../../contexts'
-import { filterPeriodTypes } from '../../config/constants'
-import { useListSchools } from '../../services/schoolServices'
-import { BoxHeader, CoursesTable, DropdownCheckbox } from '..'
+import { useDashboard } from '..'
+import { BoxHeader, CoursesTable } from '.'
+import { filterPeriodTypes } from '../../../../config/constants'
+import { useListSchools } from '../../../../services/schoolServices'
+import { DropdownCheckbox } from '../../../../components'
 
 function ReportBestSellingCourses() {
   const [filters, setFilters] = useState({

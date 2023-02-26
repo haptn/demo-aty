@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import clsx from 'clsx'
 import { Spin } from 'antd'
 
-import { useDashboard } from '../../contexts'
-import { filterPeriodTypes } from '../../config/constants'
-import { BoxHeader, SummaryTable } from '../'
-import styles from '../../styles/pages/Dashboard.module.scss'
+import { useDashboard } from '..'
+import { BoxHeader, SummaryTable } from '.'
+import { filterPeriodTypes } from '../../../../config/constants'
+import styles from '../../../../styles/pages/Dashboard.module.scss'
 
 function Summary() {
   const [filterPeriod, setFilterPeriod] = useState(filterPeriodTypes.THIS_MONTH)

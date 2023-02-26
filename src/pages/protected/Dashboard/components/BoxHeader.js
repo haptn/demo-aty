@@ -2,8 +2,8 @@ import React from 'react'
 import clsx from 'clsx'
 import { Button, Select } from 'antd'
 import { ReloadOutlined } from '@ant-design/icons'
-import { filterPeriodTypes } from '../../config/constants'
-import styles from '../../styles/pages/Dashboard.module.scss'
+import { filterPeriodTypes } from '../../../../config/constants'
+import styles from '../../../../styles/pages/Dashboard.module.scss'
 
 function BoxHeader(props) {
   const {
