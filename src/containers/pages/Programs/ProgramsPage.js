@@ -6,7 +6,7 @@ import { MainLayout } from '../..'
 import { ActivityTab, CourseTab, OverviewTab } from '.'
 import { ActivityDetail, CourseDetail } from './drawers'
 
-function ProgramsPageLayout() {
+function ProgramsPage() {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -79,4 +79,4 @@ function ProgramsPageLayout() {
   )
 }
 
-export default ProgramsPageLayout
+export default ProgramsPage
