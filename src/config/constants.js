@@ -47,9 +47,18 @@ export const currentActivityStatus = {
   CANCELLED: 'Đã hủy'
 }
 
-export const taxStatus = {
+export const taxTypeStatus = {
   APPLYING: 'Đang áp dụng',
   NOT_APPLIED: 'Không áp dụng'
+}
+export const taxStatus = {
+  NOT_SUBMITTED: 'Chưa nộp',
+  SUBMITTED: 'Đã nộp'
+}
+export const taxPeriod = {
+  MONTH: 'Theo tháng',
+  QUARTER: 'Theo quý',
+  YEAR: 'Theo năm',
 }
 
 // =========== Filter types ===========

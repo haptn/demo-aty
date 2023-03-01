@@ -5,12 +5,12 @@ import _ from 'lodash'
 import { Button, Select, Space, Spin, Switch, Table, Tooltip } from 'antd'
 import { PlusOutlined, EditOutlined } from '@ant-design/icons'
 
-import { taxStatus } from '../../../../config/constants'
+import { taxTypeStatus } from '../../../../config/constants'
 import { useListTaxTypes, useMutationUpdateTaxType } from '../../../../services/taxServices'
 import { MainLayout, AccountDetailDrawer } from '../../..'
 import { formatMoney } from '../../../../utils/format'
 
-function TaxesLayout() {
+function TaxTypesLayout() {
   const [detailData, setDetailData] = useState(null)
 
   const [params, setParams] = useState(null)
@@ -63,7 +63,7 @@ function TaxesLayout() {
         {
           id,
           data: {
-            status: newStatus ? taxStatus.APPLYING : taxStatus.NOT_APPLIED
+            status: newStatus ? taxTypeStatus.APPLYING : taxTypeStatus.NOT_APPLIED
           }
         },
         {
@@ -150,7 +150,7 @@ function TaxesLayout() {
       // width: '12rem',
       render: (_, { id, status }) => (
         <Switch
-          checked={status === taxStatus.APPLYING}
+          checked={status === taxTypeStatus.APPLYING}
           onChange={newStatus => handleChangeStatus(id, newStatus)}
           loading={taxTypeMutation.isLoading && taxTypeMutation?.variables?.id === id}
         />
@@ -204,7 +204,7 @@ function TaxesLayout() {
             allowClear
             style={{ width: 150 }}
             options={[
-              ...Object.values(taxStatus)?.map(item => ({
+              ...Object.values(taxTypeStatus)?.map(item => ({
                 value: item,
                 label: item,
               }))
@@ -248,4 +248,4 @@ function TaxesLayout() {
   )
 }
 
-export default TaxesLayout
+export default TaxTypesLayout

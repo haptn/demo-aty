@@ -37,7 +37,7 @@ export { default as StUniform } from './protected/Settings/aty-self/Uniform'
 export { default as StIncomeCategories } from './protected/Settings/accounting/IncomeCategories'
 export { default as StCostsCategories } from './protected/Settings/accounting/CostsCategories'
 
-export { default as StTaxes } from './protected/Settings/taxes-fees-insurances/Taxes'
+export { default as StTaxTypes } from './protected/Settings/taxes-fees-insurances/TaxTypes'
 // export { default as  } from './protected/Settings/taxes-fees-insurances'
 // export { default as  } from './protected/Settings/taxes-fees-insurances'
 // export { default as  } from './protected/Settings/taxes-fees-insurances'

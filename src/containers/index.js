@@ -13,7 +13,7 @@ export { default as BoardingPage } from './pages/Boarding/BoardingPage'
 export { default as InvoicesLayout } from './pages/InvoicesLayout'
 export { default as LoanDebtLayout } from './pages/LoanDebtLayout'
 export { default as PurchaseRentalLayout } from './pages/PurchaseRentalLayout'
-export { default as TaxesLayout } from './pages/TaxesLayout'
+export { default as TaxesPage } from './pages/Taxes/TaxesPage'
 export { default as ProgramsPage } from './pages/Programs/ProgramsPage'
 export { default as AssetsPage } from './pages/Assets/AssetsPage'
 
@@ -35,7 +35,7 @@ export { default as StUniformLayout } from './pages/Settings/aty-self/UniformLay
 export { default as StIncomeCategoriesLayout } from './pages/Settings/accounting/IncomeCategoriesLayout'
 export { default as StCostsCategoriesLayout } from './pages/Settings/accounting/CostsCategoriesLayout'
 // taxes-fees-insurances
-export { default as StTaxesLayout } from './pages/Settings/taxes-fees-insurances/TaxesLayout'
+export { default as StTaxTypesLayout } from './pages/Settings/taxes-fees-insurances/TaxTypesLayout'
 // banks
 // assets
 

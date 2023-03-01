@@ -6,7 +6,7 @@ import {
   Programs, Boarding, Assets,
   Taxes, PurchaseRental, LoanDebt, Invoices,
   Settings, StSchools, StClasses, StCourses, StAccounts,
-  StTaxes, StTuitorFees, StSalary, StServices,
+  StTaxTypes, StTuitorFees, StSalary, StServices,
   StBoarding, StUniform, StFoodMenu,
   StIncomeCategories, StCostsCategories,
 } from '../pages'
@@ -41,10 +41,13 @@ function AppRouter() {
         <Route path="budget" element={<Budget />} />
         <Route path="cash-books" element={<CashBook />} />
         <Route path="cash-books" element={<CashBook />} />
-        <Route path="taxes" element={<Taxes />} />
         <Route path="invoices" element={<Invoices />} />
         <Route path="purchase-rental" element={<PurchaseRental />} />
         <Route path="loan-debt" element={<LoanDebt />} />
+
+        <Route path="taxes" element={<Taxes />}>
+          <Route path="*" element={<Taxes />} />
+        </Route>
 
         <Route path="salaries" element={<Salaries />}>
           <Route path="*" element={<Salaries />} />
@@ -97,7 +100,7 @@ function AppRouter() {
           <Route path="documents" element={<StAccounts />} />
           <Route path="renew-cycle" element={<StAccounts />} />
 
-          <Route path="taxes" element={<StTaxes />} />
+          <Route path="taxes" element={<StTaxTypes />} />
           <Route path="tariffs" element={<StAccounts />} />
           <Route path="fees" element={<StAccounts />} />
           <Route path="insurances" element={<StAccounts />} />
