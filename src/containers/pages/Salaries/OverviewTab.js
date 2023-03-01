@@ -1,6 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'antd'
-import { AuditOutlined, FileProtectOutlined } from '@ant-design/icons'
+import { AuditOutlined, ExceptionOutlined, FileDoneOutlined, FileProtectOutlined } from '@ant-design/icons'
 
 const CategoryItem = ({ icon, label, ...rest }) => (
   <div className='flex flex-align-center my-1 see-more-category'
@@ -20,15 +20,15 @@ function OverviewTab({ setOpenModal }) {
       label: 'Quy định Lương, Bảo hiểm, Thuế TNCN'
     },
     {
-      icon: <FileProtectOutlined style={iconStyles} />,
+      icon: <FileDoneOutlined style={iconStyles} />,
       label: 'Quy định Thưởng, Phụ cấp, Trợ cấp'
     },
     {
-      icon: <FileProtectOutlined style={iconStyles} />,
+      icon: <FileDoneOutlined style={iconStyles} />,
       label: 'Quy định tài trợ thi chứng chỉ'
     },
     {
-      icon: <FileProtectOutlined style={iconStyles} />,
+      icon: <ExceptionOutlined style={iconStyles} />,
       label: 'Quy định tạm ứng, thanh toán tạm ứng'
     },
     {

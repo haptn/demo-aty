@@ -20,14 +20,12 @@ function AccountingTab(props) {
   const [params, setParams] = useState(null)
   const [searchKeyword, setSearchKeyword] = useState('')
   const [filters, setFilters] = useState({
-    fromTime: null,
-    toMonth: null,
+    months: [dayjs().subtract(1, 'month').format('YYYY/M'), dayjs().format('YYYY/M')]
     // status: null,
     // jobPosition: [],
     // school: [],
   })
   const [page, setPage] = useState(1)
-  const [month, setMonth] = useState([dayjs().format('YYYY/M'), dayjs().format('YYYY/M')])
   const { data: schools = [] } = useListSchools(undefined, { isCustom: true })
 
   const data = [
@@ -198,10 +196,11 @@ function AccountingTab(props) {
             {/* <ConfigProvider locale={locale}>   // ko có tác dụng */}
             <DatePicker.RangePicker picker="month"
               format={'MM/YYYY'} //locale={locale}
-              value={[dayjs(month[0], 'YYYY/MM'), dayjs(month[1], 'YYYY/MM')]}
-              onChange={value => setMonth([value[0].format('YYYY/M'), value[1].format('YYYY/M')])}
+              value={[dayjs(filters.months[0], 'YYYY/MM'), dayjs(filters.months[1], 'YYYY/MM')]}
+              onChange={value => handleFilter('months', value)}
               allowClear={false}
               popupClassName='my-datepicker'
+              style={{ width: 180 }}
             // disabledDate={current => current && current > dayjs().endOf('day')}
             // Để custom sang tiếng Việt nó đang bị mất 1 số cái CSS nên giờ đang tạm comment lại
             // monthCellRender={(date) => (

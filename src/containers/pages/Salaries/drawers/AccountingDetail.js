@@ -1,6 +1,6 @@
 import React from 'react'
 import { Drawer } from '../../..'
-import { DatePicker, Table, Typography, Form, Input, Col, Divider, Row} from 'antd';
+import { DatePicker, Table, Typography, Form, Input, Col, Divider, Row } from 'antd';
 import dayjs from 'dayjs';
 import { formatMoney } from '../../../../../src/utils/format'
 
@@ -26,53 +26,53 @@ function AccountingDetail({ data, open, setOpen }) {
       // render: (_, _data, idx) => <span>{(page - 1) * 10 + idx + 1}</span>
     },
     {
-      title: <div style={{ textAlign: 'center', fontSize: '12px'}}>DIỄN GIẢI</div>,
+      title: <div style={{ textAlign: 'center', fontSize: '12px' }}>DIỄN GIẢI</div>,
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: <div style={{ textAlign: 'center', fontSize: '12px'}}>TK NỢ</div>,
+      title: <div style={{ textAlign: 'center', fontSize: '12px' }}>TK NỢ</div>,
       dataIndex: 'tk_no',
       key: 'tk_no',
     },
     {
-      title: <div style={{ textAlign: 'center', fontSize: '12px'}}>TK CÓ</div>,
+      title: <div style={{ textAlign: 'center', fontSize: '12px' }}>TK CÓ</div>,
       dataIndex: 'tk_co',
       key: 'tk_co',
     },
     {
-      title: <div style={{ textAlign: 'center', fontSize: '12px'}}>SỐ TIỀN</div>,
+      title: <div style={{ textAlign: 'center', fontSize: '12px' }}>SỐ TIỀN</div>,
       dataIndex: 'so_tien',
       key: 'so_tien',
-      render: (total ) => formatMoney(total)
+      render: (total) => formatMoney(total)
     },
     {
-      title: <div style={{ textAlign: 'center', fontSize: '12px'}}>ĐỐI TƯỢNG NỢ</div>,
+      title: <div style={{ textAlign: 'center', fontSize: '12px' }}>ĐỐI TƯỢNG NỢ</div>,
       dataIndex: 'doi_tuong_no',
       key: 'doi_tuong_no',
     },
     {
-      title: <div style={{ textAlign: 'center', fontSize: '12px'}}>TÊN ĐỐI TƯỢNG NỢ</div>,
+      title: <div style={{ textAlign: 'center', fontSize: '12px' }}>TÊN ĐỐI TƯỢNG NỢ</div>,
       dataIndex: 'ten_doi_tuong_no',
       key: 'ten_doi_tuong_no',
     },
     {
-      title: <div style={{ textAlign: 'center', fontSize: '12px'}}>ĐỐI TƯỢNG CÓ</div>,
+      title: <div style={{ textAlign: 'center', fontSize: '12px' }}>ĐỐI TƯỢNG CÓ</div>,
       dataIndex: 'doi_tuong_co',
       key: 'doi_tuong_co',
     },
     {
-      title: <div style={{ textAlign: 'center', fontSize: '12px'}}>TÊN ĐỐI TƯỢNG CÓ</div>,
+      title: <div style={{ textAlign: 'center', fontSize: '12px' }}>TÊN ĐỐI TƯỢNG CÓ</div>,
       dataIndex: 'ten_doi_tuong_co',
       key: 'ten_doi_tuong_co',
     },
     {
-      title: <div style={{ textAlign: 'center', fontSize: '12px'}}>ĐƠN VỊ</div>,
+      title: <div style={{ textAlign: 'center', fontSize: '12px' }}>ĐƠN VỊ</div>,
       dataIndex: 'don_vi',
       key: 'don_vi',
     },
     {
-      title: <div style={{ textAlign: 'center', fontSize: '12px'}}>KHOẢN MỤC CP</div>,
+      title: <div style={{ textAlign: 'center', fontSize: '12px' }}>KHOẢN MỤC CP</div>,
       dataIndex: 'khoan_muc_cp',
       key: 'khoan_muc_cp',
     }
@@ -196,32 +196,32 @@ function AccountingDetail({ data, open, setOpen }) {
       don_vi: "",
       khoan_muc_cp: ""
     },
-    {
-      id: 10,
-      name: "Tạm ứng 141 của nhân viên Nguyễn Tuấn Dương",
-      tk_no: 3341,
-      tk_co: 141,
-      so_tien: 6400000,
-      doi_tuong_no: "",
-      ten_doi_tuong_no: "",
-      doi_tương_co: "NTDUONG",
-      ten_doi_tuong_co: "NGUYỄN TUẤN DƯƠNG",
-      don_vi: "PKDPN",
-      khoan_muc_cp: ""
-    },
-    {
-      id: 11,
-      name: "Tạm ứng 141 của nhân viên Phạm Thị Ngọc Hà",
-      tk_no: 6429.1,
-      tk_co: 3382,
-      so_tien:800000,
-      doi_tuong_no: "",
-      ten_doi_tuong_no: "",
-      doi_tương_co: "PTNHA",
-      ten_doi_tuong_co: "PHẠM THỊ NGỌC HÀ",
-      don_vi: "PKDPB",
-      khoan_muc_cp: ""
-    }
+    // {
+    //   id: 10,
+    //   name: "Tạm ứng 141 của nhân viên Nguyễn Tuấn Dương",
+    //   tk_no: 3341,
+    //   tk_co: 141,
+    //   so_tien: 6400000,
+    //   doi_tuong_no: "",
+    //   ten_doi_tuong_no: "",
+    //   doi_tương_co: "NTDUONG",
+    //   ten_doi_tuong_co: "NGUYỄN TUẤN DƯƠNG",
+    //   don_vi: "PKDPN",
+    //   khoan_muc_cp: ""
+    // },
+    // {
+    //   id: 11,
+    //   name: "Tạm ứng 141 của nhân viên Phạm Thị Ngọc Hà",
+    //   tk_no: 6429.1,
+    //   tk_co: 3382,
+    //   so_tien: 800000,
+    //   doi_tuong_no: "",
+    //   ten_doi_tuong_no: "",
+    //   doi_tương_co: "PTNHA",
+    //   ten_doi_tuong_co: "PHẠM THỊ NGỌC HÀ",
+    //   don_vi: "PKDPB",
+    //   khoan_muc_cp: ""
+    // }
   ]
 
   return (
@@ -230,28 +230,24 @@ function AccountingDetail({ data, open, setOpen }) {
       onClose={() => setOpen(prev => ({ ...prev, accounting: false }))}
       onSave={handleSave}
       width={'calc(100% - 200px)'}
-      bodyStyle={{padding: '0 !important'}}
     >
-      <div className='contaier-1' style={{heigh: '20%'}}>
-        <Form
-          form={form}
-          layout="vertical"
-        >
+      <div className='contaier-1' style={{ heigh: '20%' }}>
+        <Form form={form} layout="vertical">
           <Row>
             <Col span={13}>
               <Form.Item label="Bảng lương" required tooltip="This is a required field">
-                <Input readOnly value={data?.name} disabled/>
+                <Input readOnly value={data?.name} disabled />
               </Form.Item>
               <Form.Item label="Diễn giải" required tooltip="This is a required field">
                 <TextArea
-                    showCount
-                    maxLength={100}
-                    style={{ height: 50, resize: 'none' }}
-                    value={`Hạch toán chi phí lương theo bảng lương ${data?.name}`}
+                  showCount
+                  maxLength={100}
+                  style={{ height: 50, resize: 'none' }}
+                  value={`Hạch toán chi phí lương theo bảng lương ${data?.name}`}
                 />
               </Form.Item>
             </Col>
-            <Col span={1}> <Divider type="vertical" style={{height: '100%', marginLeft: '50%'}}/> </Col>
+            <Col span={1}> <Divider type="vertical" style={{ height: '100%', marginLeft: '50%' }} /> </Col>
             <Col span={6}>
               <Form.Item label="Ngày hoạch toán" required tooltip="This is a required field">
                 <DatePicker defaultValue={dayjs('2015/01/01', dateFormat)} format={dateFormat} />
@@ -260,58 +256,58 @@ function AccountingDetail({ data, open, setOpen }) {
                 <DatePicker defaultValue={dayjs('2015/01/01', dateFormat)} format={dateFormat} />
               </Form.Item>
               <Form.Item label="Số chứng từ" required>
-                <Input style={{width: '15rem'}} value="HLCPL00009" readOnly disabled/>
+                <Input style={{ width: '15rem' }} value="HLCPL00009" readOnly disabled />
               </Form.Item>
             </Col>
             <Col span={4}>
               <Title level={5}>Tổng cộng</Title>
-              <Title level={2}>{formatMoney(dataTbl.reduce((a,b) => a+ b.so_tien, 0))}</Title>
+              <Title level={2}>{formatMoney(dataTbl.reduce((a, b) => a + b.so_tien, 0))}</Title>
             </Col>
           </Row>
         </Form>
       </div>
       <div className='container-2' >
-      <Title level={5}>Hoạch toán</Title>
+        <Title level={5}>Hoạch toán</Title>
         <Table
-                columns={columns}
-                dataSource={dataTbl}
-                bordered size='small'
-                className={'w-100 mb-1 my-table'}
-                pagination={{
-                  size: 'default',
-                  showTotal: total => `Tổng cộng ${total} dòng`,
-                 // onChange: _page => setPage(_page),
-                  hideOnSinglePage: true
-                }}
-                style={{ marginBottom: '30px' }}
+          columns={columns}
+          dataSource={dataTbl}
+          bordered size='small'
+          className={'w-100 mb-1 my-table'}
+          pagination={{
+            size: 'default',
+            showTotal: total => `Tổng cộng ${total} dòng`,
+            // onChange: _page => setPage(_page),
+            hideOnSinglePage: true
+          }}
+          style={{ marginBottom: '30px' }}
 
-                summary={pageData => {
-                  let totalExpense = 0
+          summary={pageData => {
+            let totalExpense = 0
 
-                  pageData.forEach(({ so_tien }) => {
-                    totalExpense += so_tien
-                  });
+            pageData.forEach(({ so_tien }) => {
+              totalExpense += so_tien
+            });
 
-                  return (
-                    <Table.Summary fixed>
-                      <Table.Summary.Row
-                        style={{
-                          textAlign: 'right',
-                          fontWeight: 700,
-                          // background: token.colorBgTextHover
-                        }}
-                      >
-                        <Table.Summary.Cell colSpan={4} index={0}>
-                          Tổng
-                        </Table.Summary.Cell>
-                        {/* <Table.Summary.Cell /> */}
-                        <Table.Summary.Cell>{formatMoney(totalExpense)}</Table.Summary.Cell>
-                        <Table.Summary.Cell />
-                      </Table.Summary.Row>
-                    </Table.Summary>
-                  )
-                }}
-              />
+            return (
+              <Table.Summary fixed>
+                <Table.Summary.Row
+                  style={{
+                    textAlign: 'right',
+                    fontWeight: 700,
+                    // background: token.colorBgTextHover
+                  }}
+                >
+                  <Table.Summary.Cell colSpan={4} index={0}>
+                    Tổng
+                  </Table.Summary.Cell>
+                  {/* <Table.Summary.Cell /> */}
+                  <Table.Summary.Cell>{formatMoney(totalExpense)}</Table.Summary.Cell>
+                  <Table.Summary.Cell />
+                </Table.Summary.Row>
+              </Table.Summary>
+            )
+          }}
+        />
       </div>
     </Drawer>
   )

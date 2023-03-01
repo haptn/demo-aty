@@ -173,7 +173,7 @@ function SchoolsLayout() {
         //     : status === staffStatus.QUITTED ? 'grey' : 'geekblue'
 
         //   return (
-        //     <Tag color={color} key={status}>
+        //     <Tag color={color} key={status} style={{ fontWeight: 500 }}>
         //       {status}
         //     </Tag>
         //   )
@@ -263,7 +263,7 @@ function SchoolsLayout() {
             ? 'volcano' : 'blue'
 
         return (
-          <Tag color={color} key={status}>
+          <Tag color={color} key={status} style={{ fontWeight: 500 }}>
             {status}
           </Tag>
         )

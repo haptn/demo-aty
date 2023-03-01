@@ -50,8 +50,6 @@ function ClassesLayout() {
       // params.schoolId = [...schools]?.map(({ value }) => value)
     }
 
-    // console.log('filters.schools', filters.schools)
-
     setParams(params)
   }, [searchKeyword, filters])
 
@@ -72,8 +70,6 @@ function ClassesLayout() {
           _.remove(clone.schools, item => item === schoolId)
           _.remove(clone.schoolNames, item => item === value)
         }
-
-        console.log('schoolId, filters, clone', schoolId, filters, clone)
 
         return clone
       })
@@ -174,8 +170,6 @@ function ClassesLayout() {
         ? 'Tất cả cơ sở'
         : `${checkedSchools?.length} cơ sở`
   }, [schools, JSON.stringify(filters.schools)])
-
-  console.log(filters?.schoolNames);
 
   return (
     <MainLayout

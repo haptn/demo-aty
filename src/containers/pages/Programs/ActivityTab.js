@@ -179,7 +179,7 @@ function ActivityTab(props) {
                 ? 'red' : ''
 
         return (
-          <Tag color={color} key={status}>
+          <Tag color={color} key={status} style={{ fontWeight: 500 }}>
             {status}
           </Tag>
         )
