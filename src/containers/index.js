@@ -5,7 +5,7 @@ export { default as MainLayout } from './layout/MainLayout'
 // ===================== Pages =====================
 export { default as ProfileLayout } from './pages/ProfileLayout'
 
-export { default as BudgetLayout } from './pages/BudgetLayout'
+export { default as BudgetPage } from './pages/Budget/BudgetPage'
 export { default as CashBooksLayout } from './pages/CashBooksLayout'
 export { default as SalaryPage } from './pages/Salaries/SalaryPage'  // sau refractor kéo nó ra thẳng folder "pages" luôn
 export { default as StudentsPage } from './pages/Students/StudentsPage'

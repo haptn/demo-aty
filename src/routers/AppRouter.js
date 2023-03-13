@@ -38,20 +38,27 @@ function AppRouter() {
       <Route element={
         <ProtectedRoute redirectPath='/' isAllowed={isAdmin} />
       }>
-        <Route path="budget" element={<Budget />} />
-        <Route path="cash-books" element={<CashBook />} />
-        <Route path="cash-books" element={<CashBook />} />
-        <Route path="invoices" element={<Invoices />} />
-        <Route path="purchase-rental" element={<PurchaseRental />} />
-        <Route path="loan-debt" element={<LoanDebt />} />
+        <Route path="budget" element={<Budget />}>
+          <Route path="*" element={<Budget />} />
+        </Route>
 
-        <Route path="taxes" element={<Taxes />}>
-          <Route path="*" element={<Taxes />} />
+        <Route path="cash-books" element={<CashBook />}>
+          <Route path="*" element={<CashBook />} />
+        </Route>
+
+        <Route path="invoices" element={<Invoices />}>
+          <Route path="*" element={<Invoices />} />
         </Route>
 
         <Route path="salaries" element={<Salaries />}>
           <Route path="*" element={<Salaries />} />
         </Route>
+
+        <Route path="taxes" element={<Taxes />}>
+          <Route path="*" element={<Taxes />} />
+        </Route>
+
+        {/* ----------------------------------- */}
 
         <Route path="students" element={<Students />}>
           <Route path="*" element={<Students />} />
@@ -65,17 +72,21 @@ function AppRouter() {
           <Route path='*' element={<Boarding />} />
         </Route>
 
+        {/* ----------------------------------- */}
+
         <Route path="assets" element={<Assets />}>
           <Route path='*' element={<Assets />} />
-          {/* <Route path="fixed-assets" element={<FixedAssets />} />
-          <Route path="equipments" element={<Equipments />} /> */}
         </Route>
 
-        {/* <Route path="assets" element={<Outlet />}>
-          <Route index element={<Assets />} />
-          <Route path="fixed-assets" element={<FixedAssets />} />
-          <Route path="equipments" element={<Equipments />} />
-        </Route> */}
+        <Route path="purchase-rental" element={<PurchaseRental />}>
+          <Route path="*" element={<PurchaseRental />} />
+        </Route>
+
+        <Route path="loan-debt" element={<LoanDebt />}>
+          <Route path="*" element={<LoanDebt />} />
+        </Route>
+
+        {/* ----------------------------------- */}
 
         <Route path="settings" element={<Outlet />}>
           <Route index element={<Settings />} />
@@ -119,10 +130,6 @@ function AppRouter() {
           <Route path="sidebar-menu" element={<StAccounts />} />
           <Route path="quick-add" element={<StAccounts />} />
         </Route>
-        {/* <Route path="settings" element={<Setting/>} /> */}
-        {/* <Route path="accounts" element={<Accounts/>} />
-          <Route path="schools" element={<Schools/>} /> */}
-        {/* ... */}
       </Route>
 
       {/* Fallback route */}

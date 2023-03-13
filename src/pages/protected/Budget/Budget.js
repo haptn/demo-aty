@@ -1,9 +1,9 @@
 import React from 'react'
-import { BudgetLayout } from '../../../containers'
+import { BudgetPage } from '../../../containers'
 
 function Budget() {
   return (
-    <BudgetLayout />
+    <BudgetPage />
   )
 }
 

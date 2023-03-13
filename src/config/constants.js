@@ -61,6 +61,12 @@ export const taxPeriod = {
   YEAR: 'Theo năm',
 }
 
+export const budgetType = {
+  BUDGET: 'Ngân sách',
+  REVENUE: 'Doanh thu',
+  COST: 'Chi phí',
+}
+
 // =========== Filter types ===========
 export const filterSchools = {
   STATUS: 'status',

@@ -17,7 +17,7 @@ import {
   UserOutlined
 } from '@ant-design/icons'
 import { ASSETS, PROGRAMS, routes, SETTINGS } from "../config/path"
-import { schoolStatus, staffStatus, userRole } from "../config/constants"
+import { budgetType, schoolStatus, staffStatus, userRole } from "../config/constants"
 import { toCapital } from "../utils/string"
 
 // [Sidebar] Menu items
@@ -632,6 +632,27 @@ const listSettings = [
   },
 ]
 
+const listSavedReports = [
+  {
+    id: '1',
+    type: budgetType.BUDGET,
+    year: '2023',
+    name: 'Tình hình thực hiện Ngân sách (năm 2023)'
+  },
+  {
+    id: '2',
+    type: budgetType.BUDGET,
+    year: '2021',
+    name: 'Tình hình thực hiện Ngân sách (năm 2021)'
+  },
+  {
+    id: '3',
+    type: budgetType.REVENUE,
+    year: '2023',
+    name: 'Tình hình thực hiện Doanh thu so với kế hoạch (năm 2023)'
+  },
+]
+
 export {
   menuItems,
   userMenuItems,
@@ -639,5 +660,6 @@ export {
   listSchools,
   listAccounts,
   listSettings,
-  schoolOrganizations
+  schoolOrganizations,
+  listSavedReports   // Budget/Revenue/Cost
 }

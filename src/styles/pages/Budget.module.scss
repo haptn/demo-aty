@@ -1,0 +1,15 @@
+%box {
+  & > div {
+    height: 100%;
+    padding: 0;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: .15rem .25rem .5rem rgba(#000, .2);
+    overflow: hidden;
+  }
+}
+
+.chart_box {
+  min-height: 20rem;
+  @extend %box;
+}

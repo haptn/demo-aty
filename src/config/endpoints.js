@@ -26,3 +26,8 @@ export const URL_CURRENT_ACTIVITIES = '/current-acitivities'
 export const URL_CLASSES = '/classes'
 export const URL_STUDENTS = '/students'
 export const URL_STAFFS = '/staffs'
+
+export const URL_BUDGET_PLAN = '/budget-plan'
+export const URL_BUDGET_PRACTICAL = '/budget-practical'
+export const URL_BUDGET_PRACTICAL_REVENUE = '/budget-practical-revenue'
+export const URL_BUDGET_PRACTICAL_COST = '/budget-practical-cost'
