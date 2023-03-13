@@ -16,6 +16,15 @@ function PageHeader(props) {
 
         {/* Actions */}
         {pageActions}
+
+        {/* Search box */}
+        {hasSearchSameRow && (
+          <Input.Search
+            allowClear enterButton
+            style={{ width: 250 }}
+            {...pageSearchProps}
+          />
+        )}
       </div>
 
       {/* Page filters */}
@@ -24,13 +33,13 @@ function PageHeader(props) {
           {/* Filters */}
           <Space size='small'>
             {pageFilters}
-            {hasSearchSameRow && (
+            {/* {hasSearchSameRow && (    // ko nhớ sao hồi đó để ở đây
               <Input.Search
                 allowClear enterButton
                 style={{ width: 160 }}
                 {...pageSearchProps}
               />
-            )}
+            )} */}
           </Space>
 
           {/* Search */}

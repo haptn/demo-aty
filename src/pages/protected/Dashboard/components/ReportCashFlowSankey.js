@@ -70,7 +70,7 @@ function ReportCashFlowSankey() {
       {/* Main Chart */}
       <Spin spinning={loadings?.cashflow}>
         <div className='mt-2'>
-          <img src='/cashflow-sankey.jpg' width={'100%'} />
+          <img src='/charts/cashflow-sankey.jpg' width={'100%'} />
           {/* <SankeyChart/> */}
         </div>
       </Spin>

@@ -25,7 +25,7 @@ function IncomingTaxes() {
       </div>
 
       <div>
-        <h3 style={{ marginBottom: 10 }}>Tờ khai cần lập năm này</h3>
+        <h3 style={{ marginBottom: 10 }}>Tờ khai cần lập năm nay</h3>
         <ul>
           <li>
             <CheckCircleFilled style={{ opacity: .33, marginRight: 5 }} /> 03/TNDN - Tờ khai quyết toán thuế TNDN

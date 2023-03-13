@@ -30,7 +30,7 @@ function DashboardPage(props) {
       pageActions={
         <Space size='small'>
           <Select
-            defaultActiveFirstOption  // sao nó ko tự chọn đc cái đầu tiên nhỉ?
+            defaultActiveFirstOption
             value={filterPeriod ?? filterPeriodTypes.THIS_MONTH}
             onChange={onFilter}
             placeholder='Số liệu của...'

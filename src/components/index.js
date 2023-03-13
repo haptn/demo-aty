@@ -15,6 +15,7 @@ export { default as FormLogin } from './login/FormLogin'
 // charts
 export { default as PieChart } from './charts/PieChart'
 export { default as BarChart } from './charts/BarChart'
+export { default as GaugeChart } from './charts/GaugeChart'
 export { default as MixedStackChart } from './charts/MixedStackChart'
 
 // settings
