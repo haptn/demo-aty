@@ -3,8 +3,8 @@ import { Outlet, Route, Routes } from 'react-router-dom'
 import {
   Login, NotFound, Dashboard, Profile,
   Budget, CashBook, Salaries, Students,
-  Programs, Boarding, Assets,
-  Taxes, PurchaseRental, LoanDebt, Invoices,
+  Programs, Boarding, Assets, Taxes,
+  BuyRent, Sale, LoanDebt, Invoices,
   Settings, StSchools, StClasses, StCourses, StAccounts,
   StTaxTypes, StTuitorFees, StSalary, StServices,
   StBoarding, StUniform, StFoodMenu,
@@ -78,8 +78,12 @@ function AppRouter() {
           <Route path='*' element={<Assets />} />
         </Route>
 
-        <Route path="purchase-rental" element={<PurchaseRental />}>
-          <Route path="*" element={<PurchaseRental />} />
+        <Route path="buy-rent" element={<BuyRent />}>
+          <Route path="*" element={<BuyRent />} />
+        </Route>
+
+        <Route path="sale" element={<Sale />}>
+          <Route path="*" element={<Sale />} />
         </Route>
 
         <Route path="loan-debt" element={<LoanDebt />}>

@@ -12,6 +12,7 @@ import {
   RocketOutlined,
   SettingOutlined,
   ShopOutlined,
+  ShoppingCartOutlined,
   TeamOutlined,
   TransactionOutlined,
   UserOutlined
@@ -135,11 +136,20 @@ for (const [key, value] of Object.entries(routes)) {
       }
       break
 
-    case routes.PURCHASE_RENTAL:
+    case routes.BUY_RENT:
       menuItem = {
         ...menuItem,
-        label: 'Mua / Bán / Thuê',
+        label: 'Mua / Thuê',
         icon: <ShopOutlined />,
+        role: allRoles
+      }
+      break
+
+    case routes.SALE:
+      menuItem = {
+        ...menuItem,
+        label: 'Bán hàng',
+        icon: <ShoppingCartOutlined />,
         role: allRoles
       }
       break

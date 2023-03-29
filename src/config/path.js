@@ -21,7 +21,8 @@ export const routes = {
     FIXED_ASSETS: `${ASSETS}/fixed-assets`,
     EQUIPMENTS: `${ASSETS}/equipments`,
   },
-  PURCHASE_RENTAL: '/purchase-rental',
+  BUY_RENT: '/buy-rent',
+  SALE: '/sale',
   LOAN_DEBT: '/loan-debt',
   '-': '-',
   SETTINGS: {
