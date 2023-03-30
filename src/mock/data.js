@@ -621,6 +621,18 @@ const listSettings = [
         pathName: '/settings/user-roles',
         description: 'Vai trò của người dùng trong hệ thống (VD: kế toán, admin,...)'
       },
+      {
+        id: '7.5',
+        name: 'Quản lý dữ liệu',
+        pathName: '/settings/data',
+        description: 'Các bộ dữ liệu khác nhau cho từng cơ sở / chi nhánh'
+      },
+      {
+        id: '7.6',
+        name: 'Tùy chọn',
+        pathName: '/settings/custom',
+        description: 'Các thiết lập tùy chọn khác'
+      },
     ],
   },
   {

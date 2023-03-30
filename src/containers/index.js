@@ -41,6 +41,7 @@ export { default as StTaxTypesLayout } from './pages/Settings/taxes-fees-insuran
 // assets
 
 // system
+export { default as StATYInfoPage } from './pages/Settings/system/ATYInfoPage'
 export { default as StAccountsLayout } from './pages/Settings/system/AccountsLayout'
 // others
 

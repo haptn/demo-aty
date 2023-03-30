@@ -8,7 +8,7 @@ import {
   Settings, StSchools, StClasses, StCourses, StAccounts,
   StTaxTypes, StTuitorFees, StSalary, StServices,
   StBoarding, StUniform, StFoodMenu,
-  StIncomeCategories, StCostsCategories,
+  StIncomeCategories, StCostsCategories, StATYInfo,
 } from '../pages'
 import { DashboardProvider } from '../pages/protected/Dashboard'
 import { useAuth } from '../hooks'
@@ -127,7 +127,7 @@ function AppRouter() {
           <Route path="equipments" element={<StAccounts />} />
           <Route path="units" element={<StAccounts />} />
 
-          <Route path="aty-info" element={<StAccounts />} />
+          <Route path="aty-info" element={<StATYInfo />} />
           <Route path="accounts" element={<StAccounts />} />
           <Route path="roles" element={<StAccounts />} />
 
