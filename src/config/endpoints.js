@@ -6,6 +6,7 @@ export const URL_SCHOOLS = '/schools'
 export const URL_SCHOOL_USERS = '/schools'
 
 // ================ Account ================
+export const URL_ROLES = '/roles'
 export const URL_ACCOUNTS = '/accounts'
 export const URL_PROFILE = '/profile'   // account detail
 // export const URL_SCHOOLS= '/schools'

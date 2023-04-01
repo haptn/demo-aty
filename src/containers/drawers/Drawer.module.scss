@@ -1,4 +1,53 @@
 .drawer {
+  div[class~="ant-drawer-body"] {
+    padding: 1.6rem;
+  }
+  div[class~="ant-drawer-body"]:has(.tab.left) {
+    padding: 0;
+    overflow: hidden;
+
+    .tab.left {
+      height: calc(100vh - 5.48rem - 4.88rem);   // 100vh - header - footer - y padding
+      // padding: 1.6rem;
+
+      div[class~="ant-tabs-nav"] {
+        padding: 1.6rem;
+        padding-right: 0;
+
+        div[class~="ant-tabs-nav-list"] {
+          // height: 100%;
+          // height: calc(100vh - 5.48rem - 4.88rem - 3.2rem);   // 100vh - header - footer - y padding
+          position: sticky;
+          top: 0;
+
+          & > * {
+            padding: .8rem;
+          }
+    
+          div[class~="ant-tabs-ink-bar"] {
+            padding: .2rem;
+            // top: 0 !important;
+          }
+        }
+      }
+
+      div[class~="ant-tabs-content-holder"] {
+        padding: 1.6rem;
+        overflow: auto;
+
+        div[class~="ant-tabs-tabpane"] {
+          padding-left: 0;
+        }
+      }
+
+      .panel {
+        div[class~="ant-collapse-content-box"] {
+          padding: 0;
+        }
+      }
+    }
+  }
+
   div[class~="ant-drawer-header"] {
     padding: 1.1rem 1.6rem;
     background-color: #063970;
@@ -7,5 +56,15 @@
     div[class~="ant-drawer-title"] {
       color: #fafafa;
     }
+  }
+
+  div[class~="ant-drawer-body"] {
+    position: relative;
+  }  
+
+  &.noYPadding {
+    div[class~="ant-drawer-body"] {
+      padding-top: 0;
+    }  
   }
 }

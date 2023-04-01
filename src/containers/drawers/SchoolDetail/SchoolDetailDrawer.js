@@ -3,7 +3,6 @@ import _ from 'lodash';
 import { Tabs } from 'antd'
 import Drawer from '../Drawer'
 import { OverviewContent, ReportContent, StaffsContent } from './';
-import styles from './SchoolDetailDrawer.module.scss'
 
 function SchoolDetailDrawer({ open, setOpen, data }) {
   const handleClose = () => {
@@ -18,8 +17,9 @@ function SchoolDetailDrawer({ open, setOpen, data }) {
     <Drawer title="Thông tin trường"
       open={open}
       onClose={handleClose}
-      // onSave={handleSave}
-      className={styles.schoolDrawer}
+      hasTabs
+    // onSave={handleSave}
+    // className={styles.schoolDrawer}
     >
       <Tabs
         defaultActiveKey="1"

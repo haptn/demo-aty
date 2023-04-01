@@ -42,6 +42,7 @@ export { default as StTaxTypesLayout } from './pages/Settings/taxes-fees-insuran
 
 // system
 export { default as StATYInfoPage } from './pages/Settings/system/ATYInfoPage'
+export { default as StRolesPage } from './pages/Settings/system/RolesPage'
 export { default as StAccountsLayout } from './pages/Settings/system/AccountsLayout'
 // others
 
@@ -52,3 +53,5 @@ export { default as StAccountsLayout } from './pages/Settings/system/AccountsLay
 export { default as Drawer } from './drawers/Drawer'
 export { default as SchoolDetailDrawer } from './drawers/SchoolDetail/SchoolDetailDrawer'
 export { default as AccountDetailDrawer } from './drawers/AccountDetail/AccountDetailDrawer'
+export { default as RoleDrawer } from './drawers/RolePrivilegeDetail/RoleDrawer'
+export { default as PrivilegeDrawer } from './drawers/RolePrivilegeDetail/PrivilegeDrawer'

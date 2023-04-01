@@ -1,3 +1,4 @@
+import { Checkbox } from 'antd'
 import {
   AreaChartOutlined,
   BankOutlined,
@@ -221,19 +222,19 @@ const listNoti = [
   },
   {
     title: 'Báo cáo chi',
-    description: 'Admin Trường vừa duyệt báo cáo chi tháng 11/2022 của bạn.',
+    description: 'Trưởng cơ sở vừa duyệt báo cáo chi tháng 11/2022 của bạn.',
     time: '2 giờ trước',
     isNew: true
   },
   {
     title: 'Báo cáo chi',
-    description: 'Admin Trường vừa điều chỉnh trong báo cáo chi tháng 11/2022 của bạn.',
+    description: 'Trưởng cơ sở vừa điều chỉnh trong báo cáo chi tháng 11/2022 của bạn.',
     time: '1 ngày trước',
     isNew: false
   },
   {
     title: '[Nhắc việc!!!]',
-    description: 'Admin Trường vừa yêu cầu tạo bản dự trù kinh phí cho chương trình 20/11.',
+    description: 'Trưởng cơ sở vừa yêu cầu tạo bản dự trù kinh phí cho chương trình 20/11.',
     time: '1 tháng trước',
     isNew: false
   },
@@ -303,14 +304,14 @@ const schoolOrganizations = {
         id: '1-1',
         value: {
           name: 'Trần Thị B',
-          title: 'Admin trường',
+          title: userRole.SCHOOL_ADMIN,
         },
         children: [
           {
             id: '1-1-1',
             value: {
               name: 'Nguyễn Thị A',
-              title: 'Kế toán',
+              title: userRole.ACCOUNTER,
               status: staffStatus.WORKING,
             },
           },
@@ -318,7 +319,7 @@ const schoolOrganizations = {
             id: '1-1-2',
             value: {
               name: 'Phạm Văn D',
-              title: 'Kế toán',
+              title: userRole.ACCOUNTER,
               status: staffStatus.QUITTED,
             }
           },
@@ -357,7 +358,7 @@ const schoolOrganizations = {
         id: '1-1',
         value: {
           name: 'Nguyễn Văn E',
-          title: 'Admin trường',
+          title: userRole.SCHOOL_ADMIN,
         },
       },
     ],
@@ -371,7 +372,7 @@ const listAccounts = [
     name: 'Nguyễn Thị A',
     phone: '0987654321',
     email: 'kt.q1@aty.edu.vn',
-    role: 'Kế toán',
+    role: userRole.ACCOUNTER,
     status: staffStatus.WORKING,
     schoolId: '1'
   },
@@ -380,7 +381,7 @@ const listAccounts = [
     name: 'Trần Thị B',
     phone: '0987654321',
     email: 'admin.q1@aty.edu.vn',
-    role: 'Admin trường',
+    role: userRole.SCHOOL_ADMIN,
     status: staffStatus.WORKING,
     schoolId: '1'
   },
@@ -389,7 +390,7 @@ const listAccounts = [
     name: 'Phạm Văn D',
     phone: '0987654321',
     email: 'kt2.q1@aty.edu.vn',
-    role: 'Kế toán',
+    role: userRole.ACCOUNTER,
     status: staffStatus.QUITTED,
     schoolId: '1'
   },
@@ -398,7 +399,7 @@ const listAccounts = [
     name: 'Nguyễn Văn E',
     phone: '0987654321',
     email: 'kt.q12@aty.edu.vn',
-    role: 'Admin trường',
+    role: userRole.SCHOOL_ADMIN,
     status: staffStatus.WORKING,
     schoolId: '4'
   },
@@ -604,22 +605,22 @@ const listSettings = [
         pathName: '/settings/aty-info',
         description: 'Dùng để tự chèn thông tin của ATY vào hợp đồng, hóa đơn,...'
       },
-      {
-        id: '7.2',
-        name: 'Thông tin chuyển khoản',
-        pathName: '/settings/bank-accounts',
-      },
+      // {
+      //   id: '7.2',
+      //   name: 'Thông tin chuyển khoản',
+      //   pathName: '/settings/bank-accounts',
+      // },
       {
         id: '7.3',
-        name: 'Tài khoản & Quyền hạn',
+        name: 'Quản lý người dùng',
         pathName: '/settings/accounts',
         description: 'Quyền hạn xemthêm/xóa/sửa của mỗi tài khoản trong hệ thống'
       },
       {
         id: '7.4',
-        name: 'Loại người dùng',
-        pathName: '/settings/user-roles',
-        description: 'Vai trò của người dùng trong hệ thống (VD: kế toán, admin,...)'
+        name: 'Vai trò và quyền hạn',
+        pathName: '/settings/roles-privileges',
+        description: 'Vai trò và quyền hạn của mỗi vai trò người dùng trong hệ thống (VD: kế toán, admin,...)'
       },
       {
         id: '7.5',
@@ -654,6 +655,7 @@ const listSettings = [
   },
 ]
 
+// Budgets
 const listSavedReports = [
   {
     id: '1',
@@ -675,6 +677,3958 @@ const listSavedReports = [
   },
 ]
 
+// Roles & Privileges
+const listPrivileges = {
+  // Tab '1': Danh mục
+  '1': [
+    {
+      header: 'Nội bộ ATY',
+      data: [
+        {
+          name: 'Trường & Cơ sở',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Lớp',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Chương trình, khóa học',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Học phí',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Bậc lương, thưởng, phụ cấp',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại dịch vụ của trường',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Bảng giá bán trú, nội trú',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Bảng giá đồng phục',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Bảng giá thực đơn',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Đối tác của ATY',
+      data: [
+        {
+          name: 'Loại đối tác',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Đối tác',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Nghiệp vụ kế toán',
+      data: [
+        {
+          name: 'Khoản mục thu nhập',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Khoản mục chi phí',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Hình thức thanh toán',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại tiền tệ',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại chứng từ',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Chu kỳ làm mới sổ',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Thuế, phí, bảo hiểm',
+      data: [
+        {
+          name: 'Loại thuế',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Biểu thuế',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại phí',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại bảo hiểm',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Tài sản',
+      data: [
+        {
+          name: 'Loại tài sản cố định',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại công cụ, dụng cụ',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Đơn vị tính',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+  ],
+  // Tab '2': Nghiệp vụ
+  '2': [
+    {
+      header: 'Ngân sách',
+      data: [
+        {
+          name: 'Tổng quan',
+          canAll: 0,
+          canUse: 1,
+          canAdd: 0,
+          canEdit: 0,
+          canDelete: 0,
+          canWriteBook: 0,
+          canUnWriteBook: 0,
+          canPrint: 0,
+          canExportXLSX: 1,
+          canShowHideCol: 1
+        },
+        {
+          name: 'Kế hoạch ngân sách',
+          canAll: 0,
+          canUse: 1,
+          canAdd: 0,
+          canEdit: 0,
+          canDelete: 0,
+          canWriteBook: 0,
+          canUnWriteBook: 0,
+          canPrint: 0,
+          canExportXLSX: 1,
+          canShowHideCol: 1
+        },
+        {
+          name: 'Tình hình thực hiện',
+          canAll: 0,
+          canUse: 1,
+          canAdd: 0,
+          canEdit: 0,
+          canDelete: 0,
+          canWriteBook: 0,
+          canUnWriteBook: 0,
+          canPrint: 0,
+          canExportXLSX: 1,
+          canShowHideCol: 1
+        },
+        {
+          name: 'Báo cáo đã lưu',
+          canAll: 0,
+          canUse: 1,
+          canAdd: 0,
+          canEdit: 0,
+          canDelete: 0,
+          canWriteBook: 0,
+          canUnWriteBook: 0,
+          canPrint: 1,
+          canExportXLSX: 1,
+          canShowHideCol: 1
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ghi sổ',
+          dataIndex: 'canWriteBook',
+          key: 'canWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Bỏ ghi',
+          dataIndex: 'canUnWriteBook',
+          key: 'canUnWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ẩn/hiện cột',
+          dataIndex: 'canShowHideCol',
+          key: 'canShowHideCol',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Sổ quỹ',
+      data: [
+        {
+          name: 'Loại đối tác',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Đối tác',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ghi sổ',
+          dataIndex: 'canWriteBook',
+          key: 'canWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Bỏ ghi',
+          dataIndex: 'canUnWriteBook',
+          key: 'canUnWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ẩn/hiện cột',
+          dataIndex: 'canShowHideCol',
+          key: 'canShowHideCol',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Hóa đơn',
+      data: [
+        {
+          name: 'Loại thuế',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Biểu thuế',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại phí',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại bảo hiểm',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ghi sổ',
+          dataIndex: 'canWriteBook',
+          key: 'canWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Bỏ ghi',
+          dataIndex: 'canUnWriteBook',
+          key: 'canUnWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ẩn/hiện cột',
+          dataIndex: 'canShowHideCol',
+          key: 'canShowHideCol',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Lương thưởng',
+      data: [
+        {
+          name: 'Loại tài sản cố định',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại công cụ, dụng cụ',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Đơn vị tính',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ghi sổ',
+          dataIndex: 'canWriteBook',
+          key: 'canWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Bỏ ghi',
+          dataIndex: 'canUnWriteBook',
+          key: 'canUnWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ẩn/hiện cột',
+          dataIndex: 'canShowHideCol',
+          key: 'canShowHideCol',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Thuế',
+      data: [
+        {
+          name: 'Tổng quan',
+          canAll: 1,
+          canUse: 1,
+          canPrint: 1,
+          canManageSample: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Khai thuế',
+          canAll: 1,
+          canUse: 1,
+          canPrint: 1,
+          canManageSample: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ghi sổ',
+          dataIndex: 'canWriteBook',
+          key: 'canWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Bỏ ghi',
+          dataIndex: 'canUnWriteBook',
+          key: 'canUnWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ẩn/hiện cột',
+          dataIndex: 'canShowHideCol',
+          key: 'canShowHideCol',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Học viên',
+      data: [
+        {
+          name: 'Loại đối tác',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Đối tác',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ghi sổ',
+          dataIndex: 'canWriteBook',
+          key: 'canWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Bỏ ghi',
+          dataIndex: 'canUnWriteBook',
+          key: 'canUnWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ẩn/hiện cột',
+          dataIndex: 'canShowHideCol',
+          key: 'canShowHideCol',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Chương trình, khóa học',
+      data: [
+        {
+          name: 'Loại thuế',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Biểu thuế',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại phí',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại bảo hiểm',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ghi sổ',
+          dataIndex: 'canWriteBook',
+          key: 'canWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Bỏ ghi',
+          dataIndex: 'canUnWriteBook',
+          key: 'canUnWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ẩn/hiện cột',
+          dataIndex: 'canShowHideCol',
+          key: 'canShowHideCol',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Bán trú, nội trú',
+      data: [
+        {
+          name: 'Loại tài sản cố định',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại công cụ, dụng cụ',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Đơn vị tính',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ghi sổ',
+          dataIndex: 'canWriteBook',
+          key: 'canWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Bỏ ghi',
+          dataIndex: 'canUnWriteBook',
+          key: 'canUnWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ẩn/hiện cột',
+          dataIndex: 'canShowHideCol',
+          key: 'canShowHideCol',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Tài sản',
+      data: [
+        {
+          name: 'Tổng quan',
+          canAll: 1,
+          canUse: 1,
+          canPrint: 1,
+          canManageSample: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Khai thuế',
+          canAll: 1,
+          canUse: 1,
+          canPrint: 1,
+          canManageSample: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ghi sổ',
+          dataIndex: 'canWriteBook',
+          key: 'canWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Bỏ ghi',
+          dataIndex: 'canUnWriteBook',
+          key: 'canUnWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ẩn/hiện cột',
+          dataIndex: 'canShowHideCol',
+          key: 'canShowHideCol',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Mua / Thuê',
+      data: [
+        {
+          name: 'Loại đối tác',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Đối tác',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ghi sổ',
+          dataIndex: 'canWriteBook',
+          key: 'canWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Bỏ ghi',
+          dataIndex: 'canUnWriteBook',
+          key: 'canUnWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ẩn/hiện cột',
+          dataIndex: 'canShowHideCol',
+          key: 'canShowHideCol',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Bán hàng',
+      data: [
+        {
+          name: 'Loại thuế',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Biểu thuế',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại phí',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại bảo hiểm',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ghi sổ',
+          dataIndex: 'canWriteBook',
+          key: 'canWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Bỏ ghi',
+          dataIndex: 'canUnWriteBook',
+          key: 'canUnWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ẩn/hiện cột',
+          dataIndex: 'canShowHideCol',
+          key: 'canShowHideCol',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Vay / Nợ',
+      data: [
+        {
+          name: 'Loại tài sản cố định',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại công cụ, dụng cụ',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Đơn vị tính',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ghi sổ',
+          dataIndex: 'canWriteBook',
+          key: 'canWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Bỏ ghi',
+          dataIndex: 'canUnWriteBook',
+          key: 'canUnWriteBook',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Ẩn/hiện cột',
+          dataIndex: 'canShowHideCol',
+          key: 'canShowHideCol',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+  ],
+  // Tab '3': Báo cáo
+  '3': [
+    {
+      header: 'Ngân sách',
+      data: [
+        {
+          name: 'Tổng quan',
+          canAll: 0,
+          canUse: 1,
+          canPrint: 0,
+          canManageSample: 0,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Kế hoạch ngân sách',
+          canAll: 0,
+          canUse: 1,
+          canPrint: 0,
+          canManageSample: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Tình hình thực hiện',
+          canAll: 0,
+          canUse: 1,
+          canPrint: 0,
+          canManageSample: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Báo cáo đã lưu',
+          canAll: 1,
+          canUse: 1,
+          canPrint: 1,
+          canManageSample: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Quản lý mẫu',
+          dataIndex: 'canManageSample',
+          key: 'canManageSample',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Sổ quỹ',
+      data: [
+        {
+          name: 'Loại đối tác',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Đối tác',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Hóa đơn',
+      data: [
+        {
+          name: 'Loại thuế',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Biểu thuế',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại phí',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại bảo hiểm',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Lương thưởng',
+      data: [
+        {
+          name: 'Loại tài sản cố định',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại công cụ, dụng cụ',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Đơn vị tính',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Thuế',
+      data: [
+        {
+          name: 'Tổng quan',
+          canAll: 1,
+          canUse: 1,
+          canPrint: 1,
+          canManageSample: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Khai thuế',
+          canAll: 1,
+          canUse: 1,
+          canPrint: 1,
+          canManageSample: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Quản lý mẫu',
+          dataIndex: 'canManageSample',
+          key: 'canManageSample',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Học viên',
+      data: [
+        {
+          name: 'Loại đối tác',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Đối tác',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Chương trình, khóa học',
+      data: [
+        {
+          name: 'Loại thuế',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Biểu thuế',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại phí',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại bảo hiểm',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Bán trú, nội trú',
+      data: [
+        {
+          name: 'Loại tài sản cố định',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại công cụ, dụng cụ',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Đơn vị tính',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Tài sản',
+      data: [
+        {
+          name: 'Tổng quan',
+          canAll: 1,
+          canUse: 1,
+          canPrint: 1,
+          canManageSample: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Khai thuế',
+          canAll: 1,
+          canUse: 1,
+          canPrint: 1,
+          canManageSample: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'In',
+          dataIndex: 'canPrint',
+          key: 'canPrint',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Quản lý mẫu',
+          dataIndex: 'canManageSample',
+          key: 'canManageSample',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Mua / Thuê',
+      data: [
+        {
+          name: 'Loại đối tác',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Đối tác',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Bán hàng',
+      data: [
+        {
+          name: 'Loại thuế',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Biểu thuế',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại phí',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại bảo hiểm',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Vay / Nợ',
+      data: [
+        {
+          name: 'Loại tài sản cố định',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Loại công cụ, dụng cụ',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+        {
+          name: 'Đơn vị tính',
+          canAll: 1,
+          canUse: 1,
+          canAdd: 1,
+          canEdit: 1,
+          canDelete: 1,
+          canExportXLSX: 1,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+  ],
+  // Tab '4': Hệ thống
+  '4': [
+    {
+      header: 'Công ty của tôi',
+      data: [
+        {
+          name: 'Thông tin công ty',
+          canAll: 0,
+          canUse: 0,
+          canEdit: 0,
+        },
+        {
+          name: 'Quản lý người dùng',
+          canAll: 0,
+          canUse: 0,
+          canEdit: 0,
+        },
+        {
+          name: 'Vai trò và quyền hạn',
+          canAll: 0,
+          canUse: 0,
+          canEdit: 0,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+    {
+      header: 'Hệ thống',
+      data: [
+        {
+          name: 'Quản lý dữ liệu kế toán',
+          canAll: 0,
+          canUse: 0,
+          canAdd: 0,
+          canEdit: 0,
+          canDelete: 0,
+          canExportXLSX: 0,
+        },
+        {
+          name: 'Tùy chọn',
+          canAll: 0,
+          canUse: 0,
+          canEdit: 0,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xuất Excel',
+          dataIndex: 'canExportXLSX',
+          key: 'canExportXLSX',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+  ],
+  // Tab '5': Tiện ích
+  '5': [
+    {
+      header: 'Tiện ích',
+      data: [
+        {
+          name: 'Tùy chỉnh Sidebar Menu',
+          canAll: 0,
+          canUse: 0,
+          canAdd: 0,
+          canEdit: 0,
+          canDelete: 0,
+        },
+        {
+          name: 'Chức năng thêm nhanh',
+          canAll: 0,
+          canUse: 0,
+          canAdd: 0,
+          canEdit: 0,
+          canDelete: 0,
+        },
+      ],
+      columns: [
+        {
+          title: '',
+          dataIndex: 'name',
+          key: 'name',
+          width: '50rem',
+          render: value => (
+            <div style={{ padding: '.25rem .5rem', fontWeight: 500 }}>{value}</div>
+          )
+        },
+        {
+          title: 'Toàn quyền',
+          dataIndex: 'canAll',
+          key: 'canAll',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sử dụng',
+          dataIndex: 'canUse',
+          key: 'canUse',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Thêm',
+          dataIndex: 'canAdd',
+          key: 'canAdd',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Sửa',
+          dataIndex: 'canEdit',
+          key: 'canEdit',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: 'Xóa',
+          dataIndex: 'canDelete',
+          key: 'canDelete',
+          width: '7rem',
+          align: 'center',
+          render: value => (
+            <Checkbox defaultChecked={value} />
+          )
+        },
+        {
+          title: '',
+          dataIndex: '',
+          key: '',
+          // width: '7rem',
+        },
+      ]
+    },
+  ],
+}
+
 export {
   menuItems,
   userMenuItems,
@@ -683,5 +4637,6 @@ export {
   listAccounts,
   listSettings,
   schoolOrganizations,
-  listSavedReports   // Budget/Revenue/Cost
+  listSavedReports,   // Budget/Revenue/Cost
+  listPrivileges,
 }

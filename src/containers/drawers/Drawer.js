@@ -12,6 +12,7 @@ function Drawer(props) {
     closable = false,
     onClose,
     children, className,
+    hasTabs,
     ...rest
   } = props
 
@@ -21,7 +22,8 @@ function Drawer(props) {
       width, height, placement,
       closable, onClose,
       className: clsx(styles.drawer, {
-        [className]: className
+        [className]: className,
+        [styles.noYPadding]: !!hasTabs
       }),
       extra: (
         <Space size='small'>
@@ -31,7 +33,7 @@ function Drawer(props) {
           </Button> */}
           <Button type="text"
             shape='circle'
-            icon={<CloseOutlined style={{ color: '#fafafa' }} />}
+            icon={<CloseOutlined style={{ color: '#fafafa', strokeWidth: 10, stroke: 'white' }} />}
             onClick={onClose}
           />
         </Space>

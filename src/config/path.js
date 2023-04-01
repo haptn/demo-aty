@@ -68,7 +68,7 @@ export const routes = {
     // 7. Hệ thống
     ATY_INFO: `${SETTINGS}/aty-info`,
     ACCOUNTS: `${SETTINGS}/accounts`,
-    ROLES: `${SETTINGS}/user-roles`,
+    ROLES: `${SETTINGS}/roles-privileges`,
     DATA: `${SETTINGS}/data`,
     CUSTOM: `${SETTINGS}/custom`,
 

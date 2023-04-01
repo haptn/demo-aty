@@ -51,6 +51,7 @@ export { default as StTaxTypes } from './protected/Settings/taxes-fees-insurance
 // export { default as  } from './protected/Settings/assets'
 
 export { default as StATYInfo } from './protected/Settings/system/ATYInfo'
+export { default as StRoles } from './protected/Settings/system/Roles'
 export { default as StAccounts } from './protected/Settings/system/Accounts'
 // export { default as Roles } from './protected/Settings/system/Roles'
 
