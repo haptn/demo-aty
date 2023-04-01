@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons'
 import { MainLayout, SchoolDetailDrawer, AccountDetailDrawer } from '../../..'
 import { useListSchools, useListAccountsInSchool } from '../../../../services/schoolServices'
-import { filterSchools, schoolStatus, schoolType, staffStatus } from '../../../../config/constants'
+import { filterSchools, schoolStatus, schoolType, staffStatus, userRole } from '../../../../config/constants'
 
 function SchoolsLayout() {
   const [detailData, setDetailData] = useState(null)
@@ -148,7 +148,7 @@ function SchoolsLayout() {
         key: 'role',
         align: 'center',
         render: (_, { role }) => {
-          let color = role === 'Admin trường' ? 'magenta' : 'geekblue'
+          let color = role === userRole.SCHOOL_ADMIN ? 'magenta' : 'geekblue'
           return (
             <Tag color={color} key={role}>
               {role}
@@ -319,7 +319,7 @@ function SchoolsLayout() {
           <Button type="primary" icon={<PlusOutlined />} size='middle'
             className='p-btn'
           >
-            Thêm Tài khoản
+            Thêm
           </Button>
           <Button type="default" icon={<FileExcelOutlined />} size='middle' className='p-btn'>
             Xuất Excel

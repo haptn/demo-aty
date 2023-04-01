@@ -195,8 +195,8 @@ function BoardingLayout() {
       dataIndex: 'name',
       key: 'name',
       render: (_, record) => {
-        let color = record?.role === 'Admin trường'
-          ? 'volcano' : record?.role === 'Admin ATY'
+        let color = record?.role === userRole.SCHOOL_ADMIN
+          ? 'volcano' : record?.role === userRole.ADMIN
             ? 'magenta' : 'geekblue'
         return (
           <div>
@@ -310,7 +310,7 @@ function BoardingLayout() {
           <Button type="primary" icon={<PlusOutlined />}
             size='middle' className='p-btn'
           >
-            Thêm Tài khoản
+            Thêm
           </Button>
           <Button type="default" icon={<FileExcelOutlined />}
             size='middle' className='p-btn'

@@ -4,8 +4,10 @@ export const keys = {
 
 export const userRole = {
   ACCOUNTER: 'Kế toán',
-  SCHOOL_ADMIN: 'Admin trường',
-  ADMIN: 'Admin ATY'
+  SCHOOL_ADMIN: 'Trưởng cơ sở',
+  ADMIN: 'Quản trị hệ thống'
+  // SCHOOL_ADMIN: 'Admin trường',
+  // ADMIN: 'Admin ATY'
 }
 
 export const schoolStatus = {

@@ -97,16 +97,11 @@ function ClassesLayout() {
       dataIndex: 'name',
       key: 'name',
       // width: '20rem',
-      render: (_, record) => {
-        let color = record?.role === 'Admin trường'
-          ? 'volcano' : record?.role === 'Admin ATY'
-            ? 'magenta' : 'geekblue'
-        return (
-          <a onClick={() => handleViewDetail(record)}>
-            <b>{record?.name}</b>
-          </a>
-        )
-      },
+      render: (_, record) => (
+        <a onClick={() => handleViewDetail(record)}>
+          <b>{record?.name}</b>
+        </a>
+      ),
     },
     {
       title: 'Cơ sở',
@@ -183,7 +178,7 @@ function ClassesLayout() {
           <Button type="primary" icon={<PlusOutlined />}
             size='middle' className='p-btn'
           >
-            Thêm Lớp
+            Thêm
           </Button>
           <Button type="default" icon={<FileExcelOutlined />}
             size='middle' className='p-btn'

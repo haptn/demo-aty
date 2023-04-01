@@ -223,12 +223,6 @@ function ActivityTab(props) {
 
   const btnAddOptions = [
     {
-      label: 'Thêm thủ công',
-      key: 'manual',
-      icon: <FormOutlined />,
-
-    },
-    {
       label: 'Nhập từ Excel',
       key: 'import-xlsx',
       icon: <FileExcelOutlined />,
@@ -249,11 +243,11 @@ function ActivityTab(props) {
         title='Danh sách Hoạt động / Sự kiện'
         pageActions={
           <Space size='small'>
-            <Dropdown menu={menuProps}>
+            <Dropdown menu={menuProps} placement='bottomRight'>
               <Button type="primary" icon={<PlusOutlined />}
                 size='middle' className='p-btn'
               >
-                Thêm Chương trình
+                Thêm
               </Button>
             </Dropdown>
 

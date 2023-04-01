@@ -246,12 +246,6 @@ function StudentsTab() {
 
   const btnAddOptions = [
     {
-      label: 'Thêm thủ công',
-      key: 'manual',
-      icon: <FormOutlined />,
-
-    },
-    {
       label: 'Nhập từ Excel',
       key: 'import-xlsx',
       icon: <FileExcelOutlined />,
@@ -269,11 +263,11 @@ function StudentsTab() {
         title="Danh sách Học viên"
         pageActions={
           <Space size='small'>
-            <Dropdown menu={menuProps}>
+            <Dropdown menu={menuProps} placement='bottomRight'>
               <Button type="primary" icon={<PlusOutlined />}
                 size='middle' className='p-btn'
               >
-                Thêm Học viên
+                Thêm
               </Button>
             </Dropdown>
 

@@ -349,19 +349,19 @@ function PlanTab() {
         }
         pageActions={
           <Space size='small'>
-            <Button type="default" icon={<FileExcelOutlined />}
-              size='middle' className='p-btn'
-            >
-              Xuất Excel
-            </Button>
-
-            <Dropdown menu={menuProps}>
+            <Dropdown menu={menuProps} placement='bottomRight'>
               <Button type="primary" icon={<FileAddOutlined />}
                 size='middle' className='p-btn'
               >
                 Thêm chỉ tiêu
               </Button>
             </Dropdown>
+
+            <Button type="default" icon={<FileExcelOutlined />}
+              size='middle' className='p-btn'
+            >
+              Xuất Excel
+            </Button>
           </Space>
         }
         pageFilters={

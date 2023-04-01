@@ -212,7 +212,7 @@ function CoursesLayout() {
           <Button type="primary" icon={<PlusOutlined />}
             size='middle' className='p-btn'
           >
-            Thêm Tài khoản
+            Thêm
           </Button>
           <Button type="default" icon={<FileExcelOutlined />}
             size='middle' className='p-btn'

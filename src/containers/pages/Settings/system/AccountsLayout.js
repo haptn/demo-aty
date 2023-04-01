@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import _ from 'lodash'
-import { Button, Popconfirm, Select, Space, Spin, Switch, Table, Tag, Tooltip } from 'antd'
+import { Button, Dropdown, Popconfirm, Select, Space, Spin, Switch, Table, Tag, Tooltip } from 'antd'
 import {
   FileExcelOutlined, PlusOutlined,
   EditOutlined, LockOutlined, KeyOutlined
@@ -192,8 +192,8 @@ function AccountsLayout() {
       dataIndex: 'name',
       key: 'name',
       render: (_, record) => {
-        let color = record?.role === 'Admin trường'
-          ? 'volcano' : record?.role === 'Admin ATY'
+        let color = record?.role === userRole.SCHOOL_ADMIN
+          ? 'volcano' : record?.role === userRole.ADMIN
             ? 'magenta' : 'geekblue'
         return (
           <div>
@@ -307,20 +307,39 @@ function AccountsLayout() {
     },
   ]
 
+  const btnAddOptions = [
+    {
+      label: 'Nhập từ Excel',
+      key: 'import-xlsx',
+      icon: <FileExcelOutlined />,
+    },
+  ]
+
+  const menuProps = {
+    items: btnAddOptions,
+    onClick: e => {
+      // console.log('clicked ', e);
+      // Mở dialog/drawer tương ứng
+    },
+  }
+
   return (
     <MainLayout
-      title="Tài khoản & Quyền hạn"
+      title="Quản lý người dùng"
       breadcrumbs={[
         { path: '/settings', name: 'Thiết lập chung' },
         // { path: '/settings', name: 'Nội bộ ATY' },
       ]}
       pageActions={
         <Space size='small'>
-          <Button type="primary" icon={<PlusOutlined />}
-            size='middle' className='p-btn'
-          >
-            Thêm Tài khoản
-          </Button>
+          <Dropdown menu={menuProps} placement='bottomRight'>
+            <Button type="primary" icon={<PlusOutlined />}
+              size='middle' className='p-btn'
+            >
+              Thêm
+            </Button>
+          </Dropdown>
+
           <Button type="default" icon={<FileExcelOutlined />}
             size='middle' className='p-btn'
           >
@@ -335,7 +354,7 @@ function AccountsLayout() {
             onChange={value => handleFilter(filterAccounts.STATUS, value)}
             placeholder='Trạng thái'
             allowClear
-            style={{ width: 150 }}
+            style={{ width: 110 }}
             options={[
               ...Object.values(staffStatus)?.map(item => ({
                 value: item,
@@ -349,7 +368,7 @@ function AccountsLayout() {
             onChange={value => handleFilter(filterAccounts.ROLE, value)}
             placeholder='Vai trò'
             allowClear
-            style={{ minWidth: 120 }}
+            style={{ minWidth: 150 }}
             options={[
               {
                 value: 'all',

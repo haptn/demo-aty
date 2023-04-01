@@ -5,16 +5,17 @@ import { Breadcrumb as AntdBreadcrumb } from 'antd'
 import { routes } from '../../config/path'
 const { Item: BreadcrumbItem } = AntdBreadcrumb
 
-const REMOVE_TEXT = 'Quản lý '
+// const REMOVE_TEXT = 'Quản lý '    // Đang suy nghĩ bỏ cái này, giữ nguyên title
 
 function Breadcrumb({ data = [], title = '', hasTabs }) {    // , hasTabs = false  // làm sau
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
   const pageTitle = useMemo(() => {
-    return title?.includes(REMOVE_TEXT)
-      ? title.replace(new RegExp(REMOVE_TEXT), '')
-      : title
+    return title
+    // return title?.includes(REMOVE_TEXT)
+    //   ? title.replace(new RegExp(REMOVE_TEXT), '')
+    //   : title
   }, [title])
 
   const breadcrumbs = useMemo(() => {

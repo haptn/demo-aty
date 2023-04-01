@@ -185,12 +185,6 @@ function DeclarationTab(props) {
 
   const btnAddOptions = [
     {
-      label: 'Thêm thủ công',
-      key: 'manual',
-      icon: <FormOutlined />,
-
-    },
-    {
       label: 'Nhập từ Excel',
       key: 'import-xlsx',
       icon: <FileExcelOutlined />,
@@ -217,7 +211,7 @@ function DeclarationTab(props) {
               Khai bổ sung
             </Button>
 
-            <Dropdown menu={menuProps}>
+            <Dropdown menu={menuProps} placement='bottomRight'>
               <Button type="primary" icon={<FileAddOutlined />}
                 size='middle' className='p-btn'
               >
